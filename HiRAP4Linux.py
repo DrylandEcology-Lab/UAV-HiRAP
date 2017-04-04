@@ -16,46 +16,37 @@ def expand_colorspace_cv(img_str):
     if isinstance(img_str, str):
         print('├┄ Convert classified picture [' + img_str + ']')
         RGB = io.imread(img_str)
-        # LAB = cv2.cvtColor(RGB, cv2.COLOR_RGB2Lab)
         LAB = color.rgb2lab(RGB)
         print('│   ├┄ lab converted')
-        # lab = color.rgb2lab(RGB)
-        # HSV = cv2.cvtColor(RGB, cv2.COLOR_RGB2HSV)
         HSV = color.rgb2hsv(RGB)
         print('│   ├┄ hsv converted')
-        # hsv = color.rgb2hsv(RGB)
-        # XYZ = cv2.cvtColor(RGB, cv2.COLOR_RGB2XYZ)
         XYZ = color.rgb2xyz(RGB)
         print('│   ├┄ xyz converted')
-        # print(LAB[0][0], lab[0][0],'\n', HSV[0][0], hsv[0][0],'\n', XYZ[0][0], xyz[0][0])
         (height, width, dimen) = RGB.shape
-        rgb = RGB.reshape(height * width, dimen)
-        lab = LAB.reshape(height * width, dimen)
-        hsv = HSV.reshape(height * width, dimen)
-        xyz = XYZ.reshape(height * width, dimen)
+        rgb = RGB.reshape(height * width, dimen);del RGB
+        lab = LAB.reshape(height * width, dimen);del LAB
+        hsv = HSV.reshape(height * width, dimen);del HSV
+        xyz = XYZ.reshape(height * width, dimen);del XYZ
         print('│   └┄ reshaped')
         img_size = (height, width)
-        expand = np.concatenate((rgb, lab, hsv, xyz), axis=1)
+        expand = np.concatenate((rgb, lab, hsv, xyz), axis=1);del rgb, lab, hsv, xyz
         print('│        ├┄ Combined = ' + str(round(sys.getsizeof(expand) / 8 / 1024 / 1024, 3)) + ' MB')
         print('│        └┄ Cost ' + str(round(time.time() - t, 3)) + ' s')
         return expand, img_size
     else:
         RGB = img_str.reshape(1, img_str.shape[0], 3)
-        # LAB = cv2.cvtColor(RGB, cv2.COLOR_RGB2Lab)
         LAB = color.rgb2lab(RGB)
         print('│   │   ├┄ lab converted')
-        # HSV = cv2.cvtColor(RGB, cv2.COLOR_RGB2HSV)
         HSV = color.rgb2hsv(RGB)
         print('│   │   ├┄ hsv converted')
-        # XYZ = cv2.cvtColor(RGB, cv2.COLOR_RGB2XYZ)
         XYZ = color.rgb2xyz(RGB)
         print('│   │   ├┄ xyz converted')
-        rgb = img_str
-        lab = LAB[0]
-        hsv = HSV[0]
-        xyz = XYZ[0]
+        rgb = img_str;del RGB
+        lab = LAB[0];del LAB
+        hsv = HSV[0];del HSV
+        xyz = XYZ[0];del XYZ
         print('│   │   └┄ reshaped')
-        expand = np.concatenate((rgb, lab, hsv, xyz), axis=1)
+        expand = np.concatenate((rgb, lab, hsv, xyz), axis=1);del rgb, lab, hsv, xyz
         print('│   │        ├┄ Combined = ' + str(round(sys.getsizeof(expand)/8/1024/1024, 3)) + ' MB')
         print('│   │        └┄ Cost ' + str(round(time.time() - t, 3)) + ' s')
         return expand
@@ -126,8 +117,6 @@ def tree_result(training_list, classify_img, img_size):
             classified_result = np.concatenate((classified_result, classified_sub_result))
     print('│   └┄ Image successfully classified')
     image_out = classified_result.reshape(img_size)
-    # img = Image.fromarray(image_out)
-    # img.show()
     return image_out
 
 if __name__ == '__main__':
@@ -143,7 +132,6 @@ if __name__ == '__main__':
             Img_prepare, Img_size = expand_colorspace_cv(Image2Classify)
             training_tuple = training_kind_generate()
         Image_out = tree_result(training_tuple, Img_prepare, Img_size)
-        # cv2.imwrite("filename.png", Image_out)
         plt.imsave('Linux_result.png', Image_out, cmap=plt.cm.gray)
         print('└┄ Result image wrote')
     except FileNotFoundError:
