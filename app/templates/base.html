@@ -25,12 +25,21 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{ url_for('main.index') }}">DTC</a></li>
             </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('main.index') }}">BDD</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
                 <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
                 {% else %}
                 <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
                 {% endif %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ url_for('main.index') }}">Contact us</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ url_for('main.index') }}">Support us</a></li>
             </ul>
         </div>
     </div>
