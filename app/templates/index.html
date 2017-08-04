@@ -6,10 +6,20 @@
 <div class="page-header">
     <h1>
     {% if current_user.is_authenticated %}
+    <p style="text-align:center;">
     Hello, {{ current_user.username }}, Welcome to use UAV-HiRAP platform!
+    </p>
     {% else %}
+    <p style="text-align:center;">
     Hello, new visitor! please regist and login to use this platform.
     {% endif %}
+    </p>
     </h1>
+</div>
+<div>
+    <p style="text-align:center;">UAV-HiRAP Decision Tree Calssifier(DTC)</p>
+    <p style="text-align:center;">
+        <img src="{{ url_for('static', filename='preview.tif') }}" style="max-width:100%;"/>
+    </p>
 </div>
 {% endblock %}
