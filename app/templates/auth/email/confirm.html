@@ -1,0 +1,7 @@
+<p>Dear {{ user.username }},</p>
+<p>Welcome to <b>UAV-HiRAP</b>!</p>
+<p>To confirm your account please <a href="{{ url_for('auth.confirm', token=token, _external=True) }}">click here</a>.</p>
+<p>Sincerely,</p>
+<p>The UAV-HiRAP Team of Chinese Academy of Forestry.</p>
+<p><small>Note1: replies to this email address are not monitored.</small></p>
+<p><small>Note2: if you recieved this email in your <b>samp box</b>, please move it to your <b>Inbox</b> and add this email address into <b>White List</b>. With your support and understanding, we could continue providing this service for other people according to anti-spam agreement.</small></p>

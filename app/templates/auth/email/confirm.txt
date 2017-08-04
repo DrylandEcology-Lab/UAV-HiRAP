@@ -1,0 +1,15 @@
+Dear {{ user.username }},
+
+Welcome to UAV-HiRAP!
+
+To confirm your account please click on the following link:
+
+{{ url_for('auth.confirm', token=token, _external=True) }}
+
+Sincerely,
+
+The UAV-HiRAP Team of Chinese Academy of Forestry.
+
+Note1: replies to this email address are not monitored.
+
+Note2: if you recieved this email in your junk/samp box, please move it to your Inbox and add this email address into White List. With your support and understanding, we could continue providing this service for other people according to anti-spam agreement
