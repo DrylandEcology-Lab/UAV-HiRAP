@@ -1,3 +1,4 @@
+from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask_login import UserMixin
@@ -25,6 +26,7 @@ class User(UserMixin, db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
+    dtc_projects = db.relationship('DTC_Project', backref='dtc_author', lazy='dynamic')
 
     @property
     def password(self):
@@ -53,8 +55,25 @@ class User(UserMixin, db.Model):
         db.session.add(self)
         return True
 
+
     def __repr__(self):
         return '<Users %r>' % self.username
+
+
+
+class DTC_Project(db.Model):
+    __tablename__ = 'dtc_projects'
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    project_name = db.Column(db.Text, index=True)
+    project_dir = db.Column(db.Text)
+    classified_pictures = db.Column(db.Text)
+    training_pictures = db.Column(db.Text)
+    training_pic_kinds = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<DTC_Project %r>' % self.projectname
 
 
 @login_manager.user_loader

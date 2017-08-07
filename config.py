@@ -7,6 +7,8 @@ class Config:
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     MAIL_SUBJECT_PREFIX = '[UAV-HiRAP]'
+    MAIL_SENDER = 'UAV-HiRAP admin <howcanoewang@gmail.com>'
+    UPLOADED_PHOTOS_DEST = basedir
 
     @staticmethod
     def init_app(app):

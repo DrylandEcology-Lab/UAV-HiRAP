@@ -4,19 +4,33 @@
 {% block title %}UAV_HiRAP{% endblock %}
 
 {% block page_content %}
+
 <div class="page-header">
     <h1>
-    {% if current_user.is_authenticated %}
-    Hello, {{ current_user.username }}, Welcome to use the Decision Tree Classifier!
-    {% else %}
-    Hello, new visitor! please regist and login to use the Decision Tree Classifier.
-    {% endif %}
+    Hello, {{ current_user.username }}, Welcome to use the Decision Tree Classifier! You could:
     </h1>
 </div>
+<div>
+	<h2>Add a new project:</h2>
+	{{ wtf.quick_form(form)}}
+</div>
+<div>
+	<h2>Or view/edit your former projects:</h2>
+</div>
+<!-- Use style.css, the example template is for "Post" database. But in this project, we replace "Post" to "DTC_Project", so it is the reason why the following codes' class== post* -->
+<ul class="posts">
+	{% for dtc_project in dtc_projects %}
+    <li class="post">
+        <div class="post-date">{{ moment(dtc_project.timestamp).formNow() }}</div>
+        <div class="post-author">
+        	<a href="{{ url_for('.inproject', projectname=dtc_project.projectname)}}">
+            {{ dtc_project.projectname }}
+            </a>
+        </div>
+    </li>
+    {% endfor%}
+</ul>
 
-{% if current_user.is_authenticated %}
-    {{ wtf.quick_form(form)}}
-{% endif %}
 
 {% endblock %}
 
