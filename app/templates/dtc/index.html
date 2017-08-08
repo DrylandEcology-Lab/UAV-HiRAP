@@ -22,7 +22,7 @@
 	{% for dtc_project in dtc_projects %}
     <li class="post">
     	<div class="profile-thumbnail">
-				<img class="img-rounded profile-thumbnail" src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.project_name+'/thumbnail.jpg') }} ">
+				<img class="img-rounded profile-thumbnail" src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.project_name+'/preview.jpg') }} ">
 		</div>
         <div class="post-content">
         	<div class="post-date">{{ moment(dtc_project.timestamp).fromNow() }}</div>

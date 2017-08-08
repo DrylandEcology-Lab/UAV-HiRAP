@@ -2,6 +2,7 @@ import os
 import time
 import hashlib
 import PIL
+import shutil
 from PIL import Image
 from flask import current_app, render_template, redirect, url_for, flash
 from flask_login import login_required, current_user
@@ -11,13 +12,12 @@ from ..models import User, DTC_Project
 from .forms import DecisionTreeForm
 
 
-def create_thumbnail(photopath, thumbnail_folder):
-    base_width = 40
+def create_thumbnail(photopath, thumbnail_folder, thumbnail_name, base_width=40):
     img = Image.open(photopath)
     w_percent = (base_width / float(img.size[0]))
     h_size = int((float(img.size[1]) * float(w_percent)))
     img = img.resize((base_width, h_size), PIL.Image.ANTIALIAS)
-    img.save(thumbnail_folder + '/thumbnail.jpg')
+    img.save(thumbnail_folder + '/' + thumbnail_name + 'jpg')
 
 
 @dtc.route('/<username>/myprojects', methods=['GET', 'POST'])
@@ -32,6 +32,9 @@ def decision_tree_submit(username):
         full_dir = app.config['UPLOADED_PHOTOS_DEST'] + user_dir + project_name
         if not os.path.exists(full_dir):
             os.makedirs(full_dir)
+        else:
+            shutil.rmtree(full_dir)
+            os.mkdir(full_dir)
 
         # create uploads pictures' dirs and names list for calculating
         classified_pictures_list = []
@@ -39,26 +42,30 @@ def decision_tree_submit(username):
         training_pic_kinds_list = []
 
         # uploads classify pictures
+        classify_hash = 'classify_' + hashlib.md5(str(time.time()).encode()).hexdigest()[:10] + '.'
         classify_filename = photos.save(form.origin_pic_dir.data,
                                         folder=full_dir,
-                                        name='classify_' + hashlib.md5(str(time.time()).encode()).hexdigest()[:10] + '.')
-        time.sleep(0.1)
+                                        name=classify_hash)
         classified_pictures_list.append(photos.path(classify_filename))
-        create_thumbnail(photos.path(classify_filename), full_dir)
+        create_thumbnail(photos.path(classify_filename), full_dir, 'preview.')
+        create_thumbnail(photos.path(classify_filename), full_dir, 'preview200.', 200)
         # uploads fore training pictures
+        fore_train_hash = 'train_' + hashlib.md5(str(time.time()).encode()).hexdigest()[:10] + '.'
         fore_train_pic = photos.save(form.fore_trainingdata_dir.data,
                                      folder=full_dir,
-                                     name='train_' + hashlib.md5(str(time.time()).encode()).hexdigest()[:10] + '.')
-        time.sleep(0.1)
+                                     name=fore_train_hash)
         training_pictures_list.append(photos.path(fore_train_pic))
         training_pic_kinds_list.append(0)
+        create_thumbnail(photos.path(fore_train_pic), full_dir, 'preview_fore.', 200)
+
         #uploads back training pictures
+        back_train_hash = 'train_' + hashlib.md5(str(time.time()).encode()).hexdigest()[:10] + '.'
         back_train_pic = photos.save(form.back_trainingdata_dir.data,
                                      folder=full_dir,
-                                     name='train_' + hashlib.md5(str(time.time()).encode()).hexdigest()[:10] + '.')
-        time.sleep(0.1)
+                                     name=back_train_hash)
         training_pictures_list.append(photos.path(back_train_pic))
         training_pic_kinds_list.append(1)
+        create_thumbnail(photos.path(back_train_pic), full_dir, 'preview_back.', 200)
 
         # save to database
         dtc_project = DTC_Project(project_name=project_name,
@@ -77,9 +84,10 @@ def decision_tree_submit(username):
     return render_template('dtc/index.html', username=current_user.username, form=form, dtc_projects=dtc_projects)
 
 
-@dtc.route('/<username>/<project_name>')
+@dtc.route('/<username>/<project_name>', methods=['GET','POST'])
 @login_required
 def inproject(username, project_name):
+
     inproject = DTC_Project.query.filter_by(author_id=current_user.id).\
         filter_by(project_name=project_name).first_or_404()
-    return render_template('dtc/inproject.html', inproject=inproject, username=username)
+    return render_template('dtc/inproject.html', inproject=inproject, username=current_user.username)

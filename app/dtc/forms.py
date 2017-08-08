@@ -28,3 +28,22 @@ class DecisionTreeForm(FlaskForm):
         if DTC_Project.query.filter_by(author_id=current_user.id).\
                 filter_by(project_name=field.data).first():
             raise ValidationError('Project name already exists, please use another name')
+
+class ProjectCalculateForm(FlaskForm):
+    submit_calculate = SubmitField('Start Calculation')
+
+class ProjectChangeForm(FlaskForm):
+    project_name = StringField('Project Name', validators=[DataRequired(),
+                                                           Length(1, 64)])
+    origin_pic_dir = FileField('Picture need to be classified (Maxsize = 1GB)',
+                               validators=[FileAllowed(photos, 'Images only')])
+    fore_trainingdata_dir = FileField('Foreground training picture (with alpha layer, Maxsize=1GB)',
+                                      validators=[FileAllowed(photos, 'Images only')])
+    back_trainingdata_dir = FileField('Background training picture (with alpha layer, Maxsize=1GB)',
+                                      validators=[FileAllowed(photos, 'Images only')])
+    comments = TextAreaField('Comments', validators=[DataRequired()])
+    submit_change = SubmitField('Change Modification')
+    def validate_project_name(self, field):
+        if DTC_Project.query.filter_by(author_id=current_user.id).\
+                filter_by(project_name=field.data).first():
+            raise ValidationError('Project name already exists, please use another name')

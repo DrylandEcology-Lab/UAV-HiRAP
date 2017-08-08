@@ -6,8 +6,71 @@
 {% block page_content %}
 <div class="page-header">
     <h1>
-    Hello! {{ current_user.username }}! You are now in {{ project_name }}!
+    	[{{ inproject.project_name }}]
     </h1>
+    <p>
+    	<font color='gray', size="4">
+    		{{ inproject.comments}}
+    	</font>
+    </p>
+    {% if not url_for('static', filename='UserData/DTC/'+current_user.email+'/'+inproject.project_name+'/result.png') %}
+    <p>
+    	<font size="3">This project has not been calculated before</font>
+  		<a href="{{ url_for('main.developing') }}">Start Calculate!</a>
+    </p>
+    {% else %}
+    <p>
+    	<font size="3">This project has been calculated before, you can check, </font>
+        <a href="{{ url_for('main.developing') }}">Download</a>
+        <font size="3">the result, or </font>
+  		<a href="{{ url_for('main.developing') }}">Calculate Again</a>
+    </p>
+    {% endif %}
+</div>
+<div>
+	<p style="text-align:center;">
+		<font size="5">
+        	Picture(s) to be classified:
+        </font>
+    </p>
+    <p style="text-align:center;">
+    	<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+inproject.project_name+'/preview200.jpg') }}" style="max-width:100%;"/>
+    </p>
+</div>
+<hr />
+<div>
+	<p style="text-align:center;">
+		<font size="5">
+        	Training data pictures:
+         </font>
+    </p>
+	<table border="0", align="center">
+  		<tr>
+    		<td align="center">Foreground</td>
+    		<td> </td>
+    		<td align="center">Background</td>
+  		</tr>
+  		<tr>
+    		<td align="center">
+    			<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+inproject.project_name+'/preview_fore.jpg') }}" style="max-width:100%;"/>
+    		</td>
+    		<td>--</td>
+    		<td align="center">
+    		<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+inproject.project_name+'/preview_back.jpg') }}" style="max-width:100%;"/>
+    		</td>
+  		</tr>
+	</table>
+</div>
+<hr />
+<div>
+	<p style="text-align:center;">
+		<font size="5">
+    		Classified results:
+    	</font>
+    </p>
+    <p style="text-align:center;">
+    	<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+inproject.project_name+'/result.png') }}" style="max-width:61.8%;"/>
+    </p>
 </div>
 
 {% endblock %}
