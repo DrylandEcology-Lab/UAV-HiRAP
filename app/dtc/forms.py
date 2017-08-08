@@ -24,7 +24,7 @@ class DecisionTreeForm(FlaskForm):
     comments = TextAreaField('Comments', validators=[DataRequired()])
     submit = SubmitField('Upload and Classify')
 
-    def validate_projectname(self, field):
-        #if DTC_Project.query.filter_by(author_id=current_user._get_current_object()).\
-        if DTC_Project.query.filter_by(project_name=field.data).first():
+    def validate_project_name(self, field):
+        if DTC_Project.query.filter_by(author_id=current_user.id).\
+                filter_by(project_name=field.data).first():
             raise ValidationError('Project name already exists, please use another name')

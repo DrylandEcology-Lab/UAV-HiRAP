@@ -10,3 +10,7 @@ from ..models import User
 @main.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
+
+@main.route('/developing', methods=['GET'])
+def developing():
+    return render_template('bdd/index.html')

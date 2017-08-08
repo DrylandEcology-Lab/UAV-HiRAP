@@ -66,6 +66,7 @@ class DTC_Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     project_name = db.Column(db.Text, index=True)
+    comments = db.Column(db.Text)
     project_dir = db.Column(db.Text)
     classified_pictures = db.Column(db.Text)
     training_pictures = db.Column(db.Text)
@@ -73,7 +74,7 @@ class DTC_Project(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
-        return '<DTC_Project %r>' % self.projectname
+        return '<DTC_Project %r>' % self.project_name
 
 
 @login_manager.user_loader

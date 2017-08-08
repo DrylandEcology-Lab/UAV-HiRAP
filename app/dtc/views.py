@@ -1,13 +1,23 @@
 import os
 import time
 import hashlib
+import PIL
+from PIL import Image
 from flask import current_app, render_template, redirect, url_for, flash
-from flask_login import login_user, logout_user, login_required, current_user
-from werkzeug.utils import secure_filename
+from flask_login import login_required, current_user
 from . import dtc
 from .. import db, photos
 from ..models import User, DTC_Project
 from .forms import DecisionTreeForm
+
+
+def create_thumbnail(photopath, thumbnail_folder):
+    base_width = 40
+    img = Image.open(photopath)
+    w_percent = (base_width / float(img.size[0]))
+    h_size = int((float(img.size[1]) * float(w_percent)))
+    img = img.resize((base_width, h_size), PIL.Image.ANTIALIAS)
+    img.save(thumbnail_folder + '/thumbnail.jpg')
 
 
 @dtc.route('/<username>/myprojects', methods=['GET', 'POST'])
@@ -18,9 +28,8 @@ def decision_tree_submit(username):
     if form.validate_on_submit():
         # create project folders
         project_name = form.project_name.data
-        user_dir = '/UserData/DTC/'+ current_user.email + '/'
+        user_dir = '/app/static/UserData/DTC/'+ current_user.email + '/'
         full_dir = app.config['UPLOADED_PHOTOS_DEST'] + user_dir + project_name
-        print(full_dir)
         if not os.path.exists(full_dir):
             os.makedirs(full_dir)
 
@@ -35,6 +44,7 @@ def decision_tree_submit(username):
                                         name='classify_' + hashlib.md5(str(time.time()).encode()).hexdigest()[:10] + '.')
         time.sleep(0.1)
         classified_pictures_list.append(photos.path(classify_filename))
+        create_thumbnail(photos.path(classify_filename), full_dir)
         # uploads fore training pictures
         fore_train_pic = photos.save(form.fore_trainingdata_dir.data,
                                      folder=full_dir,
@@ -55,14 +65,16 @@ def decision_tree_submit(username):
                                   project_dir=full_dir,
                                   classified_pictures=str(classified_pictures_list),
                                   training_pictures=str(training_pictures_list),
-                                  training_pic_kinds=str(training_pic_kinds_list))
+                                  training_pic_kinds=str(training_pic_kinds_list),
+                                  comments=form.comments.data,
+                                  author_id=current_user.id)
         db.session.add(dtc_project)
         db.session.commit()
         flash('Pictures submitted successfully')
-        return render_template('dtc/inproject.html')
+        return redirect(url_for('dtc.inproject', username=current_user.username, project_name=project_name))
     dtc_projects = DTC_Project.query.filter_by(author_id=current_user.id).\
                    order_by(DTC_Project.timestamp.desc()).all()
-    return render_template('dtc/index.html', username=username, form=form, dtc_projects=dtc_projects)
+    return render_template('dtc/index.html', username=current_user.username, form=form, dtc_projects=dtc_projects)
 
 
 @dtc.route('/<username>/<project_name>')

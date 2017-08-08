@@ -6,6 +6,7 @@
 {{ super() }}
 <link rel="shortcut icon" href="{{ url_for('static', filename='home.ico') }}" type="image/x-icon">
 <link rel="icon" href="{{ url_for('static', filename='home.ico') }}" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 {% endblock %}
 
 
@@ -23,23 +24,38 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('dtc.decision_tree_submit', username=current_user.username) }}">DTC</a></li>
+                <li>
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('dtc.decision_tree_submit', username=current_user.username) }}">
+                {% else %}
+                <a href="{{ url_for('dtc.decision_tree_submit', username='visitor') }}">
+                {% endif %}
+                DTC</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('main.index') }}">BDD</a></li>
+                <li><a href="{{ url_for('main.developing') }}">BDD</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
-                <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ current_user.username }} | Account<b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ url_for('main.developing') }}">Change Password</a></li>
+                        <li><a href="{{ url_for('main.developing') }}">Change Email</a></li>
+                        <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+                    </ul>
+                </li>
                 {% else %}
                 <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
                 {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ url_for('main.index') }}">Contact us</a></li>
+                <li><a href="{{ url_for('main.developing') }}">Contact us</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ url_for('main.index') }}">Support us</a></li>
+                <li><a href="{{ url_for('main.developing') }}">Support us</a></li>
             </ul>
         </div>
     </div>
