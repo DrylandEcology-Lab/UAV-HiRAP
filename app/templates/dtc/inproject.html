@@ -6,25 +6,28 @@
 {% block page_content %}
 <div class="page-header">
     <h1>
-    	[{{ inproject.project_name }}]
+    	[{{ dtc_project.project_name }}]
     </h1>
     <p>
     	<font color='gray', size="4">
-    		{{ inproject.comments}}
+    		{{ dtc_project.comments}}
     	</font>
     </p>
-    {% if not url_for('static', filename='UserData/DTC/'+current_user.email+'/'+inproject.project_name+'/result.png') %}
+    {% if not exist %}
     <p>
     	<font size="3">This project has not been calculated before</font>
-  		<a href="{{ url_for('main.developing') }}">Start Calculate!</a>
     </p>
+    	<form method="post">
+        {{ wtf.form_field(form.submit_calculate) }}
+        </form>
     {% else %}
     <p>
-    	<font size="3">This project has been calculated before, you can check, </font>
-        <a href="{{ url_for('main.developing') }}">Download</a>
-        <font size="3">the result, or </font>
-  		<a href="{{ url_for('main.developing') }}">Calculate Again</a>
+    	<font size="3">This project has been calculated before, you can check the result, download or calculate again</font>
     </p>
+    	<form method="post">
+        {{ wtf.form_field(form.download) }}
+  		{{ wtf.form_field(form.submit_calculate) }}
+        </form>
     {% endif %}
 </div>
 <div>
@@ -34,7 +37,7 @@
         </font>
     </p>
     <p style="text-align:center;">
-    	<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+inproject.project_name+'/preview200.jpg') }}" style="max-width:100%;"/>
+    	<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.project_name+'/preview200.jpg') }}" width="30%", height="30%">
     </p>
 </div>
 <hr />
@@ -47,16 +50,16 @@
 	<table border="0", align="center">
   		<tr>
     		<td align="center">Foreground</td>
-    		<td> </td>
+    		<td width="10"> </td>
     		<td align="center">Background</td>
   		</tr>
   		<tr>
     		<td align="center">
-    			<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+inproject.project_name+'/preview_fore.jpg') }}" style="max-width:100%;"/>
+    			<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.project_name+'/preview_fore.jpg') }}" style="max-width:100%;"/>
     		</td>
-    		<td>--</td>
+    		<td></td>
     		<td align="center">
-    		<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+inproject.project_name+'/preview_back.jpg') }}" style="max-width:100%;"/>
+    		<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.project_name+'/preview_back.jpg') }}" style="max-width:100%;"/>
     		</td>
   		</tr>
 	</table>
@@ -68,9 +71,18 @@
     		Classified results:
     	</font>
     </p>
+    {% if exist %}
     <p style="text-align:center;">
-    	<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+inproject.project_name+'/result.png') }}" style="max-width:61.8%;"/>
+    	<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.project_name+'/result.png') }}" style="max-width:61.8%;"/>
     </p>
+    {% else %}
+    <p style="text-align:center;">
+    	<font size="4">
+    		NONE, please click [Calculate] button to calculate it!
+    	</font>
+    </p>
+    {% endif %}
 </div>
+
 
 {% endblock %}

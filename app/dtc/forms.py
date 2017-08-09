@@ -30,7 +30,8 @@ class DecisionTreeForm(FlaskForm):
             raise ValidationError('Project name already exists, please use another name')
 
 class ProjectCalculateForm(FlaskForm):
-    submit_calculate = SubmitField('Start Calculation')
+    download = SubmitField('Download result')
+    submit_calculate = SubmitField('Calculate')
 
 class ProjectChangeForm(FlaskForm):
     project_name = StringField('Project Name', validators=[DataRequired(),

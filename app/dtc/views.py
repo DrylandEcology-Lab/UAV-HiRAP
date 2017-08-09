@@ -4,12 +4,13 @@ import hashlib
 import PIL
 import shutil
 from PIL import Image
-from flask import current_app, render_template, redirect, url_for, flash
+from flask import current_app, render_template, redirect, url_for, flash, send_file
 from flask_login import login_required, current_user
 from . import dtc
 from .. import db, photos
-from ..models import User, DTC_Project
-from .forms import DecisionTreeForm
+from ..models import DTC_Project
+from .forms import DecisionTreeForm, ProjectCalculateForm
+from .decisiontree import decision_tree_classifier
 
 
 def create_thumbnail(photopath, thumbnail_folder, thumbnail_name, base_width=40):
@@ -87,7 +88,26 @@ def decision_tree_submit(username):
 @dtc.route('/<username>/<project_name>', methods=['GET','POST'])
 @login_required
 def inproject(username, project_name):
-
-    inproject = DTC_Project.query.filter_by(author_id=current_user.id).\
+    form = ProjectCalculateForm()
+    dtc_project = DTC_Project.query.filter_by(author_id=current_user.id).\
         filter_by(project_name=project_name).first_or_404()
-    return render_template('dtc/inproject.html', inproject=inproject, username=current_user.username)
+    # calculate pictures
+    if form.submit_calculate.data and form.is_submitted():
+        decision_tree_classifier(dtc_project.classified_pictures,
+                                 dtc_project.training_pictures,
+                                 dtc_project.training_pic_kinds,
+                                 dtc_project.project_dir)
+        flash("Calculate finished")
+        return redirect(url_for('dtc.inproject', project_name=project_name, username=current_user.username))
+    # download result
+    if form.download.data and form.is_submitted():
+        flash("You clicked download")
+        return send_file(dtc_project.project_dir+'/result.png', as_attachment=True)
+
+    # judge whether result.png exist
+    if os.path.exists(dtc_project.project_dir+'/result.png'):
+        exist = True
+    else:
+        exist = False
+    return render_template('dtc/inproject.html',
+                           dtc_project=dtc_project, username=current_user.username, form=form, exist=exist)

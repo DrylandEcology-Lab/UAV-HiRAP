@@ -2,5 +2,6 @@ Linux_result.png
 slicetest.png
 venv/
 UserData/
+https_certificate/
 __pycache__
 email_config.txt

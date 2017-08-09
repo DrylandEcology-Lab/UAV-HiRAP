@@ -11,7 +11,19 @@
 </div>
 <div>
 	<h2>Add a new project:</h2>
-	{{ wtf.quick_form(form)}}
+    <form class="form" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    {{ wtf.form_field(form.project_name) }}
+    {{ wtf.form_field(form.origin_pic_dir) }}
+    <p>Example:[Otindag Sandy land] <img src="{{ url_for('static', filename="ExamplePictures/preview-Classify.jpg") }}" height="5%", width="5%"/></p>
+    {{ wtf.form_field(form.fore_trainingdata_dir) }}
+    <p>Example:[Sand training picture] <img src="{{ url_for('static', filename="ExamplePictures/preview-Sand.png") }}" height="5%", width="5%"/></p>
+    {{ wtf.form_field(form.back_trainingdata_dir) }}
+    <p>Example:[Tree training picture] <img src="{{ url_for('static', filename="ExamplePictures/preview-Tree.png") }}" height="5%", width="5%"/></p>
+    <p><font color="red">Note: if training pictures do not have an alpha layer, the black/white background will be counted as training data</font></p>
+    {{ wtf.form_field(form.comments) }}
+    {{ wtf.form_field(form.submit) }}
+    </form>
 </div>
 <hr />
 <div>
