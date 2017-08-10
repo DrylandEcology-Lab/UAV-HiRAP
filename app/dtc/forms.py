@@ -4,14 +4,17 @@ from flask_wtf.file import FileField, FileRequired, FileAllowed
 from flask_login import login_required, current_user
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms import ValidationError
-from wtforms.validators import Length, DataRequired
+from wtforms.validators import Length, DataRequired, Regexp
 from ..models import DTC_Project
 from .. import photos
 
 
 class DecisionTreeForm(FlaskForm):
     project_name = StringField('Project Name', validators=[DataRequired(),
-                                                          Length(1,64)])
+                                                           Length(1,64),
+                                                           Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
+                                                                  'Project names must have only letters, ' 
+                                                                  'numbers, dots and underscores')])
     origin_pic_dir = FileField('Picture need to be classified (Maxsize = 1GB)',
                                validators=[FileAllowed(photos, 'Images only'),
                                            FileRequired('File was empty')])

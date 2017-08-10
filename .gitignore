@@ -1,6 +1,7 @@
 Linux_result.png
 slicetest.png
 venv/
+log/
 UserData/
 https_certificate/
 __pycache__

@@ -1,4 +1,3 @@
-# -*- coding:UTF-8 -*-
 import time
 import sys
 import os
@@ -17,57 +16,57 @@ def expand_colorspace_cv(img_str, printonoff='on'):
     # return: the list of expanded colorspace picture list
     t = time.time()
     if isinstance(img_str, str):
-        if printonoff == 'on': print('├┄ Convert classified picture [' + img_str + ']')
+        if printonoff == 'on': print('|--- Convert classified picture [' + img_str + ']')
         RGB = io.imread(img_str)
         LAB = color.rgb2lab(RGB)
-        if printonoff == 'on': print('│   ├┄ lab converted')
+        if printonoff == 'on': print('|   |--- lab converted')
         HSV = color.rgb2hsv(RGB)
-        if printonoff == 'on': print('│   ├┄ hsv converted')
+        if printonoff == 'on': print('|   |--- hsv converted')
         XYZ = color.rgb2xyz(RGB)
-        if printonoff == 'on': print('│   ├┄ xyz converted')
+        if printonoff == 'on': print('|   |--- xyz converted')
         (height, width, dimen) = RGB.shape
         rgb = RGB.reshape(height * width, dimen); del RGB
         lab = LAB.reshape(height * width, dimen); del LAB
         hsv = HSV.reshape(height * width, dimen); del HSV
         xyz = XYZ.reshape(height * width, dimen); del XYZ
-        if printonoff == 'on': print('│   └┄ reshaped')
+        if printonoff == 'on': print('|   ^--- reshaped')
         img_size = (height, width)
         expand = np.concatenate((rgb, lab, hsv, xyz), axis=1);del rgb, lab, hsv, xyz
         if printonoff == 'on':
-            print('│        ├┄ Combined = ' + str(round(sys.getsizeof(expand) / 8 / 1024 / 1024, 3)) + ' MB')
-        if printonoff == 'on': print('│        └┄ Cost ' + str(round(time.time() - t, 3)) + ' s')
+            print('|        |--- Combined = ' + str(round(sys.getsizeof(expand) / 8 / 1024 / 1024, 3)) + ' MB')
+        if printonoff == 'on': print('|        ^--- Cost ' + str(round(time.time() - t, 3)) + ' s')
         return expand, img_size
     else:
         RGB = img_str.reshape(1, img_str.shape[0], 3)
         LAB = color.rgb2lab(RGB)
-        if printonoff == 'on': print('│   │   ├┄ lab converted')
+        if printonoff == 'on': print('|   |   |--- lab converted')
         HSV = color.rgb2hsv(RGB)
-        if printonoff == 'on': print('│   │   ├┄ hsv converted')
+        if printonoff == 'on': print('|   |   |--- hsv converted')
         XYZ = color.rgb2xyz(RGB)
-        if printonoff == 'on': print('│   │   ├┄ xyz converted')
+        if printonoff == 'on': print('|   |   |--- xyz converted')
         rgb = img_str; del RGB
         lab = LAB[0]; del LAB
         hsv = HSV[0]; del HSV
         xyz = XYZ[0]; del XYZ
-        if printonoff == 'on': print('│   │   └┄ reshaped')
+        if printonoff == 'on': print('|   |   ^--- reshaped')
         expand = np.concatenate((rgb, lab, hsv, xyz), axis=1); del rgb, lab, hsv, xyz
         if printonoff == 'on':
-            print('│   │        ├┄ Combined = ' + str(round(sys.getsizeof(expand)/8/1024/1024, 3)) + ' MB')
-        if printonoff == 'on': print('│   │        └┄ Cost ' + str(round(time.time() - t, 3)) + ' s')
+            print('|   |        |--- Combined = ' + str(round(sys.getsizeof(expand)/8/1024/1024, 3)) + ' MB')
+        if printonoff == 'on': print('|   |        ^--- Cost ' + str(round(time.time() - t, 3)) + ' s')
         return expand
 
 
 def training_data_generate(train_str, printonoff='on'):
     t = time.time()
-    if printonoff == 'on': print('│   ├┄ Convert [' + train_str + '] to Training data')
+    if printonoff == 'on': print('|   |--- Convert [' + train_str + '] to Training data')
     train = io.imread(train_str)
     (height, width, dimen) = train.shape
     if dimen == 4:
         train = train.reshape(height * width, dimen)
         train_index = np.nonzero(train[:, 3])
         train_select = train[train_index][:, 0:3]
-        if printonoff == 'on': print('│   │   ├┄ Unused pixels deleted')
-        if printonoff == 'on': print('│   │   │   └┄ Cost ' + str(round(time.time() - t, 3)) + ' s')
+        if printonoff == 'on': print('|   |   |--- Unused pixels deleted')
+        if printonoff == 'on': print('|   |   |   ^--- Cost ' + str(round(time.time() - t, 3)) + ' s')
         train_array = expand_colorspace_cv(train_select)
         return train_array
     else:
@@ -81,18 +80,18 @@ def training_kind_generate(interact, printonoff='on'):
     interact = 'on'
     interact = (train_imgs, train_img_kinds)
     '''
-    if printonoff == 'on': print('├┄ Training data list generating')
-    if printonoff == 'on': print('│   ├┄ Input training data')
+    if printonoff == 'on': print('|--- Training data list generating')
+    if printonoff == 'on': print('|   |--- Input training data')
     container = []
     if interact=='on':
         add_field = 'y'
         while add_field == 'y':
-            kind_name = input('│   │   ├┄ Please input kind name:')
-            kind_dir = input('│   │   ├┄ Please input picture (training data) path for this kind: ')
+            kind_name = input('|   |   |--- Please input kind name:')
+            kind_dir = input('|   |   |--- Please input picture (training data) path for this kind: ')
             container.append((kind_name, kind_dir))
             if len(container) >= 2:
-                add_field = input('│   │   ├┄ Add more new kind? (y/n)')
-            if printonoff == 'on': print('│   │   └┄ Training data list generated')
+                add_field = input('|   |   |--- Add more new kind? (y/n)')
+            if printonoff == 'on': print('|   |   ^--- Training data list generated')
     else:   # interact = [train_dirs, train_kinds]
         (train_dirs, train_kinds) = interact
         for (train_dir, train_kind) in zip(train_dirs, train_kinds):
@@ -113,18 +112,18 @@ def tree_train(training_list, printonoff='on'):
         training_data_temp = training_data_generate(kind_couple[1])
         training_data = np.vstack((training_data, training_data_temp))
         training_result += len(training_data_temp) * [i]
-        if printonoff == 'on':print('│   └┄ Training data preparing accomplished')
-    if printonoff == 'on': print('├┄ Decision Tree Model application')
+        if printonoff == 'on':print('|   ^--- Training data preparing accomplished')
+    if printonoff == 'on': print('|--- Decision Tree Model application')
     clf = tree.DecisionTreeClassifier()  # import tree generator
-    if printonoff == 'on': print('│   ├┄ Build Decision Tree model')
+    if printonoff == 'on': print('|   |--- Build Decision Tree model')
     clf = clf.fit(training_data, training_result)  # training tress
-    if printonoff == 'on': print('│   ├┄ Decision Tree model generated')
+    if printonoff == 'on': print('|   |--- Decision Tree model generated')
     return clf
 
 
 def tree_apply(clf, classify_img, img_size, printonoff='on'):
     classified_result = clf.predict(classify_img)  # classify new pixels
-    if printonoff == 'on': print('│   └┄ Image successfully classified')
+    if printonoff == 'on': print('|   ^--- Image successfully classified')
     image_out = classified_result.reshape(img_size)
     return image_out
 
@@ -165,8 +164,8 @@ def classify_img(imgdir, folder_name, training_tuple, printonoff='on'):
         plt.imsave(cls_name, image_out, cmap=plt.cm.gray)
         del img_prepare, image_out
         percent = round(i / len(pic_list) * 100, 2)
-        if printonoff == 'on': print('\r│   │' + '='*round(percent/2) + '>'+ ' '*round(50-percent/2) + '│' + str(percent) + '%', end="")
-    if printonoff == 'on': print('\r│   │' + '='*49 + '>│100%')
+        if printonoff == 'on': print('\r|   |' + '='*round(percent/2) + '>'+ ' '*round(50-percent/2) + '|' + str(percent) + '%', end="")
+    if printonoff == 'on': print('\r|   |' + '='*49 + '>|100%')
     return cls_name_list, img_size
 
 
@@ -215,13 +214,15 @@ def decision_tree_classifier(classify_img_dirs, training_img_dirs, training_img_
     (cls_list, img_size) = classify_img(image2classify, full_folder_name, training_tuple)
     image_combination(cls_list, img_size, combine_dir=project_dir)
     delete_file_folder(full_folder_name)
-    print('└┄ Result image wrote')
+    print('^--- Result image wrote')
 
 
 if __name__ == '__main__':
-    print('================Program start==================\n'
-          '■ Main')
-    Image2Classify = input('├┄ Please input the image path which need to classify: ')
+    import sys
+    print(sys.getdefaultencoding())
+    print('================Program start==================\n'+
+          '[] Main')
+    Image2Classify = input('|--- Please input the image path which need to classify: ')
     if os.path.exists(Image2Classify):
         t = time.time()
         folder_name = str(time.time())
@@ -229,8 +230,8 @@ if __name__ == '__main__':
         (cls_list, img_size) = classify_img(Image2Classify, folder_name, training_tuple)
         image_combination(cls_list, img_size)
         delete_file_folder(folder_name)
-        print('│   └┄ Cost ' + str(round(time.time() - t, 3)) + ' s')
-        print('└┄ Result image wrote')
+        print('|   ^--- Cost ' + str(round(time.time() - t, 3)) + ' s')
+        print('^--- Result image wrote')
     else:
         print('File not found')
 

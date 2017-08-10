@@ -15,11 +15,11 @@
     {{ form.hidden_tag() }}
     {{ wtf.form_field(form.project_name) }}
     {{ wtf.form_field(form.origin_pic_dir) }}
-    <p>Example:[Otindag Sandy land] <img src="{{ url_for('static', filename="ExamplePictures/preview-Classify.jpg") }}" height="5%", width="5%"/></p>
+    <p><font color="gray">Example:[Otindag Sandy land.tif]</font> <img src="{{ url_for('static', filename="ExamplePictures/preview-Classify.jpg") }}" height="5%", width="5%"/></p>
     {{ wtf.form_field(form.fore_trainingdata_dir) }}
-    <p>Example:[Sand training picture] <img src="{{ url_for('static', filename="ExamplePictures/preview-Sand.png") }}" height="5%", width="5%"/></p>
+    <p><font color="gray">Example:[Tree training picture.png]</font> <img src="{{ url_for('static', filename="ExamplePictures/preview-Tree.png") }}" height="5%", width="5%"/></p>
     {{ wtf.form_field(form.back_trainingdata_dir) }}
-    <p>Example:[Tree training picture] <img src="{{ url_for('static', filename="ExamplePictures/preview-Tree.png") }}" height="5%", width="5%"/></p>
+    <p><font color="gray">Example:[Sand training picture.png]</font> <img src="{{ url_for('static', filename="ExamplePictures/preview-Sand.png") }}" height="5%", width="5%"/></p>
     <p><font color="red">Note: if training pictures do not have an alpha layer, the black/white background will be counted as training data</font></p>
     {{ wtf.form_field(form.comments) }}
     {{ wtf.form_field(form.submit) }}
@@ -34,7 +34,7 @@
 	{% for dtc_project in dtc_projects %}
     <li class="post">
     	<div class="profile-thumbnail">
-				<img class="img-rounded profile-thumbnail" src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.project_name+'/preview.jpg') }} ">
+				<img class="img-rounded profile-thumbnail" src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.project_name+'/preview.png') }} ">
 		</div>
         <div class="post-content">
         	<div class="post-date">{{ moment(dtc_project.timestamp).fromNow() }}</div>

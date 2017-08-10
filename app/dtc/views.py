@@ -18,7 +18,7 @@ def create_thumbnail(photopath, thumbnail_folder, thumbnail_name, base_width=40)
     w_percent = (base_width / float(img.size[0]))
     h_size = int((float(img.size[1]) * float(w_percent)))
     img = img.resize((base_width, h_size), PIL.Image.ANTIALIAS)
-    img.save(thumbnail_folder + '/' + thumbnail_name + 'jpg')
+    img.save(thumbnail_folder + '/' + thumbnail_name + 'png')
 
 
 @dtc.route('/<username>/myprojects', methods=['GET', 'POST'])
