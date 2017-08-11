@@ -34,17 +34,25 @@
 	{% for dtc_project in dtc_projects %}
     <li class="post">
     	<div class="profile-thumbnail">
-				<img class="img-rounded profile-thumbnail" src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.project_name+'/preview.png') }} ">
+				<img class="img-rounded profile-thumbnail" src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.id|string+dtc_project.icon|string) }} ">
 		</div>
         <div class="post-content">
         	<div class="post-date">{{ moment(dtc_project.timestamp).fromNow() }}</div>
         	<div class="post-author">
-        		<a href="{{ url_for('.inproject', username=current_user.username, project_name=dtc_project.project_name)}}">
+        		<a href="{{ url_for('dtc.inproject', username=current_user.username, project_id=dtc_project.id)}}">
             		{{ dtc_project.project_name }}
             	</a>
         	</div>
         	<div class="post-body">
-            {{ dtc_project.comments }}
+            	{{ dtc_project.comments }}
+            </div>
+            <div class="post-foot">
+				<a href="{{ url_for('dtc.edit', username=current_user.username, project_id=dtc_project.id) }}">
+					<span class="label label-primary">Edit</span>
+				</a>
+                <a href="{{ url_for('main.developing') }}">
+                    <span class="label label-default">Delete</span>
+                </a>
             </div>
         </div>
     </li>

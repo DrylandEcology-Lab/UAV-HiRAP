@@ -1,5 +1,6 @@
 Linux_result.png
 slicetest.png
+*.sqlite
 venv/
 log/
 UserData/

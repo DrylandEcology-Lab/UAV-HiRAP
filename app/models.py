@@ -57,7 +57,7 @@ class User(UserMixin, db.Model):
 
 
     def __repr__(self):
-        return '<Users %r>' % self.username
+        return '<Users %r>' % self.email
 
 
 
@@ -71,10 +71,13 @@ class DTC_Project(db.Model):
     classified_pictures = db.Column(db.Text)
     training_pictures = db.Column(db.Text)
     training_pic_kinds = db.Column(db.Text)
+    previews = db.Column(db.Text)
+    icon = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
-        return '<DTC_Project %r>' % self.project_name
+        return '<DTC_Project project_name%r\n classified_pictures%r \n training_pictures%r \n training_kinds%r>' \
+               % (self.project_name, self.classified_pictures, self.training_pictures, self.training_pic_kinds)
 
 
 @login_manager.user_loader

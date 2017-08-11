@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}DTC - Edit Project{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+<h1>Edit [{{ dtc_project.project_name }}]</h1>
+</div>
+<div>
+<form class="form" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    {{ wtf.form_field(form.project_name) }}
+    {{ wtf.form_field(form.origin_pic_dir) }}
+    <p><font color="gray">The project will classify this picture</font> <img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.id|string+previews['classify']) }}" height="5%", width="5%"/></p>
+    {{ wtf.form_field(form.fore_trainingdata_dir) }}
+    <p><font color="gray">This picture is foreground picture</font> <img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.id|string+previews['fore']) }}" height="5%", width="5%"/></p>
+    {{ wtf.form_field(form.back_trainingdata_dir) }}
+    <p><font color="gray">This picture is background picture</font> <img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.id|string+previews['back']) }}" height="5%", width="5%"/></p>
+    <p><font color="Red">Note: if training pictures do not have an alpha layer, the black/white background will be counted as training data</font></p>
+    {{ wtf.form_field(form.comments) }}
+    {{ wtf.form_field(form.submit) }} {{ wtf.form_field(form.cancel)}}
+    </form>
+</div>
+{% endblock %}

@@ -19,6 +19,7 @@
     </p>
     	<form method="post">
         {{ wtf.form_field(form.submit_calculate) }}
+        {{ wtf.form_field(form.back) }}
         </form>
     {% else %}
     <p>
@@ -27,6 +28,7 @@
     	<form method="post">
         {{ wtf.form_field(form.download) }}
   		{{ wtf.form_field(form.submit_calculate) }}
+        {{ wtf.form_field(form.back) }}
         </form>
     {% endif %}
 </div>
@@ -37,7 +39,7 @@
         </font>
     </p>
     <p style="text-align:center;">
-    	<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.project_name+'/preview200.png') }}" width="30%", height="30%">
+    	<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.id|string+previews['classify']) }}" style="max-width:100%;"/>
     </p>
 </div>
 <hr />
@@ -55,11 +57,11 @@
   		</tr>
   		<tr>
     		<td align="center">
-    			<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.project_name+'/preview_fore.png') }}" style="max-width:100%;"/>
+    			<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.id|string+previews['fore']) }}" style="max-width:100%;"/>
     		</td>
     		<td></td>
     		<td align="center">
-    		<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.project_name+'/preview_back.png') }}" style="max-width:100%;"/>
+    		<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.id|string+previews['back']) }}" style="max-width:100%;"/>
     		</td>
   		</tr>
 	</table>
@@ -73,7 +75,7 @@
     </p>
     {% if exist %}
     <p style="text-align:center;">
-    	<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.project_name+'/result.png') }}" style="max-width:61.8%;"/>
+    	<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.id|string+previews['result']) }}" style="max-width:100%;"/>
     </p>
     {% else %}
     <p style="text-align:center;">

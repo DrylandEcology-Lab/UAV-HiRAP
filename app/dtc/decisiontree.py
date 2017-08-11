@@ -1,6 +1,6 @@
 import time
-import sys
 import os
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from math import ceil
@@ -61,18 +61,22 @@ def training_data_generate(train_str, printonoff='on'):
     if printonoff == 'on': print('|   |--- Convert [' + train_str + '] to Training data')
     train = io.imread(train_str)
     (height, width, dimen) = train.shape
-    if dimen == 4:
-        train = train.reshape(height * width, dimen)
-        train_index = np.nonzero(train[:, 3])
-        train_select = train[train_index][:, 0:3]
+    if dimen != 3 and dimen !=4:
+        if printonoff == 'on': print('[Error]: picture layer uncommon')
+        if printonoff == 'on': print('================Program end==================')
+        return []
+    else:
+        if dimen == 4:
+            train = train.reshape(height * width, dimen)
+            train_index = np.nonzero(train[:, 3])   # select alpha layer != 0 as training data
+            train_select = train[train_index][:, 0:3]
+        if dimen == 3:
+            if printonoff == 'on': print('[Warning]: no alpha layer, count background as training data')
+            train_select = train.reshape(height * width, dimen)
         if printonoff == 'on': print('|   |   |--- Unused pixels deleted')
         if printonoff == 'on': print('|   |   |   ^--- Cost ' + str(round(time.time() - t, 3)) + ' s')
         train_array = expand_colorspace_cv(train_select)
         return train_array
-    else:
-        if printonoff == 'on': print('training image should have alpha layer')
-        if printonoff == 'on': print('================Program end==================')
-        return []
 
 
 def training_kind_generate(interact, printonoff='on'):
@@ -169,7 +173,7 @@ def classify_img(imgdir, folder_name, training_tuple, printonoff='on'):
     return cls_name_list, img_size
 
 
-def image_combination(cls_name_list, img_size, combine_dir='/'):
+def image_combination(cls_name_list, img_size, combine_dir='..'):
     images = map(Image.open, cls_name_list)
     widths, heights = zip(*(i.size for i in images))
     width = max(widths)
@@ -218,8 +222,6 @@ def decision_tree_classifier(classify_img_dirs, training_img_dirs, training_img_
 
 
 if __name__ == '__main__':
-    import sys
-    print(sys.getdefaultencoding())
     print('================Program start==================\n'+
           '[] Main')
     Image2Classify = input('|--- Please input the image path which need to classify: ')
