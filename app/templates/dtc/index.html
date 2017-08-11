@@ -50,7 +50,7 @@
 				<a href="{{ url_for('dtc.edit', username=current_user.username, project_id=dtc_project.id) }}">
 					<span class="label label-primary">Edit</span>
 				</a>
-                <a href="{{ url_for('main.developing') }}">
+                <a href="javascript:if(confirm('Are you sure to delete this object?'))location='{{ url_for('dtc.delete', username=current_user.username, project_id=dtc_project.id) }}'">
                     <span class="label label-default">Delete</span>
                 </a>
             </div>

@@ -247,3 +247,14 @@ def edit(username, project_id):
     form.project_name.data = dtc_project.project_name
     form.comments.data = dtc_project.comments
     return render_template('dtc/edit_dtc_project.html', form=form, dtc_project=dtc_project, previews=previews)
+
+@dtc.route('/<username>/<int:project_id>/delete', methods=['GET'])
+@login_required
+def delete(username, project_id):
+    dtc_project = DTC_Project.query.get_or_404(project_id)
+    rm = dtc_project.project_dir
+    if os.path.exists(rm):
+        shutil.rmtree(rm)
+    db.session.delete(dtc_project)
+    db.session.commit()
+    return redirect(url_for('dtc.decision_tree_submit', username=current_user.username))
