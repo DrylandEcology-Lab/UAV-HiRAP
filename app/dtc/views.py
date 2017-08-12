@@ -76,7 +76,8 @@ def decision_tree_submit(username):
         db.session.add(dtc_project)
         db.session.commit()
         # refresh dtc_project from database
-        dtc_project = DTC_Project.query.filter_by(author_id=current_user.id).filter_by(project_name=form.project_name.data).first()
+        dtc_project = DTC_Project.query.order_by(DTC_Project.id.desc()).first()
+        print('in here')
         previews = {'classify':'', 'fore':'', 'back':'', 'result':''}
 
         # create project folders
@@ -119,7 +120,7 @@ def decision_tree_submit(username):
         flash('Pictures submitted successfully')
         return redirect(url_for('dtc.inproject', username=current_user.username, project_id=dtc_project.id))
     dtc_projects = DTC_Project.query.filter_by(author_id=current_user.id).order_by(DTC_Project.timestamp.desc()).all()
-    return render_template('dtc/index.html', form=form, dtc_projects=dtc_projects)
+    return render_template('dtc/index.html', form=form, dtc_projects=dtc_projects, DTC_Project=DTC_Project)
 
 
 @dtc.route('/<username>/<int:project_id>', methods=['GET', 'POST'])

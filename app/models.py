@@ -76,8 +76,8 @@ class DTC_Project(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
-        return '<DTC_Project project_name%r\n classified_pictures%r \n training_pictures%r \n training_kinds%r>' \
-               % (self.project_name, self.classified_pictures, self.training_pictures, self.training_pic_kinds)
+        return '<%r DTC_Project project_name%r\nclassified_pictures%r \ntraining_pictures%r \ntraining_kinds%r> \n\n' \
+               % (self.id, self.project_name, self.classified_pictures, self.training_pictures, self.training_pic_kinds)
 
 
 @login_manager.user_loader

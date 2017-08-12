@@ -4,6 +4,7 @@
 
 {% block head %}
 {{ super() }}
+<meta charset="UTF-8">
 <link rel="shortcut icon" href="{{ url_for('static', filename='home.ico') }}" type="image/x-icon">
 <link rel="icon" href="{{ url_for('static', filename='home.ico') }}" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
@@ -80,4 +81,5 @@
 {% block scripts %}
 {{ super() }}
 {{ moment.include_moment() }}
+<script src="{{ url_for('static', filename='uploadbar.js') }}"></script>
 {% endblock %}

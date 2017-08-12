@@ -20,7 +20,7 @@
     	<form method="post">
         {{ wtf.form_field(form.submit_calculate) }}
         {{ wtf.form_field(form.back) }}
-        </form>
+  </form>
     {% else %}
     <p>
     	<font size="3">This project has been calculated before, you can check the result, download or calculate again</font>
@@ -29,62 +29,60 @@
         {{ wtf.form_field(form.download) }}
   		{{ wtf.form_field(form.submit_calculate) }}
         {{ wtf.form_field(form.back) }}
-        </form>
+  </form>
     {% endif %}
 </div>
 <div>
-	<p style="text-align:center;">
-		<font size="5">
-        	Picture(s) to be classified:
-        </font>
-    </p>
-    <p style="text-align:center;">
-    	<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.id|string+previews['classify']) }}" style="max-width:100%;"/>
-    </p>
+<table width="100%" border="0", align="center">
+  <tr>
+    <td rowspan="2", width="25%">
+    	<p style="text-align:center;">
+			<font size="3">
+        	Picture(s) to be classified
+        	</font>
+    	</p>
+    </td>
+    <td colspan="2" width="50%">
+        <p style="text-align:center;">
+            <font size="3">
+                Training data pictures
+             </font>
+        </p>
+    </td>
+    <td width="25%">
+    	<p style="text-align:center;">
+			<font size="3">
+   			Classified results</font>
+    	</p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="25%">Foreground</td>
+    <td align="center">Background</td>
+    <td align="center" width="25%">Percent: nan %</td>
+    </tr>
+  <tr>
+    <td>
+    		<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.id|string+previews['classify']) }}" width="100%"/>
+    </td>
+    <td align="center" width="25%">
+    	<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.id|string+previews['fore']) }}" width="100%"/>
+    </td>
+    <td align="center">
+    		<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.id|string+previews['back']) }}" width="100%"/></td>
+    <td align="center">
+        {% if exist %}
+            <img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.id|string+previews['result']) }}" width="100%"/>
+        {% else %}
+        <p style="text-align:center;">
+            <font size="4" color="gray">
+                NONE, please click [Calculate] button to calculate it!
+            </font>
+        </p>
+        {% endif %}
+    </td>
+  </tr>
+</table>
 </div>
-<hr />
-<div>
-	<p style="text-align:center;">
-		<font size="5">
-        	Training data pictures:
-         </font>
-    </p>
-	<table border="0", align="center">
-  		<tr>
-    		<td align="center">Foreground</td>
-    		<td width="10"> </td>
-    		<td align="center">Background</td>
-  		</tr>
-  		<tr>
-    		<td align="center">
-    			<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.id|string+previews['fore']) }}" style="max-width:100%;"/>
-    		</td>
-    		<td></td>
-    		<td align="center">
-    		<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.id|string+previews['back']) }}" style="max-width:100%;"/>
-    		</td>
-  		</tr>
-	</table>
-</div>
-<hr />
-<div>
-	<p style="text-align:center;">
-		<font size="5">
-    		Classified results:
-    	</font>
-    </p>
-    {% if exist %}
-    <p style="text-align:center;">
-    	<img src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.id|string+previews['result']) }}" style="max-width:100%;"/>
-    </p>
-    {% else %}
-    <p style="text-align:center;">
-    	<font size="4">
-    		NONE, please click [Calculate] button to calculate it!
-    	</font>
-    </p>
-    {% endif %}
-</div>
-
 
 {% endblock %}
