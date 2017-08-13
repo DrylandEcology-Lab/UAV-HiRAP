@@ -5,7 +5,6 @@ from flask_login import login_required, current_user
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import Length, DataRequired, Regexp
 from ..models import DTC_Project
-from .validators import UniqueProjectName
 from .. import photos
 
 
