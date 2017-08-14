@@ -40,6 +40,6 @@ def create_app(config_name):
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
     from .dtc import dtc as dtc_blueprint
-    app.register_blueprint(dtc_blueprint, url_prefix='/dtc')
+    app.register_blueprint(dtc_blueprint, url_prefix='/myprojects')
 
     return app

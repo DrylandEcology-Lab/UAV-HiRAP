@@ -21,11 +21,22 @@ class Role(db.Model):
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
+    ip = db.Column(db.String(15))
+    password_hash = db.Column(db.String(128))
+
     email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(64), unique=True, index=True)
-    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
-    password_hash = db.Column(db.String(128))
+    realname = db.Column(db.String(64))
+    country = db.Column(db.String(64))
+    org = db.Column(db.String(128))
+    field = db.Column(db.Integer)
+    major = db.Column(db.String(64))
+    aim = db.Column(db.Text)
+
     confirmed = db.Column(db.Boolean, default=False)
+    edit_required = db.Column(db.Boolean, default=False)
+
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     dtc_projects = db.relationship('DTC_Project', backref='dtc_author', lazy='dynamic')
 
     @property

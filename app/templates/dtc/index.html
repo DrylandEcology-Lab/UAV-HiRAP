@@ -9,9 +9,17 @@
 {% endblock%}
 
 {% block page_content %}
+{% if current_user.edit_required %}
 <div class="page-header">
     <h1>
-    Welcome to use the Decision Tree Classifier! You could:
+    <p>Your profile information is not completely, please reedit it again.</p>
+    <p>we will recheck it soon.</p>
+    </h1>
+</div>
+{% else %}
+<div class="page-header">
+    <h1>
+    Here is your projects page, You could:
     </h1>
 </div>
 <div>
@@ -111,7 +119,7 @@ $(function(){
 	{% for dtc_project in dtc_projects %}
     <li class="post">
     	<div class="profile-thumbnail">
-				<img class="img-rounded profile-thumbnail" src="{{ url_for('static', filename='UserData/DTC/'+current_user.email+'/'+dtc_project.id|string+dtc_project.icon|string) }} ">
+				<img class="img-rounded profile-thumbnail" src="{{ url_for('static', filename='UserData/'+current_user.email+'/'+dtc_project.id|string+dtc_project.icon|string) }} ">
 		</div>
         <div class="post-content">
         	<div class="post-date">{{ moment(dtc_project.timestamp).fromNow() }}</div>
@@ -135,5 +143,6 @@ $(function(){
     </li>
     {% endfor %}
 </ul>
+{% endif %}
 {% endblock %}
 

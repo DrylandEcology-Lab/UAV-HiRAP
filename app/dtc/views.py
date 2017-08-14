@@ -15,7 +15,7 @@ from .decisiontree import decision_tree_classifier
 
 def create_project_folder(app, dtc_project):
     # create new folder
-    user_dir = '/app/static/UserData/DTC/' + current_user.email + '/'
+    user_dir = '/app/static/UserData/' + current_user.email + '/'
     full_dir = app.config['UPLOADED_PHOTOS_DEST'] + user_dir + str(dtc_project.id)
     if not os.path.exists(full_dir):
         os.makedirs(full_dir)
@@ -65,7 +65,7 @@ def delete_old_preview_pictures(path, preview_key):
         os.remove(rm)
 
 
-@dtc.route('/<username>/myprojects', methods=['GET', 'POST'])
+@dtc.route('/<username>', methods=['GET', 'POST'])
 @login_required
 def decision_tree_submit(username):
     form = DecisionTreeForm()

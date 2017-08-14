@@ -24,18 +24,21 @@
             <a class="navbar-brand" href="{{ url_for('main.index') }}">Home</a>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navbar-center">
                 <li>
                 {% if current_user.is_authenticated %}
                 <a href="{{ url_for('dtc.decision_tree_submit', username=current_user.username) }}">
                 {% else %}
-                <a href="{{ url_for('dtc.decision_tree_submit', username='visitor') }}">
+                <a href="{{ url_for('auth.login') }}">
                 {% endif %}
-                DTC</a>
+                My Projects</a>
                 </li>
-            </ul>
-            <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('main.developing') }}">BDD</a></li>
+                <li>
+                <a href="{{ url_for('main.developing') }}">About UAV-HiRAP</a>
+                </li>
+                <li>
+                <a href="{{ url_for('main.developing') }}">About Us</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
@@ -43,20 +46,16 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ current_user.username }} | Account<b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ url_for('main.developing') }}">Change Password</a></li>
-                        <li><a href="{{ url_for('main.developing') }}">Change Username</a></li>
-                        <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+                        <li><a href="{{ url_for('main.developing') }}">Your Profile</a></li>
+                        <li><a href="{{ url_for('main.developing') }}">Help</a></li>
+                        <li><a href="{{ url_for('main.developing') }}">Settings</a></li>
+                        <li><a href="{{ url_for('auth.logout') }}">Sign out</a></li>
                     </ul>
                 </li>
                 {% else %}
-                <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+                <li><a href="{{ url_for('auth.login') }}">Sign in | Sign up</a></li>
                 {% endif %}
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ url_for('main.developing') }}">Contact us</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ url_for('main.developing') }}">Support us</a></li>
+                <li><a href="{{ url_for('main.developing') }}">中文</a></li>
             </ul>
         </div>
     </div>

@@ -2,24 +2,40 @@
 
 {% block title %}UAV-HiRAP{% endblock %}
 
+{% block head %}
+{{ super() }}
+<style type=text/css>
+body {
+
+    background: url("{{ url_for('static', filename='index.jpg') }}") center center fixed;
+	
+    -webkit-background-size: cover;
+
+    -moz-background-size: cover;
+
+    background-size: cover;
+
+    -o-background-size: cover;
+
+}
+</style>
+{% endblock %}
+
 {% block page_content %}
 <div class="page-header">
     <h1>
     {% if current_user.is_authenticated %}
     <p style="text-align:center;">
-    Welcome to use UAV-HiRAP platform!
+    Welcome to UAV-HiRAP!
     </p>
     {% else %}
     <p style="text-align:center;">
-    Hello, new visitor! please regist and login to use this platform.
+    Please Sign In to Access UAV-HiRAP
     {% endif %}
     </p>
     </h1>
 </div>
 <div>
-    <p style="text-align:center;">UAV-HiRAP Decision Tree Calssifier(DTC)</p>
-    <p style="text-align:center;">
-        <img src="{{ url_for('static', filename='ExamplePictures/Linux_result.png') }}" style="max-width:100%;"/>
-    </p>
+    <font size="5"><p style="text-align:center;">Unmanned Aerial Vehicles - High Resolution imagery Analysis Platform (UAV-HiRAP), is an open-source, web-based platform which provides service for image classification. Artificial intelligence (AI) have been applied into this platform for better classifing quality.</p></font>
 </div>
 {% endblock %}
