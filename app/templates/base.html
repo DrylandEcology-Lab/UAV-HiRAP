@@ -46,7 +46,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ current_user.username }} | Account<b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ url_for('main.developing') }}">Your Profile</a></li>
+                        <li><a href="{{ url_for('auth.my_profile', username=current_user.username) }}">Your Profile</a></li>
                         <li><a href="{{ url_for('main.developing') }}">Help</a></li>
                         <li><a href="{{ url_for('main.developing') }}">Settings</a></li>
                         <li><a href="{{ url_for('auth.logout') }}">Sign out</a></li>

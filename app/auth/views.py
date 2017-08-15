@@ -1,10 +1,10 @@
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, current_app, redirect, request, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from . import auth
 from .. import db
 from ..models import User
 from ..email import send_email
-from .forms import LoginForm, RegistrationForm
+from .forms import LoginForm, RegistrationForm, ProfileEditForm
 
 @auth.before_app_request
 def before_requests():
@@ -45,7 +45,7 @@ def logout():
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
-    if form.validate_on_submit():
+    if form.submit.data and form.validate_on_submit():
         user = User(ip= request.remote_addr,
                     email=form.email.data,
                     username=form.email.data.split('@')[0],
@@ -61,6 +61,8 @@ def register():
         token = user.generate_confirmation_token()
         send_email(user.email, 'Confirm Your UAV-HiRAP Account', 'auth/email/confirm', user=user, token=token)
         flash('A confirmation email has been sent to your by email. Please check your INBOX or SAMP Box')
+        app = current_app._get_current_object()
+        send_email(app.config['MAIL_ADMIN'], '[' + user.username + '] Joined in', 'auth/email/userinfo', user=user)
         return redirect(url_for('main.index'))
     return render_template('auth/register.html', form=form)
 
@@ -82,3 +84,34 @@ def resend_confirmation():
     send_email(current_user.email, 'Confirm Your UAV-HiRAP Account', 'auth/email/confirm', user=current_user, token=token)
     flash('A new confirmation email has been sent to your by email. Please wait for a moment and check your INBOX or SAMP Box again')
     return redirect(url_for('main.index'))
+
+@auth.route('/<username>/profile', methods=['GET','POST'])
+@login_required
+def my_profile(username):
+    user = User.query.filter_by(username=username).first()
+    form = ProfileEditForm()
+    if form.cancel.data and form.is_submitted():
+        return redirect(url_for('main.index'))
+    if form.submit.data and form.validate_on_submit():
+        user.realname = form.realname.data
+        user.country = form.country.data
+        user.org = form.org.data
+        user.field = form.field.data
+        user.major = form.major.data
+        user.aim = form.aim.data
+        if not user.edit_required:
+            flash('Your profile has been updated!')
+        if user.edit_required:
+            flash('Your profile changes have been sent to administrator, he will check your profile soon')
+            app = current_app._get_current_object()
+            send_email(app.config['MAIL_ADMIN'], '[' + user.username + '] Changed profile', 'auth/email/userinfo', user=user)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('main.index'))
+    form.realname.data = user.realname
+    form.country.data =user.country
+    form.org.data = user.org
+    form.field.data = user.field
+    form.major.data = user.major
+    form.aim.data = user.aim
+    return render_template('auth/profile.html', form=form, user=user)

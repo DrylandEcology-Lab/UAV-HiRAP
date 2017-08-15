@@ -1,0 +1,8 @@
+User email: 	{{ user.email }}
+Real name: 	{{ user.realname }}
+Country: 	{{ user.country }}
+Organization: 	{{ user.org }}
+Field:		{{ [(1, 'Earth Science'),(2, 'Life Science'),(3, 'Medical Science'),(4, 'Computer Science'),(5, 'Chemical Science'),(6, 'Engineering & Materials'),(7, 'Other Subject')][user.field-1] }}
+Major:		{{ user.major }}
+Purpose:	{{ user.aim }}
+

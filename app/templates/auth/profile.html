@@ -1,27 +1,25 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title%}Sign Up{% endblock %}
+{% block title%}My Profile{% endblock %}
 
 {% block page_content %}
 <div class="page_header">
-    <h1>Sign up</h1>
+    <h1>My Profile</h1>
 </div>
 <hr />
-<div class="col-md-4">
+<div>
+	<h2>Email: {{ user.email }}</h2>
 	<form class="form" method="post" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
-    {{ wtf.form_field(form.email) }}
     {{ wtf.form_field(form.realname) }}
-    {{ wtf.form_field(form.password) }}
-    {{ wtf.form_field(form.password2) }}
     {{ wtf.form_field(form.country) }}
     {{ wtf.form_field(form.org) }}
     {{ wtf.form_field(form.field) }}
     {{ wtf.form_field(form.major) }}
     {{ wtf.form_field(form.aim) }}
-    <p>Please use your </p>
     {{ wtf.form_field(form.submit) }}
+    {{ wtf.form_field(form.cancel) }}
     </form>
 </div>
 {% endblock %}

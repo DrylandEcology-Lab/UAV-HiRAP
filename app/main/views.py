@@ -13,4 +13,4 @@ def index():
 
 @main.route('/developing', methods=['GET'])
 def developing():
-    return render_template('bdd/index.html')
+    return render_template('developing.html')

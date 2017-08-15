@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SelectField, TextAreaField,SubmitField
-from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo
+from wtforms.validators import DataRequired, Length, Email, EqualTo
 from wtforms import ValidationError
 from ..models import User
 
@@ -14,7 +14,7 @@ class LoginForm(FlaskForm):
 
 
 class RegistrationForm(FlaskForm):
-    email = StringField('<p>Email <font color="red" size="2">(Please ensure correct, no change after registration)</font></p>',
+    email = StringField('Email <p><font color="red" size="2">(Please ensure correct, no change after registration)</font></p>',
                         validators=[DataRequired(), Length(1,64), Email()])
     realname = StringField('Real name<font color="red">*</font>', validators=[DataRequired(), Length(1,64)])
     password = PasswordField('Password<font color="red">*</font>', validators=[DataRequired(),
@@ -31,7 +31,8 @@ class RegistrationForm(FlaskForm):
                                  (5, 'Chemical Science'),
                                  (6, 'Engineering & Materials'),
                                  (7, 'Other Subject')],
-                        validators=[DataRequired()])
+                        validators=[DataRequired()],
+                        render_kw={"placeholder": "--select--"})
     major = StringField('Major<font color="red">*</font>', validators=[DataRequired()])
     aim = TextAreaField('Your purpose to use this platform<font color="red">*</font>',
                       validators=[DataRequired()])
@@ -48,3 +49,24 @@ class RegistrationForm(FlaskForm):
     def validate_username(self, field):
         if User.query.filter_by(username=field.data).first():
             raise ValidationError('Username already in use')
+
+class ProfileEditForm(FlaskForm):
+    realname = StringField('Real name', validators=[DataRequired(), Length(1, 64)])
+    country = StringField('Country', validators=[DataRequired()])
+    org = StringField('Organization', validators=[DataRequired()])
+    field = SelectField('Research field',
+                        coerce=int,
+                        choices=[(1, 'Earth Science'),
+                                 (2, 'Life Science'),
+                                 (3, 'Medical Science'),
+                                 (4, 'Computer Science'),
+                                 (5, 'Chemical Science'),
+                                 (6, 'Engineering & Materials'),
+                                 (7, 'Other Subject')],
+                        validators=[DataRequired()],
+                        render_kw={"placeholder": "--select--"})
+    major = StringField('Major', validators=[DataRequired()])
+    aim = TextAreaField('Your purpose to use this platform',
+                        validators=[DataRequired()])
+    submit = SubmitField('Submit')
+    cancel = SubmitField('back')

@@ -24,6 +24,7 @@ class DevelopmentConfig(Config):
         email_config = eval(f.read())
     MAIL_USERNAME = email_config.get('MAIL_USERNAME')
     MAIL_PASSWORD = email_config.get('MAIL_PASSWORD')
+    MAIL_ADMIN = email_config.get('MAIL_ADMIN')
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
 

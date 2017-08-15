@@ -1,9 +1,9 @@
 Linux_result.png
 slicetest.png
-*.sqlite
 venv/
 log/
 UserData/
 https_certificate/
 __pycache__
 email_config.txt
+*.sqlite

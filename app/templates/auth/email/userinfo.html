@@ -1,0 +1,30 @@
+<table width="100%" border="0">
+  <tr>
+    <th scope="row">User email:</th>
+    <td>{{ user.email }}</td>
+  </tr>
+  <tr>
+    <th scope="row">Real name:</th>
+    <td>{{ user.realname }}</td>
+  </tr>
+  <tr>
+    <th scope="row">Country:</th>
+    <td>{{ user.country }}</td>
+  </tr>
+  <tr>
+    <th scope="row">Organization:</th>
+    <td>{{ user.org }}</td>
+  </tr>
+  <tr>
+    <th scope="row">Field:</th>
+    <td>{{ [(1, 'Earth Science'),(2, 'Life Science'),(3, 'Medical Science'),(4, 'Computer Science'),(5, 'Chemical Science'),(6, 'Engineering & Materials'),(7, 'Other Subject')][user.field-1] }}</td>
+  </tr>
+  <tr>
+    <th scope="row">Major:</th>
+    <td>{{ user.major }}</td>
+  </tr>
+  <tr>
+    <th scope="row">Purpose:</th>
+    <td>{{ user.aim }}</td>
+  </tr>
+</table>
