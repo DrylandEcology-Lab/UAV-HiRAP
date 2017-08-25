@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -9,6 +10,10 @@ class Config:
     MAIL_SUBJECT_PREFIX = '[UAV-HiRAP]'
     MAIL_SENDER = 'UAV-HiRAP admin <howcanoewang@gmail.com>'
     UPLOADED_PHOTOS_DEST = basedir
+    LANGUAGES = {
+        'en': u'English',
+        'zh': u'中文'
+    }
 
     @staticmethod
     def init_app(app):

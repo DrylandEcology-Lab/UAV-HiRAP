@@ -1,5 +1,6 @@
 from datetime import datetime
-from flask import render_template, session, redirect, url_for, flash, current_app
+from flask import render_template, request, session, redirect, url_for, flash, current_app
+from flask_babel import gettext
 from .. import db
 from ..email import send_email
 from . import main
@@ -14,3 +15,8 @@ def index():
 @main.route('/developing', methods=['GET'])
 def developing():
     return render_template('developing.html')
+
+@main.route('/language/<language>')
+def set_language(language=None):
+    session['language'] = language
+    return redirect(url_for('main.index'))

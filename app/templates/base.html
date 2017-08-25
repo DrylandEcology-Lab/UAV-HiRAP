@@ -55,7 +55,14 @@
                 {% else %}
                 <li><a href="{{ url_for('auth.login') }}">Sign in | Sign up</a></li>
                 {% endif %}
-                <li><a href="{{ url_for('main.developing') }}">中文</a></li>
+                <li>
+                {% if session['language'] == 'en' %}
+                    <a href="{{ url_for('main.set_language', language='zh') }}" >中文</a>
+                {% endif %}
+                {% if session['language'] == 'zh' %}
+                    <a href="{{ url_for('main.set_language', language='en') }}" >English</a>
+                {%  endif %}
+                </li>
             </ul>
         </div>
     </div>

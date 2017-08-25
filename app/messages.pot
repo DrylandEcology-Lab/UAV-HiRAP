@@ -1,0 +1,47 @@
+# Translations template for PROJECT.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-08-15 20:19+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
+#: dtc/forms.py:14
+msgid "Project Name"
+msgstr ""
+
+#: dtc/forms.py:18
+msgid "Picture need to be classified (Maxsize = 1GB)"
+msgstr ""
+
+#: dtc/forms.py:19 dtc/forms.py:22 dtc/forms.py:25
+msgid "Images only"
+msgstr ""
+
+#: dtc/forms.py:20 dtc/forms.py:23 dtc/forms.py:26
+msgid "File was empty"
+msgstr ""
+
+#: dtc/forms.py:32
+msgid "Back"
+msgstr ""
+
+#: dtc/forms.py:33
+msgid "Download result"
+msgstr ""
+
+#: dtc/forms.py:34
+msgid "Calculate"
+msgstr ""
+
