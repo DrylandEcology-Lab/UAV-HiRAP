@@ -134,7 +134,7 @@ def inproject(username, project_id):
         return redirect(url_for('dtc.decision_tree_submit', username=current_user.username))
     # calculate pictures
     if form.submit_calculate.data and form.is_submitted():
-        decision_tree_classifier(dtc_project.classified_pictures,
+        vfc = decision_tree_classifier(dtc_project.classified_pictures,
                                  dtc_project.training_pictures,
                                  dtc_project.training_pic_kinds,
                                  dtc_project.project_dir)
@@ -143,6 +143,7 @@ def inproject(username, project_id):
         previews['result'] = create_thumbnail(dtc_project.project_dir + '/result.png',
                                               dtc_project.project_dir, 'pre_result'+hash, 100)
         dtc_project.previews = str(previews)
+        dtc_project.vfc = str(vfc)
         db.session.add(dtc_project)
         db.session.commit()
         flash("Calculate finished")
@@ -150,14 +151,19 @@ def inproject(username, project_id):
     # download result
     if form.download.data and form.is_submitted():
         return send_file(dtc_project.project_dir+'/result.png', as_attachment=True)
-
     # judge whether result.png exist
     if os.path.exists(dtc_project.project_dir+'/result.png'):
         exist = True
+        try:
+            vfc = eval(dtc_project.vfc)
+            vfc_temp = vfc[0]
+        except:
+            vfc_temp = 'NaN'
     else:
         exist = False
+        vfc_temp = 'NaN'
 
-    return render_template('dtc/inproject.html', form=form, exist=exist, dtc_project=dtc_project, previews=previews)
+    return render_template('dtc/inproject.html', form=form, exist=exist, dtc_project=dtc_project, previews=previews, vfc_temp=vfc_temp)
 
 
 @dtc.route('/<username>/<int:project_id>/edit', methods=['GET', 'POST'])

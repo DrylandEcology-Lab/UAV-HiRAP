@@ -7,6 +7,7 @@ from math import ceil
 from PIL import Image
 from sklearn import tree
 from skimage import io, color
+from collections import Counter
 
 
 def expand_colorspace_cv(img_str, printonoff='on'):
@@ -61,7 +62,7 @@ def training_data_generate(train_str, printonoff='on'):
     if printonoff == 'on': print('|   |--- Convert [' + train_str + '] to Training data')
     train = io.imread(train_str)
     (height, width, dimen) = train.shape
-    if dimen != 3 and dimen !=4:
+    if dimen != 3 and dimen != 4:
         if printonoff == 'on': print('[Error]: picture layer uncommon')
         if printonoff == 'on': print('================Program end==================')
         return []
@@ -104,7 +105,7 @@ def training_kind_generate(interact, printonoff='on'):
 
 
 def tree_train(training_list, printonoff='on'):
-    # :param training_list: [('kind1':training_data_dir), ('kind2':training_data_dir),...]
+    # :param training_list: [('kind1',training_data_dir), ('kind2',training_data_dir),...]
     # :param classify_img:
     # :param img_size:
     # :return:
@@ -159,6 +160,7 @@ def classify_img(imgdir, folder_name, training_tuple, printonoff='on'):
     pic_list = slice_picture(imgdir, folder_name)
     cls_name_list = []
     decision_tree = tree_train(training_tuple)
+    vfc = Counter({})
     # deal with each sliced image separately
     for i, img_dir in enumerate(pic_list):
         cls_name = folder_name + '/cls' + str(i) + '.jpg'
@@ -166,11 +168,17 @@ def classify_img(imgdir, folder_name, training_tuple, printonoff='on'):
         img_prepare, img_size = expand_colorspace_cv(img_dir, printonoff='off')
         image_out = tree_apply(decision_tree, img_prepare, img_size, printonoff='off')
         plt.imsave(cls_name, image_out, cmap=plt.cm.gray)
+        # count number
+        unique, counts = np.unique(image_out, return_counts=True)
+        vfc = vfc + Counter(dict(zip(unique, counts)))
         del img_prepare, image_out
         percent = round(i / len(pic_list) * 100, 2)
         if printonoff == 'on': print('\r|   |' + '='*round(percent/2) + '>'+ ' '*round(50-percent/2) + '|' + str(percent) + '%', end="")
+    total = sum(vfc.values())
+    for i in vfc:
+        vfc[i] = str(round(vfc[i] / total * 100, 2))
     if printonoff == 'on': print('\r|   |' + '='*49 + '>|100%')
-    return cls_name_list, img_size
+    return cls_name_list, img_size, dict(vfc)
 
 
 def image_combination(cls_name_list, img_size, combine_dir='..'):
@@ -208,6 +216,7 @@ def decision_tree_classifier(classify_img_dirs, training_img_dirs, training_img_
     :param training_img_dirs: string from DTC_Project.db, such as '[file/dir/image/name1.jpg, file/dir/image/name2.jpg]'
     :param training_img_kinds: string from DTC_Project.db, such as '[0,1]'
     :param project_dir: string from DTC_Project.db, such as '[project/file/dir]'
+    :return coverage: string to DTC_Project.db, such as '{'0':0.236; '1':0.546; '2':0.345}'
     '''
     image2classify = eval(classify_img_dirs)[0]
     training_dirs = eval(training_img_dirs)
@@ -215,10 +224,11 @@ def decision_tree_classifier(classify_img_dirs, training_img_dirs, training_img_
     folder_name = str(time.time())
     full_folder_name = project_dir + '/' + folder_name
     training_tuple = training_kind_generate(interact=[training_dirs, training_kinds])
-    (cls_list, img_size) = classify_img(image2classify, full_folder_name, training_tuple)
+    (cls_list, img_size, vfc) = classify_img(image2classify, full_folder_name, training_tuple)
     image_combination(cls_list, img_size, combine_dir=project_dir)
     delete_file_folder(full_folder_name)
     print('^--- Result image wrote')
+    return vfc
 
 
 if __name__ == '__main__':
@@ -229,8 +239,9 @@ if __name__ == '__main__':
         t = time.time()
         folder_name = str(time.time())
         training_tuple = training_kind_generate(interact='on')
-        (cls_list, img_size) = classify_img(Image2Classify, folder_name, training_tuple)
+        (cls_list, img_size, vfc) = classify_img(Image2Classify, folder_name, training_tuple)
         image_combination(cls_list, img_size)
+        print('|   ^--- Coverage=' + vfc)
         delete_file_folder(folder_name)
         print('|   ^--- Cost ' + str(round(time.time() - t, 3)) + ' s')
         print('^--- Result image wrote')

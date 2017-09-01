@@ -3,6 +3,7 @@ slicetest.png
 venv/
 log/
 UserData/
+UserDataBackUp/
 https_certificate/
 __pycache__
 email_config.txt

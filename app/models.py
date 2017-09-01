@@ -85,6 +85,7 @@ class DTC_Project(db.Model):
     previews = db.Column(db.Text)
     icon = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    vfc = db.Column(db.Text)   # vfc = {'0':0.236; '1':0.546; '2':0.345}
 
     def __repr__(self):
         return '<%r DTC_Project project_name%r\nclassified_pictures%r \ntraining_pictures%r \ntraining_kinds%r> \n\n' \

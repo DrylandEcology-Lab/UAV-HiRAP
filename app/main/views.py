@@ -20,3 +20,7 @@ def developing():
 def set_language(language=None):
     session['language'] = language
     return redirect(url_for('main.index'))
+
+@main.route('/about_us')
+def about_us():
+    return render_template('about_us.html')
