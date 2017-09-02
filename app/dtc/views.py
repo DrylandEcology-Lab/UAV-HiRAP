@@ -96,7 +96,7 @@ def decision_tree_submit(username):
                                                                           saved_dir=full_dir,
                                                                           previews=previews,
                                                                           form_data=form.fore_trainingdata_dir.data,
-                                                                          form_kind=0,
+                                                                          form_kind=1,
                                                                           thumbnail_size=100,
                                                                           pic_name_list=[],
                                                                           pic_kind_list=[])
@@ -105,7 +105,7 @@ def decision_tree_submit(username):
                                                                           saved_dir=full_dir,
                                                                           previews=previews,
                                                                           form_data=form.back_trainingdata_dir.data,
-                                                                          form_kind=1,
+                                                                          form_kind=0,
                                                                           thumbnail_size=100,
                                                                           pic_name_list=training_pictures_list,
                                                                           pic_kind_list=training_pic_kinds_list)
@@ -155,7 +155,7 @@ def inproject(username, project_id):
     if os.path.exists(dtc_project.project_dir+'/result.png'):
         exist = True
         try:
-            vfc = eval(dtc_project.vfc)
+            vfc = eval(dtc_project.vfc)   # if user old data vfc empty, raise eval(not string) error
             vfc_temp = vfc[0]
         except:
             vfc_temp = 'NaN'

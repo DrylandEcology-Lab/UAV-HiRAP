@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
@@ -90,6 +91,15 @@ class DTC_Project(db.Model):
     def __repr__(self):
         return '<%r DTC_Project project_name%r\nclassified_pictures%r \ntraining_pictures%r \ntraining_kinds%r> \n\n' \
                % (self.id, self.project_name, self.classified_pictures, self.training_pictures, self.training_pic_kinds)
+
+    @staticmethod
+    def admin_remove_all_result():
+        # in old version, foreground=0(black), background=1(white)
+        # this is not suitable for common classification result show
+        for i in DTC_Project.query.all():
+            result_dir = i.project_dir + '/result.png'
+            if os.path.exists(result_dir):
+                os.remove(result_dir)
 
 
 @login_manager.user_loader

@@ -83,6 +83,7 @@ def training_data_generate(train_str, printonoff='on'):
 def training_kind_generate(interact, printonoff='on'):
     '''
     interact = 'on'
+    else
     interact = (train_imgs, train_img_kinds)
     '''
     if printonoff == 'on': print('|--- Training data list generating')
@@ -111,12 +112,11 @@ def tree_train(training_list, printonoff='on'):
     # :return:
     training_data = np.empty((0, 12))    # training data
     training_result = []   # training data results
-    kind_list = []
-    for i, kind_couple in enumerate(training_list):
-        kind_list.append(kind_couple[0])
+    for kind_couple in training_list:
         training_data_temp = training_data_generate(kind_couple[1])
         training_data = np.vstack((training_data, training_data_temp))
-        training_result += len(training_data_temp) * [i]
+        pixel_color_id = int(kind_couple[0])
+        training_result += len(training_data_temp) * [pixel_color_id]
         if printonoff == 'on':print('|   ^--- Training data preparing accomplished')
     if printonoff == 'on': print('|--- Decision Tree Model application')
     clf = tree.DecisionTreeClassifier()  # import tree generator
@@ -167,7 +167,7 @@ def classify_img(imgdir, folder_name, training_tuple, printonoff='on'):
         cls_name_list.append(cls_name)
         img_prepare, img_size = expand_colorspace_cv(img_dir, printonoff='off')
         image_out = tree_apply(decision_tree, img_prepare, img_size, printonoff='off')
-        plt.imsave(cls_name, image_out, cmap=plt.cm.gray)
+        plt.imsave(cls_name, image_out, cmap=plt.cm.Accent)
         # count number
         unique, counts = np.unique(image_out, return_counts=True)
         vfc = vfc + Counter(dict(zip(unique, counts)))
@@ -241,7 +241,7 @@ if __name__ == '__main__':
         training_tuple = training_kind_generate(interact='on')
         (cls_list, img_size, vfc) = classify_img(Image2Classify, folder_name, training_tuple)
         image_combination(cls_list, img_size)
-        print('|   ^--- Coverage=' + vfc)
+        print('|   ^--- Coverage=' + str(vfc))
         delete_file_folder(folder_name)
         print('|   ^--- Cost ' + str(round(time.time() - t, 3)) + ' s')
         print('^--- Result image wrote')
