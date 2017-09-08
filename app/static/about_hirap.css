@@ -1,0 +1,125 @@
+@charset "utf-8";
+/* CSS Document */
+
+@media all and (min-width:48em)
+{
+html {
+	font-size: 18px;
+}
+}
+
+pre {
+  display: block;
+  font-family: -moz-fixed;
+  white-space: pre-wrap;
+  margin: 1em 0;
+}
+
+h1 {
+	color: rgb(51, 51, 51); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal;
+}
+.h1 {
+	color: rgb(51, 51, 51); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal;
+}
+h2 {
+	color: rgb(51, 51, 51); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal;
+}
+.h2 {
+	color: rgb(51, 51, 51); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal;
+}
+h3 {
+	color: rgb(51, 51, 51); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal;
+}
+.h3 {
+	color: rgb(51, 51, 51); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal;
+}
+h4 {
+	color: rgb(51, 51, 51); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal;
+}
+.h4 {
+	color: rgb(51, 51, 51); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal;
+}
+h5 {
+	color: rgb(51, 51, 51); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal;
+}
+.h5 {
+	color: rgb(51, 51, 51); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal;
+}
+h6 {
+	color: rgb(51, 51, 51); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal;
+}
+.h6 {
+	color: rgb(51, 51, 51); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal;
+}
+.container {
+	max-width: 60rem;
+}
+.blog-masthead {
+	margin-bottom: 3rem; box-shadow: inset 0px -0.1rem 0.25rem rgba(0,0,0,0.1); background-color: rgb(66, 139, 202); -webkit-box-shadow: inset 0 -.1rem .25rem rgba(0, 0, 0, .1);
+}
+.nav-link {
+	padding: 1rem; color: rgb(205, 221, 235); font-weight: 500; position: relative;
+}
+.nav-link:hover {
+	color: rgb(255, 255, 255); background-color: transparent;
+}
+.nav-link:focus {
+	color: rgb(255, 255, 255); background-color: transparent;
+}
+.nav-link.active {
+	color: rgb(255, 255, 255);
+}
+.nav-link.active::after {
+	left: 50%; width: 0px; height: 0px; bottom: 0px; margin-left: -0.3rem; vertical-align: middle; border-right-color: transparent; border-bottom-color: currentColor; border-left-color: transparent; border-right-width: 0.3rem; border-bottom-width: 0.3rem; border-left-width: 0.3rem; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; position: absolute; content: "";
+}
+.blog-header {
+	padding-bottom: 1.25rem; margin-bottom: 2rem; border-bottom-color: rgb(238, 238, 238); border-bottom-width: 0.05rem; border-bottom-style: solid;
+}
+.blog-title {
+	font-size: 2rem; font-weight: normal; margin-bottom: 0px;
+}
+.blog-description {
+	color: rgb(153, 153, 153); font-size: 1.1rem;
+}
+@media all and (min-width:40em)
+{
+.blog-title {
+	font-size: 3.5rem;
+}
+}
+.sidebar-module {
+	padding: 1rem;
+}
+.sidebar-module-inset {
+	padding: 1rem; border-radius: 0.25rem; background-color: rgb(245, 245, 245);
+}
+.sidebar-module-inset p:last-child {
+	margin-bottom: 0px;
+}
+.sidebar-module-inset ul:last-child {
+	margin-bottom: 0px;
+}
+.sidebar-module-inset ol:last-child {
+	margin-bottom: 0px;
+}
+.blog-pagination {
+	margin-bottom: 4rem;
+}
+.blog-pagination > .btn {
+	border-radius: 2rem;
+}
+.blog-post {
+	margin-bottom: 4rem;
+}
+.blog-post-title {
+	font-size: 2.5rem; margin-bottom: 0.25rem;
+}
+.blog-post-meta {
+	color: rgb(153, 153, 153); margin-bottom: 1.25rem;
+}
+.blog-footer {
+	padding: 2.5rem 0px; text-align: center; color: rgb(153, 153, 153); border-top-color: rgb(229, 229, 229); border-top-width: 0.05rem; border-top-style: solid; background-color: rgb(249, 249, 249);
+}
+.blog-footer p:last-child {
+	margin-bottom: 0px;
+}

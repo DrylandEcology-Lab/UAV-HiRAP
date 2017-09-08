@@ -97,10 +97,10 @@ class DTC_Project(db.Model):
         # in old version, foreground=0(black), background=1(white)
         # this is not suitable for common classification result show
         for i in DTC_Project.query.all():
-            result_dir = i.project_dir + '/result.png'
-            if os.path.exists(result_dir):
-                os.remove(result_dir)
-
+            if isinstance(i.project_dir, str):
+                result_dir = i.project_dir + '/result.png'
+                if os.path.exists(result_dir):
+                    os.remove(result_dir)
 
 @login_manager.user_loader
 def load_user(user_id):

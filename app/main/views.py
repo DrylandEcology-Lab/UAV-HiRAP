@@ -24,3 +24,7 @@ def set_language(language=None):
 @main.route('/about_us')
 def about_us():
     return render_template('about_us.html')
+
+@main.route('/about_hirap')
+def about_hirap():
+    return render_template('about_hirap.html')

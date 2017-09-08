@@ -1,43 +1,68 @@
-{% extends "base.html" %}
+﻿{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='about_us.css') }}">
+{% endblock %}
 
 {% block title %}About Us{% endblock %}
 
 {% block page_content %}
 <div class="container marketing">
-      <!-- Three columns of text below the carousel -->
+	  <!-- Three columns of text below the carousel -->
+	  <h1><p style="text-align:center;">Our team</p></h1>
+      
+      <hr class="featurette-divider">
+      
       <div class="row">
-        <div class="col-lg-4">
-          <img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-          <p><a class="btn btn-secondary" role="button" href="#">View details »</a></p>
+        <div class="col-lg-3">
+          <img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="{{ url_for('static', filename='about_us/WF.png') }}">
+          <h2>WANG Feng</h2>
+          <p>Project leader.</p>
+          <p><a class="btn btn-secondary" role="button" href="#WF">View details</a></p>
         </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
-          <h2>Heading</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-          <p><a class="btn btn-secondary" role="button" href="#">View details »</a></p>
+        
+        <div class="col-lg-3">
+          <img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="{{ url_for('static', filename='about_us/WHZ.png') }}">
+          <h2>WANG Haozhou</h2>
+          <p>Software architecture</p>
+          <p><a class="btn btn-secondary" role="button" href="#WHZ">View details</a></p>
         </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-secondary" role="button" href="#">View details »</a></p>
+        
+        <div class="col-lg-3">
+          <img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="{{ url_for('static', filename='about_us/MY.png') }}" />
+          <h2>MU Yue</h2>
+          <p>Algorithm development.</p>
+          <p><a class="btn btn-secondary" role="button" href="#MY">View details</a></p>
         </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
+        
+        <div class="col-lg-3">
+          <img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="{{ url_for('static', filename='about_us/JJ.png') }}">
+          <h2>JI Jie</h2>
+          <p>Graphic and interface design</p>
+          <p><a class="btn btn-secondary" role="button" href="#JJ">View details</a></p>
+        </div><!-- /.col-lg-4 -->
+        
+        
+  </div><!-- /.row -->
 
-
-      <!-- START THE FEATURETTES -->
-
+      
+      <hr class="featurette-divider">
+      
+      <h1><p style="text-align:center;">Teammember profile</p></h1>
+      
       <hr class="featurette-divider">
 
+      <!-- START THE FEATURETTES -->    
       <div class="row featurette">
         <div class="col-md-7">
-          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <h2 class="featurette-heading"><a id="WF"></a>WANG Feng/王锋<p><span class="text-muted">Project leader.</span></p></h2>
+          <p class="lead"><b>Title</b>: Institude of Desertification Studies, Chinese Academy of Forestry, China.</p>
+          <p class="lead">Associate Professor on Dryland Ecology. Focusing on the coupling process of vegetation structure, function, pattern and hydrology in arid and semi-arid ecological fragile areas.</p>
+          <p class="lead"><b>Email</b>:<a href="mailto:wangfeng@caf.ac.cn">wangfeng@caf.ac.cn</a></p>
         </div>
         <div class="col-md-5">
-          <img class="featurette-image img-fluid mx-auto" style="width: 500px; height: 500px;" alt="500x500" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22500%22%20height%3D%22500%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20500%20500%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15e188fe8e9%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A25pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15e188fe8e9%22%3E%3Crect%20width%3D%22500%22%20height%3D%22500%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22185.11000061035156%22%20y%3D%22261.49899940490723%22%3E500x500%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-src="holder.js/500x500/auto" data-holder-rendered="true">
+          <img class="featurette-image img-fluid mx-auto" style="width: 500px; height: 500px;" alt="500x500" src="{{ url_for('static', filename='about_us/WF500.png') }}" data-holder-rendered="true">
         </div>
       </div>
 
@@ -45,11 +70,29 @@
 
       <div class="row featurette">
         <div class="col-md-7 order-md-2">
-          <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <h2 class="featurette-heading"><a id="WHZ"></a>WANG Haozhou/王浩舟<p><span class="text-muted">System integration and software architecture.
+</span></p></h2>
+          <p class="lead"><b>Title</b>: Graduate Student, Department of Forestry and Environmental Mangement, University of New Brunswick, Canada.</p>
+          <p class="lead">An ecology and forestry graduate student. Interest in programming, doing scientific researches and artificial intelligence. Know a little about Python, such as web crawlers, GUI (graphical user interface) design, data analysis, data visualization and flask network programming.</p>
+          <p class="lead"><b>Email</b>:<a href="mailto:howcanoewang@gmail.com">howcanoewang@gmail.com</a></p>
         </div>
         <div class="col-md-5 order-md-1">
-          <img class="featurette-image img-fluid mx-auto" style="width: 500px; height: 500px;" alt="500x500" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22500%22%20height%3D%22500%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20500%20500%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15e188fe8ed%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A25pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15e188fe8ed%22%3E%3Crect%20width%3D%22500%22%20height%3D%22500%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22185.11000061035156%22%20y%3D%22261.49899940490723%22%3E500x500%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-src="holder.js/500x500/auto" data-holder-rendered="true">
+          <img class="featurette-image img-fluid mx-auto" style="width: 500px; height: 500px;" alt="500x500" src="{{ url_for('static', filename='about_us/WHZ500.png') }}" data-holder-rendered="true">
+        </div>
+      </div>
+      
+      <hr class="featurette-divider">
+      
+      <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+          <h2 class="featurette-heading"><a id="MY"></a>MU Yue/穆悦
+            <p><span class="text-muted">Algorithm and model development.</span></p></h2>
+          <p class="lead"><b>Title</b>: Postdoc Research Fellow, Institute for Sustainable Agro-ecosystem Services, The University of Tokyo, Japan.</p>
+          <p class="lead">Research Interest: Image-based Pattern Recognition; Remote Sensing of Vegetation; Earth Surface Processes and Landforms.</p>
+          <p class="lead"><b>Email</b>:<a href="mailto:gfjiyue@163.com">gfjiyue@163.com</a></p>
+        </div>
+        <div class="col-md-5 order-md-1">
+          <img class="featurette-image img-fluid mx-auto" style="width: 500px; height: 500px;" alt="500x500" src="{{ url_for('static', filename='about_us/MY500.png') }}" data-src="holder.js/500x500/auto" data-holder-rendered="true">
         </div>
       </div>
 
@@ -57,26 +100,20 @@
 
       <div class="row featurette">
         <div class="col-md-7">
-          <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <h2 class="featurette-heading"><a id="JJ"></a>JI Jie/姬婕
+            <p><span class="text-muted">Graphic and interface design.</span></p></h2>
+          <p class="lead"><b>Title</b>:Graduate student, Institude of Desertification Studies, Chinese Academy of Forestry, China.</p>
+          <p class="lead">Used to be landscape architecture student, focus on 3D model generated by Structure from Motion(SfM).</p>
+          <p class="lead"><b>Email</b>:<a href="mailto:379173980@qq.com">379173980@qq.com</a></p>
         </div>
         <div class="col-md-5">
-          <img class="featurette-image img-fluid mx-auto" style="width: 500px; height: 500px;" alt="500x500" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22500%22%20height%3D%22500%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20500%20500%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15e188fe8f0%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A25pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15e188fe8f0%22%3E%3Crect%20width%3D%22500%22%20height%3D%22500%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22185.11000061035156%22%20y%3D%22261.49899940490723%22%3E500x500%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-src="holder.js/500x500/auto" data-holder-rendered="true">
+          <img class="featurette-image img-fluid mx-auto" style="width: 500px; height: 500px;" alt="500x500" src="{{ url_for('static', filename='about_us/JJ500.png') }}" data-src="holder.js/500x500/auto" data-holder-rendered="true">
         </div>
       </div>
 
-      <hr class="featurette-divider">
-
       <!-- /END THE FEATURETTES -->
-
-
-      <!-- FOOTER -->
-      <footer>
-        <p class="float-right"><a href="#">Back to top</a></p>
-        <p>© 2017 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
-      </footer>
-
+      
+      <hr class="featurette-divider">
 </div>
-
 
 {% endblock %}

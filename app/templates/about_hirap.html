@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='about_hirap.css') }}">
+{% endblock %}
+
+{% block title %}About UAV-HiRAP{% endblock %}
+
+{% block page_content %}
+<div class="blog-header">
+	<div class="container">
+    	<h1 class="blog-title">About UAV-HiRAP</h1>
+    	<p class="lead blog-description">A guidebook about this platform.</p>
+    </div>
+</div>
+
+<div class="container">
+	<div class="row">
+    	<div class="col-sm-8 blog-main">
+        
+        	<div class="blog-post">
+            	<h2 class="blog-post-title"><a id="BI"></a>Brief introduction</h2>
+                <p class="blog-post-meta">
+                	September 6, 2017 by
+                  	<a href="/about_us#WF">WANG Feng</a>
+                </p>
+                <p>Unmanned Aerial Vehicles - High Resolution imagery Analysis Platform (UAV-HiRAP), is an open-source, web-based platform which provides service for image classification. Artificial intelligence (AI) have been applied into this platform for better classifing quality.</p>
+                <pre>基于无人机获取的高精度影像和机器学习的人工智能算法，解决各类型植被分类、面积覆盖度提取，林学、生态学等研究领域关键特征的快速计算和输出等需求。</pre>
+            </div>
+            
+            <div class="blog-post">
+            	<h2 class="blog-post-title"><a id="NF"></a>New features</h2>
+                <p class="blog-post-meta">
+                	September 7, 2017 by
+                    <a href="/about_us#WHZ">WANG Haozhou</a>
+                </p>
+                <h3>Image Management</h3>
+                <p>The software provides convenient image management function, the user can use project management page free to add, delete items. Also modifing the project name, comments and dealing with the image have been supported.</p>
+                <pre>本软件提供便利的影像管理功能，用户可以用户项目管理页面里自由的添加、删除项目，修改项目名称、备注和欲处理的图像</pre>
+                <hr />
+                <h3>Decision Tree Model Ggeneration</h3>
+                <p>The classification of the software is based on the artificial intelligence algorithm. The classification model is built automatically by the computer and the basic training set provided by the user. Users can directly use the database has been classified training set, can also use the <a href="TPG">custom training set</a>.</p>
+                <pre>该软件的分类依据是依赖基于机器学习的人工智能算法进行分类，分类模型由用户提供的分类基础训练集由计算机自动构建。用户可直接利用数据库中已有的分类训练集，也可利用自定义的训练集。</pre>
+                <hr />
+                <h3>Results Output</h3>
+                <p>After the image classification, results can be outputed in the image tiff format. All types of vegetation coverage can alse be calculated.</p>
+                <pre>在图像分类之后，能将分类后的图片tiff的格式输出，各类型植被覆盖度也能被计算出来。</pre>
+            </div>
+            
+            <div class="blog-post">
+            	<h2 class="blog-post-title"><a id="H2U"></a>How to use</h2>
+                <p class="blog-post-meta">
+                	September 5, 2017 by
+                  <a href="/about_us#WHZ">WANG Haozhou</a>
+                </p>
+                <h3>Sign Up and Sign In</h3>
+                <p>When new user visit, the "Home" and "My Projects" will show please Sign in to unlock UAV-HiRAP vip function.</p>
+                <pre>新用户登陆时，“首页”和“我的项目”均提示需要登录方可解锁功能。</pre>
+                <ul>
+                    <img style="width: 500px; height: 130px;" alt="500x130" src="{{ url_for('static', filename='about_hirap/H2U1.1.png') }}">
+                    <img style="width: 500px; height: 200px;" alt="500x200" src="{{ url_for('static', filename='about_hirap/H2U1.2.png') }}">
+                </ul>
+                <p>If you did not sign up before, please click "Click here to Sign up" to enter regist page.</p>
+                <pre>如果之前没有注册过账号，则点击Click here to Sign up进入注册界面</pre>
+                <ul><img style="width: 200px; height: 430px;" alt="200x430" src="{{ url_for('static', filename='about_hirap/H2U1.3.png') }}"></ul>
+                <p>Fill in all the information that required, you will get validate email, click the link in that email to activate your account.</p>
+                <pre>填上注册用的信息，将会收到验证邮件，点击邮件里面的链接即可激活邮箱账号。</pre>
+                <ul><img style="width: 500px; height: 100px;" alt="500x100" src="{{ url_for('static', filename='about_hirap/H2U1.4.png') }}"></ul>
+                <hr>
+                <h3>New Project</h3>
+                <p>After signing in, you could enter "New Project" page by clicking "My Projects". Then input project name and select photo, and press "Upload and Classify" button. This step will be automatically finished after web page has response.</p>
+                <pre>登陆后，通过点击My projects，即可进入新建项目界面，键入项目名和选择文件路径之后，点击【Upload and Classify】，等待网页响应后，即完成项目新建与上传。</pre>
+                <ul><img style="width: 500px; height: 310px;" alt="500x310" src="{{ url_for('static', filename='about_hirap/H2U2.1.png') }}"><</ul>
+                <p>After all images files are uplaoded, the brower will go into the project content page. The calculation button will be activated.</p>
+                <pre>图片文件上传完毕，直接进入该项目网页中，可以进行计算操作。</pre>
+                <ul><img style="width: 400px; height: 250px;" alt="400x250" src="{{ url_for('static', filename='about_hirap/H2U2.2.png') }}"></ul>
+                <hr />
+                <h3>Open Project</h3>
+                <p>If you have an exist project file, then you can directly open the view. Go to the bottom of this page, click on the hyperlink of project file name </p>
+                <pre>如果有已经做好的项目文件，那么可以直接打开查看，将网页拉到最下面，点击相应的项目文件名超链接</pre>
+                <ul><img style="width: 500px; height: 90px;" alt="500x90" src="{{ url_for('static', filename='about_hirap/H2U3.png') }}"></ul>
+                <p>Then you can go into the project content page.</p>
+                <pre>即可进入项目界面。</pre>
+                <ul><img style="width: 400px; height: 250px;" alt="400x250" src="{{ url_for('static', filename='about_hirap/H2U2.2.png') }}"></ul>
+                <hr />
+                <h3>Modity Project</h3>
+                <p>If you want to modify the project name, project comments and project pictures, click the blue "Edit" button at the bottom of the item.</p>
+                <pre>若想修改项目名称、项目备注和项目图片，点击项目下方蓝色的"Edit"按钮</pre>
+                <ul><img style="width: 500px; height: 90px;" alt="500x90" src="{{ url_for('static', filename='about_hirap/H2U3.png') }}"></ul>
+                <p>So you can go into the project modify page.</p>
+                <pre>即可进入项目修改界面。</pre>
+                <ul><img style="width: 500px; height: 300px;" alt="800x300" src="{{ url_for('static', filename='about_hirap/H2U4.png') }}"></ul>
+                <p>Users can directly modify the project name and comments in that page, re-upload the picture will replace the original picture.</p>
+                <pre>用户可以直接再网页中修改项目名及备注，重新上传图片后会将原始的图片替换掉。</pre>
+                <hr />
+                <h3>Delete Project</h3>
+                <p>To delete an item, click the gray button at the bottom of the item to delete it.</p>
+                <pre>若想删除项目，点击项目下方灰色的Delete按钮，即可删除改项目</pre>
+                <ul><img style="width: 500px; height: 90px;" alt="500x90" src="{{ url_for('static', filename='about_hirap/H2U3.png') }}"></ul>
+                <p>Note: this operation could not be revoked.</p>
+                <pre>注意：此删除操作一旦执行，不可恢复！</pre>
+                <hr />
+                <h3>Image Classification</h3>
+                <p>In the project interface, click the "Calculate" button.</p>
+                <pre>在项目界面中，点击Calculate按钮</pre>
+                <ul><img style="width: 500px; height: 90px;" alt="500x90" src="{{ url_for('static', filename='about_hirap/H2U3.png') }}"></ul>
+                <p>The server background will begin to classify images, waiting for the page response, you can get the classification result in the form of binary image.</p>
+                <pre>服务器后台就开始进行分类操作，等待网页响应后，即可获得分类后的二值图</pre>
+                <ul><img style="width: 500px; height: 200px;" alt="500x200" src="{{ url_for('static', filename='about_hirap/H2U6.png') }}"></ul>
+                <p>Users could download this binary image by clicking "Download result" button.</p>
+                <pre>用户可以点击"Download result"按钮，下载该黑白二值图。</pre>
+            </div>
+            <div class="blog-post">
+            	<h2 class="blog-post-title"><a id="TPG"></a>Training pictures generate</h2>
+                <p class="blog-post-meta">
+                	September 4, 2017 by
+                    <a href="/about_us#JJ">JI Jie</a>
+                </p>
+                <p>Note: <b>Photoshop CS6</b> is required in this step</p>
+                <ol>
+                    <li>Open Photoshop
+                    	<pre>打开Photoshop</pre>
+                    </li>
+                    <li>New images (Ctrl+N) and set "Background contents" transparent.
+                    	<pre>新建图像（Ctrl+N），设置背景内容为"透明"</pre>
+                    </li>
+                    <img style="width: 500px; height: 400px;" alt="500x400" src="{{ url_for('static', filename='about_hirap/TPG1.png') }}"><p></p>
+                    <li>Open classified pictures (Ctrl+O)
+                    	<pre>打开要分类的图片（Ctrl+O）</pre>
+                    </li>
+                    <img style="width: 500px; height: 500px;" alt="500x500" src="{{ url_for('static', filename='about_hirap/TPG2.png') }}"><p></p>
+                    <li>Using Pen tool <img style="width: 21px; height: 18px;" alt="21x18" src="{{ url_for('static', filename='about_hirap/Penicon.png') }}"> to select areas where are foreground and background.
+                    	<pre>用钢笔工具来选择背景与前景的训练集</pre>
+                    </li>
+                    <img style="width: 500px; height: 500px;" alt="500x500" src="{{ url_for('static', filename='about_hirap/TPG3.png') }}"><p></p>
+                    <li>Right click the start point, and select "Make Selection..."
+                    	<pre>在起始点右键，选择"建立选区"</pre>
+                    </li>
+                    <img style="width: 500px; height: 500px;" alt="500x500" src="{{ url_for('static', filename='about_hirap/TPG4.png') }}"><p></p>
+                    <li>Set "Feather Radius" equal to 0 and press "OK"
+                    	<pre>设置羽化半径为0，点击确定</pre>
+                    </li>
+                    <img style="width: 500px; height: 500px;" alt="500x500" src="{{ url_for('static', filename='about_hirap/TPG5.png') }}"><p></p>
+                    <li>Copy the select area (Ctrl+C)
+                    	<pre>复制选中的选区（Ctrl+C）</pre>
+                    </li>
+                    <img style="width: 500px; height: 500px;" alt="500x500" src="{{ url_for('static', filename='about_hirap/TPG6.png') }}"><p></p>
+                    <li>Paste the select area (Ctrl+V)
+                    	<pre>粘贴选中的区域（Ctrl+V）</pre>
+                    </li>
+                    <img style="width: 500px; height: 500px;" alt="500x500" src="{{ url_for('static', filename='about_hirap/TPG7.png') }}"><p></p>
+                    <li>Repeat previous steps to select enough training picture areas.
+                    	<pre>重复之前的步骤，选取足够的训练集</pre>
+                    </li>
+                    <li>File > Save As ...
+                    	<pre>文件 > 另存为... </pre>
+                    </li>
+                    <img style="width: 500px; height: 500px;" alt="500x500" src="{{ url_for('static', filename='about_hirap/TPG8.png') }}"><p></p>
+                    <li>Change the saved format to PNG.
+                    	<pre>修改保存的格式为PNG格式</pre>
+                    </li>
+                    <img style="width: 500px; height: 600px;" alt="500x600" src="{{ url_for('static', filename='about_hirap/TPG9.png') }}"><p></p>
+                </ol>
+            </div>
+            
+          <div class="blog-post">
+            	<h2 class="blog-post-title"><a id="A"></a>Achievements</h2>
+                <p class="blog-post-meta">
+                	September 7, 2017 by
+                    <a href="/about_us#WHZ">WANG Haozhou</a>
+                <p>1. Software copywrite (UAV-HiRAP v1.0 single version)
+                	<pre>UAV-HiRAP单机版v1.0软件著作权</pre>
+                </p>
+                    <img style="width: 600px; height: 800px;" alt="500x500" src="{{ url_for('static', filename='about_hirap/Cert1.png') }}">
+                </p>
+            </div>
+        </div>
+        
+        <div class="col-sm-3 offset-sm-1 blog-sidebar">
+        	<div class="sidebar-module sidebar-module-inset">
+            	<h4>About</h4>
+            	<p>UAV-HiRAP web-based platform</p>
+                <p>Version number: v2.0</p>
+                <p>September 10, 2017</p>
+            </div>
+            
+            <div class="sidebar-module">
+                <h4>Contents</h4>
+                <ol class="list-unstyled">
+                  <li><a href="#BI">Brief introduction</a></li>
+                  <li><a href="#NF">New features</a></li>
+                  <li><a href="#H2U">How to use</a></li>
+                  <li><a href="#TPG">Training pictures generate</a></li>
+                  <li><a href="#A">Achievements</a></li>
+                </ol>
+            </div>
+            
+            <div class="sidebar-module">
+                <h4>Elsewhere</h4>
+                <ol class="list-unstyled">
+                  <li><a href="https://github.com/HowcanoeWang/UAV-HiRAP">GitHub</a></li>
+                  <li><a href="#">Twitter</a></li>
+                  <li><a href="#">Facebook</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock%}
