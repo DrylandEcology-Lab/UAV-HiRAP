@@ -77,7 +77,6 @@ def decision_tree_submit(username):
         db.session.commit()
         # refresh dtc_project from database
         dtc_project = DTC_Project.query.order_by(DTC_Project.id.desc()).first()
-        print('in here')
         previews = {'classify':'', 'fore':'', 'back':'', 'result':''}
 
         # create project folders
@@ -89,7 +88,7 @@ def decision_tree_submit(username):
                                                       previews=previews,
                                                       form_data=form.origin_pic_dir.data,
                                                       form_kind='',
-                                                      thumbnail_size=100,
+                                                      thumbnail_size=200,
                                                       create_icon='on', pic_name_list=[], pic_kind_list=[])
         # uploads fore training pictures
         training_pictures_list, training_pic_kinds_list, _ = upload_pictures(prefix='fore',
@@ -97,7 +96,7 @@ def decision_tree_submit(username):
                                                                           previews=previews,
                                                                           form_data=form.fore_trainingdata_dir.data,
                                                                           form_kind=1,
-                                                                          thumbnail_size=100,
+                                                                          thumbnail_size=200,
                                                                           pic_name_list=[],
                                                                           pic_kind_list=[])
         # uploads back training pictures
@@ -106,7 +105,7 @@ def decision_tree_submit(username):
                                                                           previews=previews,
                                                                           form_data=form.back_trainingdata_dir.data,
                                                                           form_kind=0,
-                                                                          thumbnail_size=100,
+                                                                          thumbnail_size=200,
                                                                           pic_name_list=training_pictures_list,
                                                                           pic_kind_list=training_pic_kinds_list)
         # save to database
@@ -134,14 +133,19 @@ def inproject(username, project_id):
         return redirect(url_for('dtc.decision_tree_submit', username=current_user.username))
     # calculate pictures
     if form.submit_calculate.data and form.is_submitted():
+        # Delete old result preview
+        try:
+            delete_old_preview_pictures(dtc_project.project_dir, previews['result'])
+        except:
+            pass
         vfc = decision_tree_classifier(dtc_project.classified_pictures,
                                  dtc_project.training_pictures,
                                  dtc_project.training_pic_kinds,
                                  dtc_project.project_dir)
-        # make result preview
+        # make result new preview
         hash = '_' + hashlib.md5(str(time.time()).encode()).hexdigest()[:10]
         previews['result'] = create_thumbnail(dtc_project.project_dir + '/result.png',
-                                              dtc_project.project_dir, 'pre_result'+hash, 100)
+                                              dtc_project.project_dir, 'pre_result'+hash, 200)
         dtc_project.previews = str(previews)
         dtc_project.vfc = str(vfc)
         db.session.add(dtc_project)
@@ -197,7 +201,7 @@ def edit(username, project_id):
                                                           previews=previews,
                                                           form_data=form.origin_pic_dir.data,
                                                           form_kind='',
-                                                          thumbnail_size=100,
+                                                          thumbnail_size=200,
                                                           create_icon='on', pic_name_list=[], pic_kind_list=[])
             # refresh database
             dtc_project.classified_pictures=str(classified_pictures_list)
@@ -213,7 +217,7 @@ def edit(username, project_id):
                                                                               previews=previews,
                                                                               form_data=form.fore_trainingdata_dir.data,
                                                                               form_kind=0,
-                                                                              thumbnail_size=100,
+                                                                              thumbnail_size=200,
                                                                               pic_name_list=pic_name_list,
                                                                               pic_kind_list=pic_kind_list)
             # update database
@@ -231,7 +235,7 @@ def edit(username, project_id):
                                                                               previews=previews,
                                                                               form_data=form.back_trainingdata_dir.data,
                                                                               form_kind=1,
-                                                                              thumbnail_size=100,
+                                                                              thumbnail_size=200,
                                                                               pic_name_list=pic_name_list,
                                                                               pic_kind_list=pic_kind_list)
             # update database

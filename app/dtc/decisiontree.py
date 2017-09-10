@@ -19,6 +19,8 @@ def expand_colorspace_cv(img_str, printonoff='on'):
     if isinstance(img_str, str):
         if printonoff == 'on': print('|--- Convert classified picture [' + img_str + ']')
         RGB = io.imread(img_str)
+        if RGB.shape[2] == 4:    # exists alpha layer
+            RGB = RGB[:,:,0:3]
         LAB = color.rgb2lab(RGB)
         if printonoff == 'on': print('|   |--- lab converted')
         HSV = color.rgb2hsv(RGB)
