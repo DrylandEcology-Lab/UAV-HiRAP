@@ -220,6 +220,7 @@ def decision_tree_classifier(classify_img_dirs, training_img_dirs, training_img_
     :param project_dir: string from DTC_Project.db, such as '[project/file/dir]'
     :return coverage: string to DTC_Project.db, such as '{'0':0.236; '1':0.546; '2':0.345}'
     '''
+    t = time.time()
     image2classify = eval(classify_img_dirs)[0]
     training_dirs = eval(training_img_dirs)
     training_kinds = eval(training_img_kinds)
@@ -229,7 +230,9 @@ def decision_tree_classifier(classify_img_dirs, training_img_dirs, training_img_
     (cls_list, img_size, vfc) = classify_img(image2classify, full_folder_name, training_tuple)
     image_combination(cls_list, img_size, combine_dir=project_dir)
     delete_file_folder(full_folder_name)
+    print('|   ^--- Cost ' + str(round(time.time() - t, 3)) + ' s')
     print('^--- Result image wrote')
+
     return vfc
 
 

@@ -28,3 +28,7 @@ def about_us():
 @main.route('/about_hirap')
 def about_hirap():
     return render_template('about_hirap.html')
+
+@main.route('/publications')
+def publications():
+    return render_template('publications.html')
