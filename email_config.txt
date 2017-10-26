@@ -1,0 +1,1 @@
+{'MAIL_USERNAME': 'example@gmail.com', 'MAIL_PASSWORD': 'password', 'MAIL_ADMIN': 'admin@somesite.com'}
