@@ -1,1 +1,1 @@
-{'MAIL_USERNAME': 'howcanoewang@gmail.com', 'MAIL_PASSWORD': '89951268995126', 'MAIL_ADMIN': 'wangfeng@caf.ac.cn'}
+{'MAIL_USERNAME': 'example@gmail.com', 'MAIL_PASSWORD': 'password', 'MAIL_ADMIN': 'admin@somesite.com'}
