@@ -1,162 +1,206 @@
-Ôªø{% extends "base.html" %}
-
-{% block head %}
-{{ super() }}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='about_us.css') }}">
-{% endblock %}
-
-{% block title %}About Us{% endblock %}
-
-{% block page_content %}
-<div class="container marketing">
-	  <!-- Three columns of text below the carousel -->
-	  <h1><p style="text-align:center;">Our team</p></h1>
-      
-      <hr class="featurette-divider">
-      
-      <div class="row">
-        <div class="col-lg-4">
-          <img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="{{ url_for('static', filename='about_us/WF.png') }}">
-          <h2>WANG Feng</h2>
-          <p>Project leader.</p>
-          <p><a class="btn btn-secondary" role="button" href="#WF">View details</a></p>
-        </div><!-- /.col-lg-4 -->
-        
-        <div class="col-lg-4">
-          <img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="{{ url_for('static', filename='about_us/WHZ.png') }}">
-          <h2>WANG Haozhou</h2>
-          <p>System integration and software develop</p>
-          <p><a class="btn btn-secondary" role="button" href="#WHZ">View details</a></p>
-        </div><!-- /.col-lg-4 -->
-        
-        <div class="col-lg-4">
-          <img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="{{ url_for('static', filename='about_us/MY.png') }}" />
-          <h2>MU Yue</h2>
-          <p>Algorithm development.</p>
-          <p><a class="btn btn-secondary" role="button" href="#MY">View details</a></p>
-        </div><!-- /.col-lg-4 -->
-        
-        <div class="col-lg-4">
-          <img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="{{ url_for('static', filename='about_us/HD.png') }}">
-          <h2>HAN Dong</h2>
-          <p>Flight planning, control and data production</p>
-          <p><a class="btn btn-secondary" role="button" href="#HD">View details</a></p>
-        </div><!-- /.col-lg-4 -->
-        
-        <div class="col-lg-4">
-          <img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="{{ url_for('static', filename='about_us/WY.png') }}">
-          <h2>WU Yin</h2>
-          <p>Flight control and route planning</p>
-          <p><a class="btn btn-secondary" role="button" href="#WY">View details</a></p>
-        </div><!-- /.col-lg-4 -->
-        
-        <div class="col-lg-4">
-          <img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="{{ url_for('static', filename='about_us/JJ.png') }}">
-          <h2>JI Jie</h2>
-          <p>Graphic and interface design</p>
-          <p><a class="btn btn-secondary" role="button" href="#JJ">View details</a></p>
-        </div><!-- /.col-lg-4 -->
-  </div><!-- /.row -->
-
-      
-      <hr class="featurette-divider">
-      
-      <h1><p style="text-align:center;">Teammember profile</p></h1>
-      
-      <hr class="featurette-divider">
-
-      <!-- START THE FEATURETTES -->    
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading"><a id="WF"></a>WANG Feng/ÁéãÈîã<p><span class="text-muted">Project leader.</span></p></h2>
-          <p class="lead">Institude of Desertification Studies, Chinese Academy of Forestry, China.</p>
-          <p class="lead">Associate Professor on Dryland Ecology. Focusing on the coupling process of vegetation structure, function, pattern and hydrology in arid and semi-arid ecological fragile areas.</p>
-          <p class="lead"><b>Email</b>:<a href="mailto:wangfeng@caf.ac.cn">wangfeng@caf.ac.cn</a></p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-fluid mx-auto" style="width: 500px; height: 500px;" alt="500x500" src="{{ url_for('static', filename='about_us/WF500.png') }}" data-holder-rendered="true">
-        </div>
-      </div>
-
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7 order-md-2">
-          <h2 class="featurette-heading"><a id="WHZ"></a>WANG Haozhou/ÁéãÊµ©Ëàü<p><span class="text-muted">System integration and software develop.
-</span></p></h2>
-          <p class="lead">Master Student, Department of Forestry and Environmental Mangement, University of New Brunswick, Canada.</p>
-          <p class="lead"> Ecology and forestry. Interest in programming and artificial intelligence. Proficiency in Matlab and Python, such as web crawlers, GUI (graphical user interface) design, flask network programming and data visualization.</p>
-          <p class="lead"><b>Email</b>:<a href="mailto:howcanoewang@gmail.com">howcanoewang@gmail.com</a></p>
-        </div>
-        <div class="col-md-5 order-md-1">
-          <img class="featurette-image img-fluid mx-auto" style="width: 500px; height: 500px;" alt="500x500" src="{{ url_for('static', filename='about_us/WHZ500.png') }}" data-holder-rendered="true">
-        </div>
-      </div>
-      
-      <hr class="featurette-divider">
-      
-      <div class="row featurette">
-        <div class="col-md-7 order-md-2">
-          <h2 class="featurette-heading"><a id="MY"></a>MU Yue/Á©ÜÊÇ¶
-            <p><span class="text-muted">Algorithm and model development.</span></p></h2>
-          <p class="lead">Postdoc Research Fellow, Institute for Sustainable Agro-ecosystem Services, The University of Tokyo, Japan.</p>
-          <p class="lead">Research Interest: Image-based Pattern Recognition; Remote Sensing of Vegetation; Earth Surface Processes and Landforms.</p>
-          <p class="lead"><b>Email</b>:<a href="mailto:gfjiyue@163.com">gfjiyue@163.com</a></p>
-        </div>
-        <div class="col-md-5 order-md-1">
-          <img class="featurette-image img-fluid mx-auto" style="width: 500px; height: 500px;" alt="500x500" src="{{ url_for('static', filename='about_us/MY500.png') }}" data-src="holder.js/500x500/auto" data-holder-rendered="true">
-        </div>
-      </div>
-      
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading"><a id="HD"></a>HAN Dong/Èü©‰∏ú
-            <p><span class="text-muted">Flight planning, control and data production.</span></p></h2>
-          <p class="lead">Master student, Institude of Desertification Studies, Chinese Academy of Forestry, China.</p>
-          <p class="lead">Research interest: ecological restoration in dryland, vegetation dynamic monitoring and UAV image productions</p>
-          <p class="lead"><b>Email</b>:<a href="mailto:handong9@outlook.com">handong9@outlook.com</a></p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-fluid mx-auto" style="width: 500px; height: 500px;" alt="500x500" src="{{ url_for('static', filename='about_us/HD500.png') }}" data-src="holder.js/500x500/auto" data-holder-rendered="true">
-        </div>
-      </div>
-      
-      
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading"><a id="WY"></a>WU Yin/Âê¥Èöê
-            <p><span class="text-muted">Flight control and route planning.</span></p></h2>
-          <p class="lead">Master student, department of Environment and Tourism, Capital Normal University, China.</p>
-          <p class="lead">Control UAV fight, proficiency in some programing language such as MATLAB and C++, and familiar with some basic profession software such as ENVI and ArcGIS..</p>
-          <p class="lead"><b>Email</b>:<a href="mailto:1975676721@qq.com">1975676721@qq.com</a></p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-fluid mx-auto" style="width: 500px; height: 500px;" alt="500x500" src="{{ url_for('static', filename='about_us/WY500.png') }}" data-src="holder.js/500x500/auto" data-holder-rendered="true">
-        </div>
-      </div>
-      
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading"><a id="JJ"></a>JI Jie/Âß¨Â©ï
-            <p><span class="text-muted">Graphic and interface design.</span></p></h2>
-          <p class="lead">Master student, Institude of Desertification Studies, Chinese Academy of Forestry, China.</p>
-          <p class="lead">Focus on 3D model generated by Structure from Motion(SfM).</p>
-          <p class="lead"><b>Email</b>:<a href="mailto:379173980@qq.com">379173980@qq.com</a></p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-fluid mx-auto" style="width: 500px; height: 500px;" alt="500x500" src="{{ url_for('static', filename='about_us/JJ500.png') }}" data-src="holder.js/500x500/auto" data-holder-rendered="true">
-        </div>
-      </div>
-
-      <!-- /END THE FEATURETTES -->
-      
-      <hr class="featurette-divider">
-</div>
-
+{% extends "base.html" %}
+
+
+
+{% block head %}
+
+{{ super() }}
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='about_us.css') }}">
+
+
+{% endblock %}
+
+
+{% block title %}About Us{% endblock %}
+
+
+{% block page_content %}
+<div class="container marketing">
+	<!-- Three columns of text below the carousel -->
+	<h1><p style="text-align:center;">Our team</p></h1>
+	<hr class="featurette-divider">
+	
+    <div class="row">
+    
+		<div class="col-lg-4">
+		<img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="{{ url_for('static', filename='about_us/WF.png') }}">
+		<h2>WANG Feng</h2>
+		<p>Project leader.</p>
+		<p><a class="btn btn-secondary" role="button" href="#WF">View details</a></p>
+    	</div><!-- /.col-lg-4 -->
+        
+        <div class="col-lg-4">
+			<img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="{{ url_for('static', filename='about_us/WHZ.png') }}">
+			<h2>WANG Haozhou</h2>
+			<p>System integration and software develop</p>
+			<p><a class="btn btn-secondary" role="button" href="#WHZ">View details</a></p>
+		</div><!-- /.col-lg-4 -->
+        
+        <div class="col-lg-4">
+			<img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="{{ url_for('static', filename='about_us/MY.png') }}" />
+			<h2>MU Yue</h2>
+			<p>Algorithm development.</p>
+			<p><a class="btn btn-secondary" role="button" href="#MY">View details</a></p>
+		</div><!-- /.col-lg-4 -->
+        
+        <div class="col-lg-4">
+			<img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="{{ url_for('static', filename='about_us/HD.png') }}">
+
+			<h2>HAN Dong</h2>
+			<p>Flight planning, control and data production</p>
+			<p><a class="btn btn-secondary" role="button" href="#HD">View details</a></p>
+		</div><!-- /.col-lg-4 -->
+        
+        <div class="col-lg-4">
+			<img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="{{ url_for('static', filename='about_us/WY.png') }}">
+			<h2>WU Yin</h2>
+			<p>Flight control and route planning</p>
+			<p><a class="btn btn-secondary" role="button" href="#WY">View details</a></p>
+		</div><!-- /.col-lg-4 -->
+        
+        <div class="col-lg-4">
+			<img width="140" height="140" class="rounded-circle" alt="Generic placeholder image" src="{{ url_for('static', filename='about_us/JJ.png') }}">
+			<h2>JI Jie</h2>
+			<p>Graphic and interface design</p>
+			<p><a class="btn btn-secondary" role="button" href="#JJ">View details</a></p>
+		</div><!-- /.col-lg-4 --> 
+
+    </div>
+    
+    <hr class="featurette-divider">
+    
+</div>
+
+<div class="album text-muted">
+	<h1><p style="text-align:center;">Associate Professors</p></h1>
+    
+    <div class="container-this">
+		<div class="row">
+        	<div class="card">
+            	<img alt="Thumbnail [100%x280]" style="height: 280px; width: 100%; display: block;" src="{{ url_for('static', filename='about_us/PXB.png') }}" data-holder-rendered="true"> 
+				<p class="card-text"><font size="4"><b>PAN Xubin/≈À–˜±Û</b></font></p>
+                <p class="card-text"><font size="3">Chinese Academy of Inspection and Quarantine, China.</font></p>
+                <p class="card-text"><font size="2"><b>Study Area</b>:Pest Risk Analysis; Species-Area Theory</font></p>
+			</div>
+            	
+        
+        	<div class="card">
+            	<img alt="Thumbnail [100%x280]" style="height: 280px; width: 100%; display: block;" src="{{ url_for('static', filename='about_us/default.png') }}" data-holder-rendered="true"> 
+				<p class="card-text"><font size="4"><b>GUO Wei/π˘Õ˛</b></font></p>
+                <p class="card-text"><font size="3">Institute for Sustainable Agro-ecosystem Services, The University of Tokyo, Japan.</font></p>
+                <p class="card-text"><font size="2"><b>Study Area</b>:UAV</font></p>
+			</div>
+
+        	<div class="card">
+            	<img alt="Thumbnail [100%x280]" style="height: 280px; width: 100%; display: block;" src="{{ url_for('static', filename='about_us/default.png') }}" data-holder-rendered="true"> 
+				<p class="card-text"><font size="4"><b>ZHENG Bangyou/÷£∞Ó”—</b></font></p>
+                <p class="card-text"><font size="3">Agriculture and Food Department, The Commonwealth Scientific and Industrial Research Organisation, Australia.</font></p>
+                <p class="card-text"><font size="2"><b>Study Area</b>:Crop physiologist, crop modeller. interests in linking environment, genotyping, phenotyping, UAV, crop model and big data into crop breeding.</font></p>
+			</div>
+        </div>
+    </div>
+    
+</div>
+
+<div class="container-this marketing">
+	<hr class="featurette-divider">
+	<h1><p style="text-align:center;">Teammember profile</p></h1>
+	<hr class="featurette-divider">
+    
+    <!-- START THE FEATURETTES -->    
+	<div class="row featurette">
+    	<div class="col-md-7">
+			<h2 class="featurette-heading"><a id="WF"></a>WANG Feng/Õı∑Ê<p><span class="text-muted">Project leader.</span></p></h2>
+			<p class="lead">Institude of Desertification Studies, Chinese Academy of Forestry, China.</p>
+			<p class="lead">Associate Professor on Dryland Ecology. Focusing on the coupling process of vegetation structure, function, pattern and hydrology in arid and semi-arid ecological fragile areas.</p>
+			<p class="lead"><b>Email</b>:<a href="mailto:wangfeng@caf.ac.cn">wangfeng@caf.ac.cn</a></p>
+        </div>
+        
+        <div class="col-md-5">
+			<img class="featurette-image img-fluid mx-auto" style="width: 100%; height: 100%;" alt="500x500" src="{{ url_for('static', filename='about_us/WF500.png') }}" data-holder-rendered="true">
+		</div>
+	</div>
+    
+    <hr class="featurette-divider">
+	
+    <div class="row featurette">
+		<div class="col-md-7 order-md-2">
+			<h2 class="featurette-heading"><a id="WHZ"></a>WANG Haozhou/Õı∫∆÷€<p><span class="text-muted">System integration and software develop.</span></p></h2>
+			<p class="lead">Master Student, Department of Forestry and Environmental Mangement, University of New Brunswick, Canada.</p>
+			<p class="lead"> Ecology and forestry. Interest in programming and artificial intelligence. Proficiency in Matlab and Python, such as web crawlers, GUI (graphical user interface) design, flask network programming and data visualization.</p>
+			<p class="lead"><b>Email</b>:<a href="mailto:howcanoewang@gmail.com">howcanoewang@gmail.com</a></p>
+		</div>
+
+        <div class="col-md-5 order-md-1">
+			<img class="featurette-image img-fluid mx-auto" style="width: 100%; height: 100%;" alt="500x500" src="{{ url_for('static', filename='about_us/WHZ500.png') }}" data-holder-rendered="true">
+		</div>
+	</div>
+    
+    <hr class="featurette-divider">
+	
+    <div class="row featurette">
+		<div class="col-md-7 order-md-2">
+			<h2 class="featurette-heading"><a id="MY"></a>MU Yue/ƒ¬‘√<p><span class="text-muted">Algorithm and model development.</span></p></h2>
+			<p class="lead">Postdoc Research Fellow, Institute for Sustainable Agro-ecosystem Services, The University of Tokyo, Japan.</p>
+			<p class="lead">Research Interest: Image-based Pattern Recognition; Remote Sensing of Vegetation; Earth Surface Processes and Landforms.</p>
+			<p class="lead"><b>Email</b>:<a href="mailto:gfjiyue@163.com">gfjiyue@163.com</a></p>
+		</div>
+
+        <div class="col-md-5 order-md-1">
+			<img class="featurette-image img-fluid mx-auto" style="width: 100%; height: 100%;" alt="500x500" src="{{ url_for('static', filename='about_us/MY500.png') }}" data-src="holder.js/500x500/auto" data-holder-rendered="true">
+		</div>
+	</div>
+    
+    <hr class="featurette-divider">
+
+	<div class="row featurette">
+		<div class="col-md-7">
+			<h2 class="featurette-heading"><a id="HD"></a>HAN Dong/∫´∂´<p><span class="text-muted">Flight planning, control and data production.</span></p></h2>
+			<p class="lead">Master student, Institude of Desertification Studies, Chinese Academy of Forestry, China.</p>
+			<p class="lead">Research interest: ecological restoration in dryland, vegetation dynamic monitoring and UAV image productions</p>
+			<p class="lead"><b>Email</b>:<a href="mailto:handong9@outlook.com">handong9@outlook.com</a></p>
+
+        </div>
+
+        <div class="col-md-5">
+			<img class="featurette-image img-fluid mx-auto" style="width: 100%; height: 100%;" alt="500x500" src="{{ url_for('static', filename='about_us/HD500.png') }}" data-src="holder.js/500x500/auto" data-holder-rendered="true">
+		</div>
+	</div>
+    
+    <hr class="featurette-divider">
+
+	<div class="row featurette">
+		<div class="col-md-7">
+			<h2 class="featurette-heading"><a id="WY"></a>WU Yin/Œ‚“˛<p><span class="text-muted">Flight control and route planning.</span></p></h2>
+			<p class="lead">Master student, department of Environment and Tourism, Capital Normal University, China.</p>
+			<p class="lead">Control UAV fight, proficiency in some programing language such as MATLAB and C++, and familiar with some basic profession software such as ENVI and ArcGIS..</p>
+			<p class="lead"><b>Email</b>:<a href="mailto:1975676721@qq.com">1975676721@qq.com</a></p>
+
+        </div>
+
+        <div class="col-md-5">
+			<img class="featurette-image img-fluid mx-auto" style="width: 100%; height: 100%;" alt="500x500" src="{{ url_for('static', filename='about_us/WY500.png') }}" data-src="holder.js/500x500/auto" data-holder-rendered="true">
+		</div>
+	</div>
+
+	<hr class="featurette-divider">
+
+	<div class="row featurette">
+		<div class="col-md-7">
+			<h2 class="featurette-heading"><a id="JJ"></a>JI Jie/ºßÊº<p><span class="text-muted">Graphic and interface design.</span></p></h2>
+			<p class="lead">Master student, Institude of Desertification Studies, Chinese Academy of Forestry, China.</p>
+			<p class="lead">Focus on 3D model generated by Structure from Motion(SfM).</p>
+			<p class="lead"><b>Email</b>:<a href="mailto:379173980@qq.com">379173980@qq.com</a></p>
+
+        </div>
+
+        <div class="col-md-5">
+			<img class="featurette-image img-fluid mx-auto" style="width: 100%; height: 100%;" alt="500x500" src="{{ url_for('static', filename='about_us/JJ500.png') }}" data-src="holder.js/500x500/auto" data-holder-rendered="true">
+		</div>
+	</div>
+        
+</div>
+
+
 {% endblock %}
