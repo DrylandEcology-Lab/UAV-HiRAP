@@ -264,7 +264,7 @@ def edit(username, project_id):
 def delete(username, project_id):
     dtc_project = DTC_Project.query.get_or_404(project_id)
     rm = dtc_project.project_dir
-    if os.path.exists(rm):
+    if isinstance(rm, str) and os.path.exists(rm):
         shutil.rmtree(rm)
     db.session.delete(dtc_project)
     db.session.commit()
