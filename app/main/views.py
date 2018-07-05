@@ -29,6 +29,10 @@ def about_us():
 def about_hirap():
     return render_template('about_hirap.html')
 
+@main.route('/plot_pano')
+def plot_pano():
+    return render_template('plot_pano.html')
+
 @main.route('/publications')
 def publications():
     return render_template('publications.html')

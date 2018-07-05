@@ -8,3 +8,5 @@ https_certificate/
 __pycache__
 email_config.txt
 *.sqlite
+.idea
+data-dev.sqlite
