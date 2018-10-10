@@ -1,0 +1,74 @@
+{% extends "proj/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block main_contents %}
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      Edit Route Planning Project
+      <a class="btn btn-default pull-right" href="{{ url_for('proj.inproject_rd', username=current_user.username, project_id=rd_project.id) }}">Back</a></h1>
+  </div>
+</div>
+<div class="panel panel-default">
+  <form class="form" method="post" enctype="multipart/form-data">
+    <div class="panel-heading">
+      <span class="text-info font-weight-bold">{{ wtf.form_field(form.project_name) }}</span>
+    </div>
+    <div class="panel-body" style="">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <i class="fa fa-edit fa-fw"></i> Edit Parameters
+            </div>
+            <div class="panel-body">
+                {{ form.hidden_tag() }}
+                {{ wtf.form_field(form.comments, style="resize:none;") }}
+                <div class="row">
+                  <div class="col-sm-6">
+                    {{ wtf.form_field(form.x1) }}
+                    {{ wtf.form_field(form.x2) }}
+                    {{ wtf.form_field(form.x3) }}
+                    {{ wtf.form_field(form.x4) }}
+                  </div>
+                  <div class="col-sm-6">
+                    {{ wtf.form_field(form.y1) }}
+                    {{ wtf.form_field(form.y2) }}
+                    {{ wtf.form_field(form.y3) }}
+                    {{ wtf.form_field(form.y4) }}
+                  </div>
+                </div>
+                <div class="row text-secondary text-muted">
+                  <div class="col-sm-6">
+                    {{ wtf.form_field(form.long_fov) }}
+                    {{ wtf.form_field(form.side_overlap) }}
+                    {{ wtf.form_field(form.h) }}
+                  </div>
+                  <div class="col-sm-6">
+                    {{ wtf.form_field(form.short_fov) }}
+                    {{ wtf.form_field(form.head_overlap) }}
+                    {{ wtf.form_field(form.time) }}
+                  </div>
+                </div>
+                <div class="text-center">
+                  {{ wtf.form_field(form.preview, class="btn btn-default") }}
+                  {{ wtf.form_field(form.change, class="btn btn-default") }}
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <i class="fa fa-product-hunt fa-fw"></i> Current Route
+            </div>
+            <div class="panel-body">
+              <img class="img-rounded" src="{{ url_for('static', filename='UserData/rd/'+rd_project.id|string+'/'+preview_img_name) }}" width="100%" height="100%">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock%}

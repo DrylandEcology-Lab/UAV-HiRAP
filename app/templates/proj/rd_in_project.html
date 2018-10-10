@@ -1,0 +1,101 @@
+{% extends "proj/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block main_contents %}
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      Flight Route Planning
+      <a class="btn btn-default pull-right" href="{{ url_for('proj.rd', username=current_user.username) }}">Back</a>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <i class="fa fa-product-hunt fa-fw"></i> {{ rd_project.project_name}}
+    <a class="btn btn-default btn-xs pull-right" href="{{ url_for('proj.edit_rd', username=current_user.username, project_id=rd_project.id) }}">Edit</a>
+  </div>
+  <div class="panel-body" style="">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-comment fa-fw"></i> Comments
+          </div>
+          <div class="panel-body" style="">
+            <p class="text-muted">{{ rd_project.comments}}</p>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover">
+              <thead>
+                  <tr>
+                      <th>Params</th>
+                      <th>Longitude</th>
+                      <th>Latitude</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>A</td>
+                      <td>{{ rd_project.x1}}</td>
+                      <td>{{ rd_project.y1}}</td>
+                  </tr>
+                  <tr>
+                      <td>B</td>
+                      <td>{{ rd_project.x2}}</td>
+                      <td>{{ rd_project.y2}}</td>
+                  </tr>
+                  <tr>
+                      <td>C</td>
+                      <td>{{ rd_project.x3}}</td>
+                      <td>{{ rd_project.y3}}</td>
+                  </tr>
+                  <tr>
+                      <td>D</td>
+                      <td>{{ rd_project.x4}}</td>
+                      <td>{{ rd_project.y4}}</td>
+                  </tr>
+                  <tr>
+                    <td>Height</td>
+                    <td colspan="2" class="text-center text-muted">{{ rd_project.h}} (m)</td>
+                  </tr>
+                  <tr>
+                    <td>Long_fov</td>
+                    <td colspan="2" class="text-center text-muted">{{ rd_project.long_fov }} (%)</td>
+                  </tr>
+                  <tr>
+                    <td>Short_fov</td>
+                    <td colspan="2" class="text-center text-muted">{{ rd_project.short_fov }} (°)</td>
+                  </tr>
+                  <tr>
+                    <td>Side_overlap</td>
+                    <td colspan="2" class="text-center text-muted">{{ rd_project.side_overlap }} (%)</td>
+                  </tr>
+                  <tr>
+                    <td>Head_overlap</td>
+                    <td colspan="2" class="text-center text-muted">{{ rd_project.head_overlap}} (%)</td>
+                  </tr>
+                  <tr>
+                    <td>Photo_intval</td>
+                    <td colspan="2" class="text-center text-muted">{{ rd_project.time}} (s)</td>
+                  </tr>
+              </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-image fa-fw"></i> Route Condition
+            <a href="{{ url_for('static', filename='UserData/rd/'+rd_project.id|string+'/'+rd_project.csv_name|string) }}" class="btn btn-default btn-xs pull-right" download="litchi.csv"><i class="fa fa-download fa-fw"></i></a>
+          </div>
+          <div class="panel-body" style="">
+            <p class="text-center text-muted">ABCD：Plot Corner Point; Orange line:Flight Route</p>
+            <img class="img-rounded" src="{{ url_for('static', filename='UserData/rd/'+rd_project.id|string+'/'+rd_project.route_picture_name|string) }}" width="100%" height="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock%}

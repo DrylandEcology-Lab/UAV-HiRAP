@@ -14,6 +14,7 @@ class Config:
         'en': u'English',
         'zh': u'中文'
     }
+    MAX_CONTENT_LENGTH = 20 * 1024 * 1024  #see app/__init__.py create_app()
 
     @staticmethod
     def init_app(app):
@@ -31,7 +32,7 @@ class DevelopmentConfig(Config):
     MAIL_PASSWORD = email_config.get('MAIL_PASSWORD')
     MAIL_ADMIN = email_config.get('MAIL_ADMIN')
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
+        'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 
 
 class TestingConfig(Config):
@@ -41,6 +42,14 @@ class TestingConfig(Config):
 
 
 class ProductionConfig(Config):
+    MAIL_SERVER = 'hwsmtp.exmail.qq.com'
+    MAIL_PORT = 465
+    MAIL_USE_SSL = True
+    with open(os.path.join(basedir, 'email_config.txt')) as f:
+        email_config = eval(f.read())
+    MAIL_USERNAME = email_config.get('MAIL_USERNAME')
+    MAIL_PASSWORD = email_config.get('MAIL_PASSWORD')
+    MAIL_ADMIN = email_config.get('MAIL_ADMIN')
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 

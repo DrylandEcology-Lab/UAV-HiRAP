@@ -1,0 +1,124 @@
+{% extends "proj/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+{{ super() }}
+{{ moment.include_jquery() }}
+{{ moment.include_moment() }}
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+{% endblock %}
+
+
+{% block main_contents %}
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Image Classify Tool</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-8">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <i class="fa fa-bar-chart-o fa-fw"></i> Create New Projects
+      </div>
+      <div class="panel-body" style="">
+        <form class="form" method="post" enctype="multipart/form-data" action="{{ url_for('proj.dtc', username=current_user.username) }}">
+          {{ form.hidden_tag() }}
+          {{ wtf.form_field(form.project_name) }}
+          <hr>
+          <p class="text-center text-warning">Maximum image size is 20MB, only ['jpg', 'jpeg', 'png', 'tif', 'tiff'] supported</p>
+          <div class="row">
+            <div class="col-md-4">{{ wtf.form_field(form.origin_pic_dir, style="width:100%;", maxlength="") }}</div>
+            <div class="col-md-4">{{ wtf.form_field(form.fore_trainingdata_dir, style="width:100%;") }}</div>
+            <div class="col-md-4">{{ wtf.form_field(form.back_trainingdata_dir, style="width:100%;") }}</div>
+          </div>
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-8"><p class='text-danger text-center'>Note: if training pictures do not have an alpha layer, the black/white background will be counted as training data.</p></div>
+          </div>
+          <hr>
+          {{ wtf.form_field(form.comments, style="resize:none;") }}
+          <div class="progress" style="display: none;">
+            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+              0%
+            </div>
+          </div>
+          {{ wtf.form_field(form.submit, id="smb") }}
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          <i class="fa fa-eye fa-fw"></i> View/Edit Former Projects
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+          <div class="list-group">
+            {% for dtc_project in dtc_projects %}
+            <div class="list-group-item">
+                <img class="img-rounded" src="{{ url_for('static', filename='UserData/dtc/'+dtc_project.id|string+dtc_project.icon|string) }} " width="40px" height="40px", style="position: absolute;border: 2px dashed gray;">
+                <div style="padding-left: 50px;">
+                  <p style="max-width: calc(65% - 50px); overflow: hidden;text-overflow:ellipsis;white-space: nowrap; position: absolute;"><a href="{{ url_for('proj.inproject_dtc', username=current_user.username, project_id=dtc_project.id)}}"  title="{{ dtc_project.project_name }}">{{ dtc_project.project_name }}</a></p>
+                  <span class="pull-right text-muted small"><em>{{ moment(dtc_project.timestamp).fromNow() }}</em></span>
+
+                  <div style="padding-top: 2rem">
+                    <!-- edit -->
+                    <a class="label label-primary" title="edit" href="{{ url_for('proj.edit_dtc', username=current_user.username, project_id=dtc_project.id) }}"><i class="fa fa-edit fa-fw"></i></a>
+                    <!-- delete -->
+                    <a class="label label-default" title="delete" href="javascript:if(confirm('Are you sure to delete this object?'))location='{{ url_for('proj.delete_dtc', username=current_user.username, project_id=dtc_project.id) }}'"><i class="fa fa-trash fa-fw"></i></a>
+                    <div class="label label-info" style="max-width:  calc(95% - 50px); overflow: hidden;text-overflow:ellipsis;white-space: nowrap; display:inline-flex">{{ dtc_project.comments }}</div>
+                  </div>
+
+                </div>
+
+            </div>
+            {% endfor %}
+          <!--<a href="#" class="btn btn-default btn-block">View All Projects</a-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $('form').on('submit', function (event) {
+        // 显示进度条
+        $('.progress').css('display', 'block');
+        // 阻止元素发生默认的行为，此处用来阻止对表单的提交
+        event.preventDefault();
+        var formData = new FormData(this);
+        // jQuery Ajax 上传文件，关键在于设置：processData 和 contentType
+        $.ajax({
+            xhr: function () {
+                var xhr = new XMLHttpRequest();
+                xhr.upload.addEventListener('progress', function (e) {
+                    if (e.lengthComputable) {
+                        var percent = Math.round(e.loaded * 100 / e.total);
+                        $('.progress-bar').attr('aria-valuenow', percent).css('width', percent + '%').text(percent + '%');
+                    }
+                });
+                return xhr;
+            },
+            type: 'POST',
+            //url: '/upload',
+            cache: false,
+            data: formData,
+            // 告诉 jQuery 不要去处理发送的数据
+            processData: false,
+            // 告诉 jQuery 不要去设置 Content-Type 请求头
+            // 因为这里是由 <form> 表单构造的 FormData 对象，且已经声明了属性 enctype="multipart/form-data"，所以设置为 false
+            contentType: false,
+            success: function(xml){
+                window.location.href="{{ url_for('proj.inproject_dtc', username=current_user.username, project_id=DTC_Project.query.order_by(DTC_Project.id.desc()).first().id+1 ) }}";
+            }
+        })/*.done(function (res) {
+            alert('上传成功!');
+        }).fail(function (res) {
+            alert('上传失败!');
+        })*/;
+    });
+</script>
+{% endblock%}

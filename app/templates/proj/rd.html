@@ -1,0 +1,161 @@
+{% extends "proj/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+{{ super() }}
+{{ moment.include_jquery() }}
+{{ moment.include_moment() }}
+{% endblock %}
+
+{% block main_contents %}
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">UAV/Drone Flight Planning</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-9">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <i class="fa fa-book fa-fw"></i> Examples
+      </div>
+      <div class="panel-body" style="">
+        <div class="row">
+          <div class="col-sm-7">
+            <img class="img-rounded" src="{{ url_for('static', filename='proj/flight_route_eg.png') }} " width="100%" height="100%">
+            <p class="text-center text-muted">ABCD：Plot Corner Point; Orange:Flight Route</p>
+          </div>
+          <div class="col-sm-5">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover">
+                  <thead>
+                      <tr>
+                          <th>Params</th>
+                          <th>Longitude</th>
+                          <th>Latitude</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>A</td>
+                          <td>115.9599</td>
+                          <td>42.9623</td>
+                      </tr>
+                      <tr>
+                          <td>B</td>
+                          <td>115.9613</td>
+                          <td>42.9620</td>
+                      </tr>
+                      <tr>
+                          <td>C</td>
+                          <td>115.9604</td>
+                          <td>42.9633</td>
+                      </tr>
+                      <tr>
+                          <td>D</td>
+                          <td>115.9617</td>
+                          <td>42.9630</td>
+                      </tr>
+                      <tr>
+                        <td>Height</td>
+                        <td colspan="2" class="text-center text-muted">30.0 (m)</td>
+                      </tr>
+                      <tr>
+                        <td>Long_fov</td>
+                        <td colspan="2" class="text-center text-muted">61.9 (%)</td>
+                      </tr>
+                      <tr>
+                        <td>Short_fov</td>
+                        <td colspan="2" class="text-center text-muted">46.4 (°)</td>
+                      </tr>
+                      <tr>
+                        <td>Side_overlap</td>
+                        <td colspan="2" class="text-center text-muted">80.0 (%)</td>
+                      </tr>
+                      <tr>
+                        <td>Head_overlap</td>
+                        <td colspan="2" class="text-center text-muted">85.0 (%)</td>
+                      </tr>
+                      <tr>
+                        <td>Photo_intval</td>
+                        <td colspan="2" class="text-center text-muted">2.0 (s)</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <i class="fa fa-bar-chart-o fa-fw"></i> Create New Route
+      </div>
+      <div class="panel-body" style="">
+        <form class="form" method="post" enctype="multipart/form-data" action="{{ url_for('proj.rd', username=current_user.username) }}">
+          {{ form.hidden_tag() }}
+          <div class="row">
+            <div class="col-sm-8">
+              {{ wtf.form_field(form.project_name) }}
+              <div class="row">
+                <div class="col-sm-6">
+                  {{ wtf.form_field(form.x1) }}
+                  {{ wtf.form_field(form.x2) }}
+                  {{ wtf.form_field(form.x3) }}
+                  {{ wtf.form_field(form.x4) }}
+                </div>
+                <div class="col-sm-6">
+                  {{ wtf.form_field(form.y1) }}
+                  {{ wtf.form_field(form.y2) }}
+                  {{ wtf.form_field(form.y3) }}
+                  {{ wtf.form_field(form.y4) }}
+                </div>
+              </div>
+              {{ wtf.form_field(form.comments, style="resize:none;") }}
+            </div>
+            <div class="col-sm-4 text-secondary text-muted">
+              {{ wtf.form_field(form.h, value="30.0") }}
+              {{ wtf.form_field(form.long_fov, value="61.9") }}
+              {{ wtf.form_field(form.short_fov, value="46.4") }}
+              {{ wtf.form_field(form.side_overlap, value="80.0") }}
+              {{ wtf.form_field(form.head_overlap, value="85.0") }}
+              {{ wtf.form_field(form.time, value="2.0") }}
+              <div class="text-center">{{ wtf.form_field(form.submit, class="btn btn-default") }}</div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-eye fa-fw"></i> View/Edit Former Routes
+      </div>
+      <div class="panel-body" style="">
+        <div class="list-group">
+          {% for rd_project in rd_projects %}
+          <div class="list-group-item">
+            <div>
+              <p style="max-width:60%; overflow: hidden;text-overflow:ellipsis;white-space: nowrap; position:absolute;">
+                <a href="{{ url_for('proj.inproject_rd', username=current_user.username, project_id=rd_project.id)}}"  title="{{ rd_project.project_name }}">{{ rd_project.project_name }}</a></p>
+              <span class="pull-right text-muted small" style="max-width:35%; overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+                <em>{{ moment(rd_project.timestamp).fromNow() }}</em></span>
+            </div>
+
+            <div style="padding-top: 2rem">
+              <!-- edit -->
+              <a class="label label-primary" title="edit" href="{{ url_for('proj.edit_rd', username=current_user.username, project_id=rd_project.id) }}"><i class="fa fa-edit fa-fw"></i></a>
+              <!-- delete -->
+              <a class="label label-default" title="delete" href="javascript:if(confirm('Are you sure to delete this object?'))location='{{ url_for('proj.delete_rd', username=current_user.username, project_id=rd_project.id) }}'"><i class="fa fa-trash fa-fw"></i></a>
+              <div class="label label-info" style="max-width:  calc(90% - 50px); overflow: hidden;text-overflow:ellipsis;white-space: nowrap; display:inline-flex">{{ rd_project.comments }}</div>
+            </div>
+          </div>
+          {% endfor %}
+          <!--<a href="#" class="btn btn-default btn-block">View All Projects</a-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock%}

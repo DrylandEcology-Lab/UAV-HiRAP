@@ -1,8 +1,19 @@
-{% extends "base.html" %}
+{% extends "bootstrap/base.html" %}
 
 {% block title %}UAV-HiRAP - Confirm your account{% endblock %}
 
-{% block page_content %}
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+
+<link rel="shortcut icon" href="{{ url_for('static', filename='home/home.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='home/home.ico') }}" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='auth/signin.css') }}">
+{% endblock %}
+
+{% block body %}
 <div class="page-header">
     <h1>
         Hello, {{ current_user.username }}!
@@ -17,5 +28,6 @@
         Need another confirmation email?
         <a href="{{ url_for('auth.resend_confirmation') }}">Click here</a>
     </p>
+  <p>Or <a href="{{ url_for('auth.logout') }}">back home page</a></p>
 </div>
 {% endblock %}

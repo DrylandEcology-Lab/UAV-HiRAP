@@ -1,26 +1,50 @@
-{% extends "base.html" %}
+{% extends "bootstrap/base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}Sign in{% endblock %}
 
-{% block page_content %}
-<div class="page-header">
-    <h1>Sign in</h1>
-</div>
-<div class="col-md-4">
-    {{ wtf.quick_form(form) }}
-    <br>
-    <p>
-        New user?
-        <a href="{{ url_for('auth.register') }}">
-            Click here to Sign up
-        </a>
-    </p>
-    <p>
-    	Forget your password?
-        <a href="{{ url_for('main.developing') }}">
-            Click here to reset it
-        </a>
-    </p>
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+
+<link rel="shortcut icon" href="{{ url_for('static', filename='home/home.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='home/home.ico') }}" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='auth/signin.css') }}">
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="page-header text-center">
+    <h1 class="font-weight-normal">Please sign in</h1>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form action="" method="post" class="form-signin" role="form">
+      {{ form.hidden_tag() }}
+      {{ wtf.form_field(form.email, class="form-control") }}
+      {{ wtf.form_field(form.password, class="form-control") }}
+      {{ wtf.form_field(form.remember_me, class="form-control") }}
+      {{ wtf.form_field(form.submit, class="btn btn-lg btn-primary btn-block") }}
+      </form>
+      <div class="text-center">
+        <p>
+            New user?
+            <a href="{{ url_for('auth.register') }}">
+                Click here to Sign up
+            </a>
+        </p>
+        <p>
+          Forget your password?
+        </p>
+        <p>
+          <a href="{{ url_for('main.developing') }}">
+              Click here to reset it (in developing)
+          </a></p>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

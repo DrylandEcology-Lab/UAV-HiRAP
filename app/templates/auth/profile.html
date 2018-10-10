@@ -1,25 +1,44 @@
-{% extends "base.html" %}
+{% extends "bootstrap/base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+
+<link rel="shortcut icon" href="{{ url_for('static', filename='home/home.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='home/home.ico') }}" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='auth/signin.css') }}">
+{% endblock %}
 
 {% block title%}My Profile{% endblock %}
 
-{% block page_content %}
-<div class="page_header">
-    <h1>My Profile</h1>
-</div>
-<hr />
-<div>
-	<h2>Email: {{ user.email }}</h2>
-	<form class="form" method="post" enctype="multipart/form-data">
-    {{ form.hidden_tag() }}
-    {{ wtf.form_field(form.realname) }}
-    {{ wtf.form_field(form.country) }}
-    {{ wtf.form_field(form.org) }}
-    {{ wtf.form_field(form.field) }}
-    {{ wtf.form_field(form.major) }}
-    {{ wtf.form_field(form.aim) }}
-    {{ wtf.form_field(form.submit) }}
-    {{ wtf.form_field(form.cancel) }}
-    </form>
+{% block body %}
+<div class="container" style="padding-bottom: 50px; padding-top: 50px;">
+  <h1 class="text-center">My Profile</h1>
+  <hr />
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2 class="text-center text-info">Email: {{ user.email }}</h2>
+      <form class="form" method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="row">
+          <div class="col-md-4">{{ wtf.form_field(form.realname) }}</div>
+          <div class="col-md-3">{{ wtf.form_field(form.country) }}</div>
+          <div class="col-md-5">{{ wtf.form_field(form.org) }}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">{{ wtf.form_field(form.field) }}</div>
+          <div class="col-md-8">{{ wtf.form_field(form.major) }}</div>
+        </div>
+        {{ wtf.form_field(form.aim, style="resize:none;") }}
+        <div class="row">
+          <div class="col-md-6">{{ wtf.form_field(form.submit, class="btn btn-lg btn-primary btn-block") }}</div>
+          <div class="col-md-6">{{ wtf.form_field(form.cancel, class="btn btn-lg btn-primary btn-block") }}</div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 {% endblock %}

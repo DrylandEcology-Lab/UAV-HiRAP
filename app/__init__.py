@@ -51,7 +51,7 @@ def create_app(config_name):
     babel.init_app(app)
 
     configure_uploads(app, photos)   # initialize upload photos
-    patch_request_class(app, 1024 * 1024 * 1024) # maximize 1GB images
+    patch_request_class(app, 20 * 1024 * 1024) # maximize 20MB images
 
     # append route(LuYou) and error page
     from .main import main as main_blueprint
@@ -60,7 +60,10 @@ def create_app(config_name):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
-    from .dtc import dtc as dtc_blueprint
-    app.register_blueprint(dtc_blueprint, url_prefix='/myprojects')
+    #from .dtc import dtc as dtc_blueprint
+    #app.register_blueprint(dtc_blueprint, url_prefix='/myprojects')
+    
+    from .proj import proj as proj_blueprint
+    app.register_blueprint(proj_blueprint, url_prefix='/projects')
 
     return app

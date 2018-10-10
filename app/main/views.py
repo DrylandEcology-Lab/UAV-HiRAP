@@ -25,14 +25,7 @@ def set_language(language=None):
 def about_us():
     return render_template('about_us.html')
 
-@main.route('/about_hirap')
-def about_hirap():
-    return render_template('about_hirap.html')
-
 @main.route('/plot_pano')
 def plot_pano():
     return render_template('plot_pano.html')
 
-@main.route('/publications')
-def publications():
-    return render_template('publications.html')

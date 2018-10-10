@@ -9,12 +9,12 @@ class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Length(1,64),
                                              Email()])
     password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('Keep me signed in')
-    submit = SubmitField('Sign In')
+    remember_me = BooleanField('Remember me')
+    submit = SubmitField('Login')
 
 
 class RegistrationForm(FlaskForm):
-    email = StringField('Email <p><font color="red" size="2">(Please ensure correct, no change after registration)</font></p>',
+    email = StringField('Email',
                         validators=[DataRequired(), Length(1,64), Email()])
     realname = StringField('Real name<font color="red">*</font>', validators=[DataRequired(), Length(1,64)])
     password = PasswordField('Password<font color="red">*</font>', validators=[DataRequired(),
@@ -68,5 +68,5 @@ class ProfileEditForm(FlaskForm):
     major = StringField('Major', validators=[DataRequired()])
     aim = TextAreaField('Your purpose to use this platform',
                         validators=[DataRequired()])
-    submit = SubmitField('Submit')
-    cancel = SubmitField('back')
+    submit = SubmitField('Update')
+    cancel = SubmitField('Back')

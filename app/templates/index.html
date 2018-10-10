@@ -1,41 +1,326 @@
-{% extends "base.html" %}
+{% extends "bootstrap/base.html" %}
 
 {% block title %}UAV-HiRAP{% endblock %}
 
 {% block head %}
-{{ super() }}
-<style type=text/css>
-body, html {
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="{{ url_for('static', filename='home/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='home/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
 
-    background: url("{{ url_for('static', filename='index.jpg') }}") center center fixed;
-	
-    -webkit-background-size: cover;
-
-    -moz-background-size: cover;
-
-    background-size: cover;
-
-    -o-background-size: cover;
-
+<link rel="shortcut icon" href="{{ url_for('static', filename='home/home.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='home/home.ico') }}" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home/home.css') }}">
+<style>
+header.masthead {
+    background-image: url("{{ url_for('static', filename='home/index.jpg') }}");
 }
 </style>
 {% endblock %}
 
-{% block page_content %}
-<div class="page-header">
-    <h1>
-    {% if current_user.is_authenticated %}
-    <p style="text-align:center;">
-    Welcome to UAV-HiRAP!
-    </p>
-    {% else %}
-    <p style="text-align:center;">
-    Please Sign In to Access UAV-HiRAP
-    {% endif %}
-    </p>
-    </h1>
-</div>
-<div>
-    <font size="5"><p style="text-align:center;">Unmanned Aerial Vehicles - High Resolution imagery Analysis Platform (UAV-HiRAP), is an open-source, web-based platform which provides service for image classification. Artificial intelligence (AI) have been applied into this platform for better classifing quality.</p></font>
-</div>
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand js-scroll-trigger" href="{{ url_for('main.index') }}">Home</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav text-uppercase ml-auto">
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#news">News</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#team">Team</a>
+        </li>
+                <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#publications">Publications</a>
+        </li>
+        {% if current_user.is_authenticated %}
+        <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" id="account" data-toggle="dropdown">{{ current_user.username }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right bg-dark text-center" aria-labelledby="account">
+                <li><a class="nav-link js-scroll-trigger" href="{{ url_for('proj.index', username=current_user.username) }}">My Projects</a></li>
+                <li><a class="nav-link js-scroll-trigger" href="{{ url_for('auth.my_profile', username=current_user.username) }}" target="_blank">User Profile</a></li>
+                <li><a class="nav-link js-scroll-trigger" href="{{ url_for('main.developing') }}" target="_blank">Settings</a></li>
+                <li><a class="nav-link js-scroll-trigger" href="{{ url_for('auth.logout') }}">Sign out</a></li>
+            </ul>
+        </li>
+        {% else %}
+        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url_for('auth.login') }}">Sign in | Sign up</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content%}
+<header class="masthead">
+  <div class="container">
+    <div class="intro-text">
+      <div class="intro-heading text-uppercase">Welcome To <br> UAV-HiRAP!</div>
+      <div class="intro-lead-in">This is an open-source, web-based platform provides services for UAV flight route design and image analysis</div>
+      {% if current_user.is_authenticated %}
+        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{ url_for('proj.index', username=current_user.username) }}">My Projects</a>
+      {% else %}
+      <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{ url_for('auth.login') }}">Sign up for free</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+<section id="services">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading text-uppercase">Services</h2>
+        <h3 class="section-subheading text-muted">主要包括：无人机航线规划、图像分析、中国沙地基础地理信息数据库和长期定位观测样地720度全景.</h3>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-md-3">
+        <!--pan class="fa-stack fa-4x">
+          <i class="fas fa-circle fa-stack-2x text-primary"></i>
+          <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+        </span-->
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('proj.rd',username=current_user.username) }}" target="_blank">
+        {% else %}
+        <a href="{{ url_for('auth.login') }}" target="_blank">
+        {% endif %}
+          <img src="{{ url_for('static', filename='home/logo_route.png') }}" alt="route_design" width="150px" height="150px">
+        </a>
+        <h4 class="service-heading">Route Design</h4>
+        <p class="text-muted">给定样地顶点坐标和无人机飞行参数设置，生成满足拼图要求的最佳航线规划，并支持导出为litchi
+          飞控配置文件。</p>
+      </div>
+      <div class="col-md-3">
+        <!--span class="fa-stack fa-4x">
+          <i class="fas fa-circle fa-stack-2x text-primary"></i>
+          <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
+        </span-->
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('proj.dtc',username=current_user.username) }}" target="_blank">
+        {% else %}
+        <a href="{{ url_for('auth.login') }}" target="_blank">
+        {% endif %}
+          <img src="{{ url_for('static', filename='home/logo_dtc.png') }}" alt="route_design" width="150px" height="150px">
+        </a>
+        <h4 class="service-heading">Image Analysis</h4>
+        <p class="text-muted">基于决策树分类算法，通过提交满足要求的训练集，实现无人机影像像素的自动分类。</p>
+      </div>
+      <div class="col-md-3">
+        <!--span class="fa-stack fa-4x">
+          <i class="fas fa-circle fa-stack-2x text-primary"></i>
+          <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+        </span-->
+        <a href="https://www.uav-hirap.org/sandinfo" target="_blank">
+          <img src="{{ url_for('static', filename='home/logo_db.png') }}" alt="route_design" width="200px" height="150px">
+        </a>
+        <h4 class="service-heading">China Dryland Database</h4>
+        <p class="text-muted">提供中国沙地基础地理信息数据库服务。</p>
+      </div>
+      <div class="col-md-3">
+        <a href="{{ url_for('main.plot_pano') }}" target="_blank">
+          <img src="{{ url_for('static', filename='home/logo_pano.png') }}" alt="route_design" width="150px" height="150px">
+        </a>
+        <h4 class="service-heading">Site Panorama View</h4>
+        <p class="text-muted">长期定位观测样地(内蒙古浑善达克沙地)720度全景图浏览功能。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="news" class="bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading text-uppercase">News</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <ul class="timeline">
+          <li>
+            <div class="timeline-image">
+              <img class="rounded-circle img-fluid" src="img/about/1.jpg" alt="fig1" style="height:100%!important;">
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <h4>October 2018</h4>
+                <h4 class="subheading">课题年度研究进展总结会顺利召开</h4>
+              </div>
+              <div class="timeline-body">
+                <p class="text-muted">生态质量监测技术研讨会暨国家重点研发计划“森林荒漠湿地生态质量监测技术集成与应用示范”课题年度研究进展总结会顺利召开</p>
+              </div>
+            </div>
+          </li>
+          <li class="timeline-inverted">
+            <div class="timeline-image">
+              <img class="rounded-circle img-fluid" src="{{ url_for('static', filename='home/update3_sm.png') }}" alt="fig2" style="height:100%!important;">
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <h4>October 2018</h4>
+                <h4 class="subheading">UAV-HiRAP 3.0版本大更新</h4>
+              </div>
+              <div class="timeline-body">
+                <p class="text-muted">增加了航线规划功能的同时，更采用Bootstrap4模板对网页UI进行了全面的美化设计</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="timeline-image">
+              <img class="rounded-circle img-fluid" src="{{ url_for('static', filename='home/paper_sm.jpg') }}" alt="publish", style="height:100%!important;">
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <h4>September 2018</h4>
+                <h4 class="subheading">团队在《生态学报》发表论文</h4>
+              </div>
+              <div class="timeline-body">
+                <p class="text-muted">祝贺团队成员韩冬、王浩舟的论文《基于无人机和机器学习算法的榆树疏林草原植被分类和覆盖度动态估计》成功发表于《生态学报》！</p>
+              </div>
+            </div>
+          </li>
+          <li class="timeline-inverted">
+            <div class="timeline-image">
+              <h4>•<br>•<br>•</h4>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading text-uppercase">Our Team</h2>
+        <h3 class="section-subheading text-muted">See all team members in UAV-HiRAP Lab
+          <a href="{{ url_for('main.about_us') }}" target="_blank"><b>&gt;&gt;&gt;</b></a></h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="team-member">
+          <img class="mx-auto rounded-circle" src="{{ url_for('static', filename='about_us/WF.png') }}" alt="">
+          <h4>WANG Feng</h4>
+          <p class="text-muted">Project leader</p>
+          <a class="btn bg-dark text-white" href="https://www.uav-hirap.org/about_us#WF" target="_blank">
+            View Details
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="team-member">
+          <img class="mx-auto rounded-circle" src="{{ url_for('static', filename='about_us/WHZ.png') }}" alt="">
+          <h4>WANG Haozhou</h4>
+          <p class="text-muted">Web designer</p>
+          <a class="btn bg-dark text-white" href="https://www.uav-hirap.org/about_us#WHZ" target="_blank">
+            View Details
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="team-member">
+          <img class="mx-auto rounded-circle" src="{{ url_for('static', filename='about_us/JJ.png') }}" alt="">
+          <h4>JI Jie</h4>
+          <p class="text-muted">Art designer</p>
+          <a class="btn bg-dark text-white" href="https://www.uav-hirap.org/about_us#JJ" target="_blank">
+            View Details
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <p class="large text-muted">UAV-HiRAP Lab is a research group under the Institute of Desertification Studies at
+          Chinese Academy of Forestry (CAF-IDS). It is dedicated to applying latest technology such as artificial
+          intelligence (AI) and unmanned aerial vehicles (UAV) in desertification management. We offer Masters, Ph.D and
+          co-op opportunities and welcome any consultation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-light" id="publications">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading text-uppercase">Publications</h2>
+        <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <h3>Papers</h3>
+        <ol>
+          <li>Haozhou Wang, Feng Wang*, Xueling Yao, Yue Mu, Yongfei Bai, Qi Lu. 2018. UAV-HiRAP: A novel method to improve landscape-level vegetation classification and coverage fraction estimation with unmanned aerial vehicle platform. Remote sensing of environment. (In review).</li>
+          <li>韩东，王浩舟，王锋*. 2018. 基于无人机和机器学习算法的榆树疏林草原植被分类和覆盖度动态估计.生态学报.38(18): 6655⁃ 6663</li>
+          <li>Yue Mu, Feng Wang*, Bangyou Zheng, Wei Guo, Yiming Feng*. 2018. A rapid image-based method to determine the morphological characteristics of gravels on desert pavement. Geomorphology. 304, 89–98.</li>
+          <li>穆悦,冯益明,高翔,韩东,吴隐,张谱. 2018. 基于无人机图像的戈壁表面砾石特征变化研究[J].林业科学研究, 31(2):55-62</li>
+          <li>Feng Wang*. 2017. Artificial intelligence in research: UAV and artificial intelligence. Science. 357: 28-29.</li>
+        </ol>
+      </div>
+
+      <div class="col-lg-12">
+        <h3>Conference</h3>
+        <ol>
+          <li>王锋. 2018. 大数据在精准治沙工程评价、管理和政策中的应用与挑战.  三北工程精准治沙技术与管理培训班. 中国内蒙古阿拉善左旗。9月19日</li>
+          <li>韩东，王浩舟，王锋*. 2018. 基于无人机和机器学习算法的榆树疏林草原植被分类和覆盖度动态估计. 第17届中国生态学大会，生态遥感与应用分会. 中国南京，5月4-6日，（学术报告） </li>
+          <li>Feng Wang. 2017. How to apply unmanned aerial vehicle and artificial intelligence to monitor ecological plots in dryland ecosystem. The workshop of monitoring techniques of observation stations in China Terrestrial Ecological Research Network. Nanning, China, 13-15 December. (Oral)</li>
+          <li>Feng Wang. 2017. The study on vegetation and landforms classification coupled unmanned aerial vehicle and artificial intelligence. The Congress of China Physical Geography. Nanjing, China, 20-22 November. (Oral)</li>
+          <li>Haozhou Wang, Feng Wang*, Xueling Yao, Yue Mu, Yongfei Bai*, Qi Lu*. 2017. UAV-HiRAP: A novel method to improve landscape-level vegetation classification and coverage fraction estimation with unmanned aerial vehicle platform. The 12th International Congress of Ecological (INTECOL). Beijing, China, August 21-25.(Oral).</li>
+          <li>Wang Feng. 2016. Near-ground remote sensing of ecology and environment monitoring: application and perspective. Lecture. Chinese Agriculture University. Beijing, China, 16 December.（Oral）</li>
+          <li>Mu Yue, Wang Feng*, Zheng Bangyou, Feng Yiming*. 2016. The gravel coverage and size of Gobi desert analyzed by a rapid image-based method[C]. IUFRO Regional Congress for Asia and Oceania 2016, Beijing, China, 24-27 October(Poster)</li>
+          <li>Wu Yin, Zhang Jing, Yao Xueling, Guo Binbin, Wang Feng*. 2016. A novel spatially explicit model for sparse forest pattern based on digital terrain data. IUFRO Regional Congress for Asia and Oceania 2016, Beijing, China, 24-27 October.(Poster)</li>
+          <li>Wang Feng. 2016. UAV: the application in the ecological monitoring. Lecture. Chinese Academy of Inspection and Quarantine. Beijing, China, 16 August.(oral)</li>
+        </ol>
+      </div>
+
+      <div class="col-lg-12">
+        <h3>Software copyrights</h3>
+        <ol>
+          <li>无人机高精度影像分析平台[简称: UAV-HiRAP] v2.0  2017. Registration No.: 软著登字第2017SR558256</li>
+          <li>无人机高精度影像分析平台[简称: UAV-HPIAP] v1.0 2016. Certificate No.: 软著登字第2016SR198498号</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <span class="copyright">Copyright © CAF-IDS 2018</span>
+      </div>
+      <div class="col-md-4">
+        <span class="copyright">Powered by <a href="https://getbootstrap.com">Bootstrap4</a> and <a href="http://flask.pocoo.org/">Python-Flask</a></span>
+      </div>
+      <div class="col-md-4">
+        <span class="copyright"><a href="#" class="js-scroll-trigger">Back to top</a></span>
+      </div>
+    </div>
+  </div>
+</footer>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='home/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='home/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='home/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+<script src="{{ url_for('static', filename='home/home.js') }}"></script>
 {% endblock %}

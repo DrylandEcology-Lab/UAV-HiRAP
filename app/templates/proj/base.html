@@ -1,0 +1,116 @@
+{% extends "bootstrap/base.html" %}
+
+{% block head %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="shortcut icon" href="{{ url_for('static', filename='home/home.ico') }}" type="image/x-icon">
+  <link rel="icon" href="{{ url_for('static', filename='home/home.ico') }}" type="image/x-icon">
+
+  <!-- Bootstrap Core CSS -->
+  <link href="{{ url_for('static', filename='proj/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- MetisMenu CSS -->
+  <link href="{{ url_for('static', filename='proj/vendor/metisMenu/metisMenu.min.css') }}" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="{{ url_for('static', filename='proj/sb-admin-2.css') }}" rel="stylesheet">
+
+  <!-- Morris Charts CSS -->
+  <link href="{{ url_for('static', filename='proj/vendor/morrisjs/morris.css') }}" rel="stylesheet">
+
+  <!-- Custom Fonts -->
+  <link href="{{ url_for('static', filename='proj/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+
+{% endblock %}
+
+{% block body %}
+{% if current_user.edit_required %}
+<div class="page-header text-center">
+    <h1>
+      <p>We are sorry that due to your imcompletely profile information, </p>
+      <p>we can not provide our services for you. </p>
+      <p>Please reedit it again and we will recheck it soon.</p>
+      <p>Or contact our Administrator:<a href="mailto:wangfeng@caf.ac.cn"> wangfeng@caf.ac.cn</a></p>
+    </h1>
+</div>
+<div class="container text-center">
+  <h3><a href="{{ url_for('auth.my_profile', username=current_user.username) }}">Edit my profile</a></h3>
+  <h3><a href="{{ url_for('main.index') }}">Back Home</a></h3>
+</div>
+{% else %}
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+  <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ url_for('main.index') }}">Home</a>
+  </div>
+  <ul class="nav navbar-top-links navbar-right">
+      <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              {{ current_user.username }} <i class="fa fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+              <li><a href="{{ url_for('auth.my_profile', username=current_user.username) }}" target="_blank"><i class="fa fa-user fa-fw"></i> User Profile</a>
+              </li>
+              <li><a href="{{ url_for('main.developing') }}"><i class="fa fa-gear fa-fw"></i> Settings</a>
+              </li>
+              <li class="divider"></li>
+              <li><a href="{{ url_for('auth.logout') }}"><i class="fa fa-sign-out fa-fw"></i> Sign out</a>
+              </li>
+          </ul>
+      </li>
+  </ul>
+  <div class="navbar-default sidebar" role="navigation">
+      <div class="sidebar-nav navbar-collapse">
+          <ul class="nav" id="side-menu">
+            <li>
+                <a href="{{ url_for('proj.index',username=current_user.username) }}"><i class="fa fa-bookmark fa-fw"></i> User's Guidebook</a>
+            </li>
+            <li class="active">
+                <a href="#"><i class="fa fa-wrench fa-fw"></i> UAV Tools<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                    <li>
+                        <a href="{{ url_for('proj.rd',username=current_user.username) }}">Route Planning</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('proj.dtc',username=current_user.username) }}">Image Classify</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('proj.seg',username=current_user.username) }}">Image Segment</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
+          </ul>
+      </div>
+  </div>
+</nav>
+
+<div class="container-fluid" id="page-wrapper">
+  {% block main_contents %}{% endblock %}
+</div>
+
+<!-- jQuery -->
+<script src="{{ url_for('static', filename='proj/vendor/jquery/jquery.min.js') }}"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="{{ url_for('static', filename='proj/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="{{ url_for('static', filename='proj/vendor/metisMenu/metisMenu.min.js') }}"></script>
+
+<!-- Morris Charts JavaScript -->
+<!--script src="{{ url_for('static', filename='proj/vendor/raphael/raphael.min.js') }}"></script>
+<script src="{{ url_for('static', filename='proj/vendor/morrisjs/morris.min.js') }}"></script-->
+
+<!-- Custom Theme JavaScript -->
+<script src="{{ url_for('static', filename='proj/sb-admin-2.js') }}"></script>
+
+{% endif %}
+{% endblock %}

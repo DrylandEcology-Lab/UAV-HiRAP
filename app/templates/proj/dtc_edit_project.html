@@ -1,0 +1,75 @@
+{% extends "proj/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block main_contents %}
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      Edit Image Analyze Project
+      <form method="post" class="pull-right">{{ wtf.form_field(form.cancel) }}</form></h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <form class="form" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span class="text-info font-weight-bold">{{ wtf.form_field(form.project_name) }}</span>
+      </div>
+      <div class="panel-body" style="">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <i class="fa fa-comment fa-fw"></i> Comments
+              </div>
+              <div class="panel-body">
+                {{ wtf.form_field(form.comments, style="resize:none;") }}
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <i class="fa fa-image fa-fw"></i> Images to classify
+                  </div>
+                  <div class="panel-body" style="">
+                    {{ wtf.form_field(form.origin_pic_dir, style="width:100%;") }}
+                    <img src="{{ url_for('static', filename='UserData/dtc/'+dtc_project.id|string+previews['classify']) }}" width="100%"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <i class="fa fa-image fa-fw"></i> Foreground training-img
+                  </div>
+                  <div class="panel-body" style="background-color:#ddd!important">
+                    {{ wtf.form_field(form.fore_trainingdata_dir, style="width:100%;") }}
+                    <img src="{{ url_for('static', filename='UserData/dtc/'+dtc_project.id|string+previews['fore']) }}" width="100%"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <i class="fa fa-image fa-fw"></i> Background training-img
+                  </div>
+                  <div class="panel-body" style="background-color:#ddd!important">
+                    {{ wtf.form_field(form.back_trainingdata_dir, style="width:100%;") }}
+                    <img src="{{ url_for('static', filename='UserData/dtc/'+dtc_project.id|string+previews['back']) }}" width="100%"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-center">{{ wtf.form_field(form.submit, class="btn btn-default btn-lg") }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  </div>
+</div> 
+{% endblock%}

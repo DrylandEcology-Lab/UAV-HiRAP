@@ -1,0 +1,96 @@
+{% extends "proj/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block main_contents %}
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      Image Analyze Tool
+      <a class="btn btn-default pull-right" href="{{ url_for('proj.dtc', username=current_user.username) }}">Back</a></h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="fa fa-product-hunt fa-fw"></i> <span class="text-info font-weight-bold">{{ dtc_project.project_name }}</span>
+        <form method="post" class="pull-right">{{ wtf.form_field(form.submit_calculate, class="btn btn-default btn-xs") }}</form>
+        <a class="btn btn-default btn-xs pull-right" href="{{ url_for('proj.edit_dtc', username=current_user.username, project_id=dtc_project.id) }}">Edit</a>
+      </div>
+      <div class="panel-body" style="">
+        <div class="row">
+          {% if not exist %}
+          <div class="col-lg-12">
+          {% else %}
+          <div class="col-lg-9">
+          {% endif %}
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <i class="fa fa-comment fa-fw"></i> Comments
+              </div>
+              <div class="panel-body" style="">
+                <p class="text-muted">{{ dtc_project.comments}}</p>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <i class="fa fa-image fa-fw"></i> Images to classify
+                  </div>
+                  <div class="panel-body">
+                    <img src="{{ url_for('static', filename='UserData/dtc/'+dtc_project.id|string+previews['classify']) }}" width="100%"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <i class="fa fa-image fa-fw"></i> Foreground training-img
+                  </div>
+                  <div class="panel-body" style="background-color:#ddd!important">
+                    <img src="{{ url_for('static', filename='UserData/dtc/'+dtc_project.id|string+previews['fore']) }}" width="100%"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <i class="fa fa-image fa-fw"></i> Background training-img
+                  </div>
+                  <div class="panel-body" style="background-color:#ddd!important">
+                    <img src="{{ url_for('static', filename='UserData/dtc/'+dtc_project.id|string+previews['back']) }}" width="100%"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {% if exist %}
+          <div class="col-lg-3">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <i class="fa fa-percent fa-fw"></i> Results
+              </div>
+              <div class="panel-body" style="">
+                <p class="text-center">Foreground percent: {{ vfc_temp }} %</p>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <i class="fa fa-image fa-fw"></i> Classified result<form method="post" class="pull-right">{{ wtf.form_field(form.download, class="btn btn-default btn-xs") }}</form>
+              </div>
+              <div class="panel-body" style="">
+                <img src="{{ url_for('static', filename='UserData/dtc/'+dtc_project.id|string+previews['result']) }}" width="100%"/>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+    
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock%}
