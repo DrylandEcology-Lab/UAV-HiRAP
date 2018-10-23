@@ -51,7 +51,7 @@ def create_app(config_name):
     babel.init_app(app)
 
     configure_uploads(app, photos)   # initialize upload photos
-    patch_request_class(app, 20 * 1024 * 1024) # maximize 20MB images
+    patch_request_class(app, 500 * 1024 * 1024) # maximize 500MB images
 
     # append route(LuYou) and error page
     from .main import main as main_blueprint

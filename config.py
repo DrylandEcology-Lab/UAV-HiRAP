@@ -14,7 +14,7 @@ class Config:
         'en': u'English',
         'zh': u'中文'
     }
-    MAX_CONTENT_LENGTH = 20 * 1024 * 1024  #see app/__init__.py create_app()
+    MAX_CONTENT_LENGTH = 500 * 1024 * 1024  #see app/__init__.py create_app()
 
     @staticmethod
     def init_app(app):

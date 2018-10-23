@@ -27,7 +27,7 @@
           {{ form.hidden_tag() }}
           {{ wtf.form_field(form.project_name) }}
           <hr>
-          <p class="text-center text-warning">Maximum image size is 20MB, only ['jpg', 'jpeg', 'png', 'tif', 'tiff'] supported</p>
+          <p class="text-center text-warning">Maximum image size is 500MB, only ['jpg', 'jpeg', 'png', 'tif', 'tiff'] supported</p>
           <div class="row">
             <div class="col-md-4">{{ wtf.form_field(form.origin_pic_dir, style="width:100%;", maxlength="") }}</div>
             <div class="col-md-4">{{ wtf.form_field(form.fore_trainingdata_dir, style="width:100%;") }}</div>
