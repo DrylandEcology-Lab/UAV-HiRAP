@@ -86,7 +86,10 @@ def route_design(locations, H=30.0, long_fov=61.9, short_fov=46.4, side_overlap=
     YD2 = YB1+(d4*(YD1-YB1)/d2)
     
     # 飞机航向角计算，机头与正北方向的夹角
-    heading = round(90-math.atan((YC2-YA2)/(XC2-XA2))*180/math.pi)
+    try:
+        heading = round(90-math.atan((YC2-YA2)/(XC2-XA2))*180/math.pi)
+    except ZeroDivisionError:
+        heading = 0
     
     df_litchi = pd.DataFrame(columns=["latitude","longitude","altitude(m)","heading(deg)","curvesize(m)",
                                       "rotationdir","gimbalmode","gimbalpitchangle"] + 

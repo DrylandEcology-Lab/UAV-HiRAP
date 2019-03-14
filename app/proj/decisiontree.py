@@ -169,7 +169,7 @@ def classify_img(imgdir, folder_name, training_tuple, printonoff='on'):
         cls_name_list.append(cls_name)
         img_prepare, img_size = expand_colorspace_cv(img_dir, printonoff='off')
         image_out = tree_apply(decision_tree, img_prepare, img_size, printonoff='off')
-        plt.imsave(cls_name, image_out, cmap=plt.cm.Accent)
+        plt.imsave(cls_name, image_out, cmap=plt.cm.Accent_r)
         # count number
         unique, counts = np.unique(image_out, return_counts=True)
         vfc = vfc + Counter(dict(zip(unique, counts)))
