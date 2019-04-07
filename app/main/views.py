@@ -28,4 +28,8 @@ def about_us():
 @main.route('/plot_pano')
 def plot_pano():
     return render_template('plot_pano.html')
+    
+@main.route('/news')
+def news():
+    return render_template('news.html')
 
