@@ -49,7 +49,16 @@ def create_thumbnail(photopath, thumbnail_folder, thumbnail_name, base_width):
     w_percent = (base_width / float(img.size[0]))
     h_size = int((float(img.size[1]) * float(w_percent)))
     img = img.resize((base_width, h_size), Image.ANTIALIAS)
-    img.save(thumbnail_folder + '/' + thumbnail_name + '.png')
+    #if image.mode == "CMYK":
+    #    image = image.convert("RGB")
+    img.save(thumbnail_folder + '/' + thumbnail_name + '.png')   
+    # [Error]:
+    #   File "/LocalDisk/Documents/www.uav-hirap.org/venv/lib/python3.6/site-packages/PIL/Image.py", line 1969, in save
+    #    save_handler(self, fp, filename)
+    #  File "/LocalDisk/Documents/www.uav-hirap.org/venv/lib/python3.6/site-packages/PIL/PngImagePlugin.py", line 729, in _save
+    #    raise IOError("cannot write mode %s as PNG" % mode)
+    #OSError: cannot write mode RGBX as PNG
+    #KeyError: 'RGBX'
     return '/' + thumbnail_name + '.png'
 
 
@@ -148,7 +157,7 @@ def dtc(username):
 def inproject_dtc(username, project_id):
     form = ProjectCalculateForm()
     dtc_project = DTC_Project.query.get_or_404(project_id)
-    previews = eval(dtc_project.previews)
+    previews = eval(dtc_project.previews)  # [Error] TypeError: eval() arg 1 must be a string, bytes or code object
     # calculate pictures
     if form.submit_calculate.data and form.is_submitted():
         # Delete old result preview

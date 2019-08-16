@@ -136,7 +136,7 @@ def calc_distance(Lat_A,Lng_A,Lat_B,Lng_B):
     xx = math.acos(math.sin(pA)*math.sin(pB)+math.cos(pA)*math.cos(pB)*math.cos(rad_lng_A - rad_lng_B))
     
     c1 = (math.sin(xx) - xx) * (math.sin(pA) + math.sin(pB)) ** 2 / math.cos(xx / 2) ** 2
-    c2 = (math.sin(xx) - xx) * (math.sin(pA) - math.sin(pB)) ** 2 / math.sin(xx / 2) ** 2
+    c2 = (math.sin(xx) - xx) * (math.sin(pA) - math.sin(pB)) ** 2 / math.sin(xx / 2) ** 2 # [Error]: ZeroDivisionError: float division by zero
     
     dr = flatten / 8 * (c1 - c2)
     
