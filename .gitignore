@@ -8,3 +8,4 @@ __linux__
 email_config.txt
 *.sqlite
 .idea
+venv/*
