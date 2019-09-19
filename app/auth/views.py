@@ -18,7 +18,7 @@ def before_requests():
 @auth.route('/unconfirmed')
 def unconfirmed():
     if current_user.is_anonymous or current_user.confirmed:
-        return redirect(url_for('main.index'))
+        return redirect(url_for('proj.index', username=current_user.username))
     return render_template('auth/unconfirmed.html')
 
 
@@ -29,7 +29,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
-            return redirect(request.args.get('next') or url_for('main.index'))
+            return redirect(request.args.get('next') or url_for('proj.index', username=current_user.username))
         flash('Invalid username or password.')
     return render_template('auth/login.html', form=form)
 
@@ -70,7 +70,7 @@ def register():
 @login_required
 def confirm(token):
     if current_user.confirmed:
-        return redirect(url_for('main.index'))
+        return redirect(url_for('proj.index', username=current_user.username))
     if current_user.confirm(token):
         flash('You have confirmed your account, thanks!')
     else:
@@ -83,7 +83,7 @@ def resend_confirmation():
     token = current_user.generate_confirmation_token()
     send_email(current_user.email, 'Confirm Your UAV-HiRAP Account', 'auth/email/confirm', user=current_user, token=token)
     flash('A new confirmation email has been sent to your by email. Please wait for a moment and check your INBOX or SAMP Box again')
-    return redirect(url_for('main.index'))
+    return redirect(url_for('proj.index', username=current_user.username))
 
 @auth.route('/<username>/profile', methods=['GET','POST'])
 @login_required
@@ -91,7 +91,7 @@ def my_profile(username):
     user = User.query.filter_by(username=username).first()
     form = ProfileEditForm()
     if form.cancel.data and form.is_submitted():
-        return redirect(url_for('main.index'))
+        return redirect(url_for('proj.index', username=current_user.username))
     if form.submit.data and form.validate_on_submit():
         user.realname = form.realname.data
         user.country = form.country.data
@@ -107,7 +107,7 @@ def my_profile(username):
             send_email(app.config['MAIL_ADMIN'], '[' + user.username + '] Changed profile', 'auth/email/userinfo', user=user)
         db.session.add(user)
         db.session.commit()
-        return redirect(url_for('main.index'))
+        return redirect(url_for('proj.index', username=current_user.username))
     form.realname.data = user.realname
     form.country.data =user.country
     form.org.data = user.org

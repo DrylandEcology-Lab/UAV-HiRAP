@@ -1,7 +1,7 @@
 # UAV-HiRAP
 Unmanned Aerial Vehicles - High Resolution imagery Analysis Platform (UAV-HiRAP), is an open-source, web-based platform which provides service for image classification.    
 
-This is developed in Python-Flask Framework, and released at: https://www.uav-hirap.org. Also a standalone version based on pyqt will be developed in the future.    
+This is developed in Python-Flask Framework, and released at: https://www.uav-hirap.org. This webservice **is stopping developing now**, it will be split to a static lab website and a standalone executable version based on PyQt5 (https://github.com/HowcanoeWang/UAV-HiRAP.Standalone). 
 
 This project is published at:    
 > Haozhou Wang, Dong Han, Yue Mu, Lina Jiang, Xueling Yao, Yongfei Bai, Qi Lu, Feng Wang*. 2019. Landscape-level vegetation classification and fractional woody and herbaceous vegetation cover estimation over the dryland ecosystems by unmanned aerial vehicle platform. Agricultural and Forest Meteorology, 278: 107665 DOI: [10.1016/j.agrformet.2019.107665](https://www.sciencedirect.com/science/article/pii/S0168192319302734?via%3Dihub)    
@@ -65,3 +65,10 @@ if you benefit from this project in your research, welcome to cite our paper!
   |- config.py  <font color='blue'>——网站总配置文件</font>    
   |- manage.py  <font color='blue'>——用于启动程序以及其他的程序任务</font>    
   |- email_config.txt <font color='blue'>——储存邮件发送的账户及密码</font>    
+
+## Test
+
+```python
+python manage.py runserver
+```
+
