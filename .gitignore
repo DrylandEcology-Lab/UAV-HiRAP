@@ -4,8 +4,9 @@ migrations/
 https_certificate/
 __pycache__
 __history__
-__linux__
-email_config.txt
 *.sqlite
 .idea
+data-dev.sqlite
+__linux__
+*.sqlite
 venv/*
