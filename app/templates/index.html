@@ -32,7 +32,7 @@ header.masthead {
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav text-uppercase ml-auto">
-        <li class="nav-item">
+        <!--li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#services">Services</a>
         </li>
         <li class="nav-item">
@@ -43,7 +43,7 @@ header.masthead {
         </li>
                 <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#publications">Publications</a>
-        </li>
+        </li-->
         {% if current_user.is_authenticated %}
         <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" id="account" data-toggle="dropdown">{{ current_user.username }}
@@ -140,7 +140,7 @@ header.masthead {
   </div>
 </section>
 
-<section id="news" class="bg-light">
+<!--section id="news" class="bg-light">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
@@ -180,7 +180,7 @@ header.masthead {
           </li>
           <li class="timeline-inverted">
               <div class="timeline-image">
-                <!-- the picture is not match with the content-->
+                <!-- the picture is not match with the content>
                 <img class="rounded-circle img-fluid" src="{{ url_for('static', filename='news/20190606.png') }}" alt="fig2" style="height:100%!important;">
               </div>
               <div class="timeline-panel">
@@ -309,7 +309,7 @@ header.masthead {
       </div>
     </div>
   </div>
-</section>
+</section-->
 
 <footer>
   <div class="container">
