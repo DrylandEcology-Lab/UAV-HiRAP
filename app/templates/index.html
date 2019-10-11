@@ -32,7 +32,7 @@ header.masthead {
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav text-uppercase ml-auto">
-        <!--li class="nav-item">
+        <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#services">Services</a>
         </li>
         <li class="nav-item">
@@ -43,7 +43,7 @@ header.masthead {
         </li>
                 <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#publications">Publications</a>
-        </li-->
+        </li>
         {% if current_user.is_authenticated %}
         <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" id="account" data-toggle="dropdown">{{ current_user.username }}
@@ -140,7 +140,7 @@ header.masthead {
   </div>
 </section>
 
-<!--section id="news" class="bg-light">
+<section id="news" class="bg-light">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
@@ -152,44 +152,44 @@ header.masthead {
         <ul class="timeline">
           <li>
             <div class="timeline-image">
-              <img class="rounded-circle img-fluid" src="{{ url_for('static', filename='news/20190715.png') }}" alt="publish", style="height:100%!important;">
+              <img class="rounded-circle img-fluid" src="{{ url_for('static', filename='news/20190822.png') }}" alt="publish", style="height:100%!important;">
             </div>
             <div class="timeline-panel">
               <div class="timeline-heading">
-                <h4>2019.7.13</h4>
-                <h4 class="subheading">课题组完成浑善达克大样地观测仪器安装与无人机观测</h4>
+                <h4>2019.8.21</h4>
+                <h4 class="subheading">王锋受邀赴北戴河为国家林草局干部做报告</h4>
               </div>
               <div class="timeline-body">
-                <p class="text-muted">7月13—16日，中国科学院地理科学与资源研究所段涛博士与乌日娜、韩东、姬婕、李晓雅、工程师共7人前往浑善达克沙地榆树疏林长期定位观测大样地调试涡度、荧光观测设备，同时开展了样地植被无人机观测。期间，大家与段涛博士交流了无人机影像处理过程中的疑难点，段博士结合研究经验提出了一些改进的建议。16日，王锋陪同中国林科院荒漠化所白建华书记及正蓝旗林业局朱景新局长共同了解了样地观测工作与植被恢复状况，随后考察了位于正蓝旗的乌和尔沁林场，探讨了将来建设浑善达克沙地榆树疏林长期定位观测研究站事宜。</p>
+                <p class="text-muted">8月21-24日，由国家林业和草原局荒漠化防治司组织的沙化土地封禁保护区管理与技术培训班在国家林业和草原局管理干部学院北戴河分院顺利举办，王锋受邀为参会人员作了题为“人工智能改变林业——利用无人机智能监测沙化土地和植被恢复”的专题讲座。</p>
               </div>
             </div>
           </li>
           <li>
             <div class="timeline-image">
-              <img class="rounded-circle img-fluid" src="{{ url_for('static', filename='news/20190625.png') }}" alt="publish", style="height:100%!important;">
+              <img class="rounded-circle img-fluid" src="{{ url_for('static', filename='news/20190819.png') }}" alt="publish", style="height:100%!important;">
             </div>
             <div class="timeline-panel">
               <div class="timeline-heading">
-                <h4>2019.6.23</h4>
-                <h4 class="subheading">课题组赴浑善达克大样地安装观测设备并完成无人机观测</h4>
+                <h4>2019.8.19</h4>
+                <h4 class="subheading">课题组成员与中科院地理所刘纪远课题组共赴内蒙古磴口沙林中心考察</h4>
               </div>
               <div class="timeline-body">
-                <p class="text-muted">6月23日­—26日，乌日娜、李晓雅、韩东和仪器公司的工程师一行六人驱车至内蒙古正蓝旗浑善达克榆树疏林大样地进行无人机观测与实验仪器安装，顺利采集了样地影像数据、安装了荧光-通量-气象要素协同观测设备。</p>
+                <p class="text-muted">8月19—22日，王锋携研究生李晓雅赴内蒙古磴口县与中科院地理所刘纪远研究员课题组成员展开为期三天的考察与交流。三天内，他们依次考察了沙林中心实验场和试验样地、奈伦湖、二十里柳子、三盛公水利枢纽与狼山，并在沙林中心举办座谈会，与当地工作人员交流研究进展。</p>
               </div>
             </div>
           </li>
           <li class="timeline-inverted">
               <div class="timeline-image">
-                <!-- the picture is not match with the content>
-                <img class="rounded-circle img-fluid" src="{{ url_for('static', filename='news/20190606.png') }}" alt="fig2" style="height:100%!important;">
+                <!-- the picture is not match with the content-->
+                <img class="rounded-circle img-fluid" src="{{ url_for('static', filename='news/20190813.png') }}" alt="fig2" style="height:100%!important;">
               </div>
               <div class="timeline-panel">
                 <div class="timeline-heading">
-                  <h4>2019.6.16</h4>
-                  <h4 class="subheading">硕士研究生韩东顺利完成学位论文答辩</h4>
+                  <h4>2019.8.13</h4>
+                  <h4 class="subheading">课题组成员赴南京培训叶绿素荧光观测仪器安装与使用</h4>
                 </div>
                 <div class="timeline-body">
-                  <p class="text-muted">6月6日，硕士研究生韩东参加了林科院荒漠化所2016级硕士毕业答辩，他以“基于无人机和机器学习算法的榆树疏林草原植被动态研究”为题，报告了硕士研究生期间在浑善达克沙地榆树疏林草原大样地开展的研究工作,顺利通过答辩。</p>
+                  <p class="text-muted">8月13-16日，课题组王锋、乌日娜、韩东赴南京大学调试了日光诱导叶绿素荧光观测仪器，并赴南农看望了已在南京农业大学作物表型研究中心工作的穆悦博士。</p>
                 </div>
               </div>
             </li>
@@ -269,12 +269,14 @@ header.masthead {
       <div class="col-lg-12">
         <h3>Papers</h3>
         <ol>
-		  <li>Haozhou Wang, Dong Han, Yue Mu, Lina Jiang, Xueling Yao, Yongfei Bai, Qi Lu, Feng Wang*. 2019. Landscape-level vegetation classification and fractional woody and herbaceous vegetation cover estimation over the dryland ecosystems by unmanned aerial vehicle platform. Agricultural and Forest Meteorology, 278: 107665<a href="https://doi.org/10.1016/j.agrformet.2019.107665" target="_blank"> DOI: 10.1016/j.agrformet.2019.107665</a></li>
-		  <li>Feng Wang*, Xubin Pan, Cynthia Gerlein-Safdi, Cao Xiaoming, Wang Sen, Gu Lianhong, Wang Dongfang, Qi Lu*. 2019. Ecological restoration in Northern China: a contrasted picture. Land Degradation & development. <a href="https://doi.org/10.1002/ldr.3314" target="_blank"> DOI: 10.1002/ldr.3314</a></li>
-		  <li>王锋*，卢琦. 2019. 沙地樟子松散生单木的天然更新幼苗空间分布模型. 林业科学. </li>
-		  <li>吴隐，韩东，姚雪玲，张静，王锋*. 2019. 基于无人机高分辨率航空影像的榆树疏林空间分布格局及其地形效应. 热带地理. 39(4)</li>
-          <li>Wu Rina, Cong Weiwei, LI Yonghua, LI Siyao, WANG Dongfang, Jia Zhiqing*, Wang Feng*. 2019. The Scientific Conceptual Framework for Ecological Quality of the Dryland Ecosystem: Concepts, Indicators, Monitoring and Assessment. Journal of Resources and Ecology, 10(2): 196-201.<a href="" target="_blank">DOI: 10.5814/j.issn.1674-764x.2019.02.010</a></li>
+          <li>Haozhou Wang, Dong Han, Yue Mu, Lina Jiang, Xueling Yao, Yongfei Bai, Qi Lu, Feng Wang*. 2019. Landscape-level vegetation classification and fractional woody and herbaceous vegetation cover estimation over the dryland ecosystems by unmanned aerial vehicle platform. Agricultural and Forest Meteorology, 278: 107665 .<a href="https://www.sciencedirect.com/science/article/pii/S0168192319302734?via%3Dihub" target="_blank"></a>DOI: 10.1016/j.agrformet.2019.107665</li>
+          <li>Feng Wang*, Xubin Pan, Cynthia Gerlein-Safdi, Cao Xiaoming, Wang Sen, Gu Lianhong, Wang Dongfang, Qi Lu*. 2019. Ecological restoration in Northern China: a contrasted picture. Land Degradation & development. <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/ldr.3314" target="_blank"></a>DOI: 10.1002/ldr.3314</li>
+          <li>王锋*，卢琦. 2019. 沙地樟子松散生单木的天然更新幼苗空间分布模型. 林业科学. </li>
+          <li>吴隐，韩东，姚雪玲，张静，王锋*. 2019. 基于无人机高分辨率航空影像的榆树疏林空间分布格局及其地形效应. 热带地理. 39(4)</li>
+          <li>Wu Rina, Cong Weiwei, LI Yonghua, LI Siyao, WANG Dongfang, Jia Zhiqing*, Wang Feng*. 2019. The Scientific Conceptual Framework for Ecological Quality of the Dryland Ecosystem: Concepts, Indicators, Monitoring and Assessment. Journal of Resources and Ecology. 2019 10(2): 196-201.<a href="" target="_blank">DOI: 10.5814/j.issn.1674-764x.2019.02.010</a></li>
           <li>Wang Shouqiang, Wang Junbang, Zhang Leiming, Xiao Zhishu, Wang Feng, Sun Nan, Li Daiqing, Chen Bin, Chen Jinghua, Li Yue, Wang Xiaobo, Wang Miaomiao. 2019 A National Key R&D Program: Technologies and and Guidelines for Monitoring Ecological Quality of terrestrial ecosystems in China. Journal of Resources and Ecology. 2019, 10(2): 105-111.</li>
+          <li>Feng Wang*, Xubin Pan, Cynthia Gerlein-Safdi, Cao Xiaoming, Wang Sen, Gu Lianhong, Wang Dongfang, Qi Lu*. 2019. Ecological restoration in Northern China: a contrasted picture. Land Degradation & development. (Accepted)</li>
+          <li>Haozhou Wang, Feng Wang*, Xueling Yao, Yue Mu, Yongfei Bai, Qi Lu. 2018. UAV-HiRAP: A novel method to improve landscape-level vegetation classification and coverage fraction estimation with unmanned aerial vehicle platform. Remote sensing of environment. (In review).</li>
           <li>韩东，王浩舟，郑邦友，王锋*. 2018. 基于无人机和机器学习算法的榆树疏林草原植被分类和覆盖度动态估计.生态学报.38(18): 6655⁃ 6663</li>
           <li>Yue Mu, Feng Wang*, Bangyou Zheng, Wei Guo, Yiming Feng*. 2018. A rapid image-based method to determine the morphological characteristics of gravels on desert pavement. Geomorphology. 304, 89–98. <a href="https://doi.org/10.1016/j.geomorph.2017.12.027" target="_blank">DOI: 10.1016/j.geomorph.2017.12.027</a></li>
           <li>穆悦,冯益明,高翔,韩东,吴隐,张谱. 2018. 基于无人机图像的戈壁表面砾石特征变化研究[J].林业科学研究, 31(2):55-62</li>
@@ -300,16 +302,13 @@ header.masthead {
       <div class="col-lg-12">
         <h3>Software copyrights</h3>
         <ol>
-		  <li>无人机高精度影像分析平台[简称: UAV-HiRAP] v3.0 2019. 软著登字第2019SR0286422</li>
-		  <li>中国沙地基础地理信息数据平台[简称：GIP-DLC] v2.0 2018. 软著登字第2018SR921265</li>
-          <li>无人机高精度影像分析平台[简称: UAV-HiRAP] v2.0 2017. 软著登字第2017SR558256</li>
-          <li>无人机高精度影像分析平台[简称: UAV-HPIAP] v1.0 2016. 软著登字第2016SR198498</li>
-		  <li>中国沙地基础地理信息web系统. 2016. 软著登字第2016SR036010</li>
+          <li>无人机高精度影像分析平台[简称: UAV-HiRAP] v2.0  2017. Registration No.: 软著登字第2017SR558256</li>
+          <li>无人机高精度影像分析平台[简称: UAV-HPIAP] v1.0 2016. Certificate No.: 软著登字第2016SR198498号</li>
         </ol>
       </div>
     </div>
   </div>
-</section-->
+</section>
 
 <footer>
   <div class="container">
