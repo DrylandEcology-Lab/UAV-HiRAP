@@ -34,7 +34,7 @@ class User(UserMixin, db.Model):
     major = db.Column(db.String(64))
     aim = db.Column(db.Text)
 
-    confirmed = db.Column(db.Boolean, default=False)
+    confirmed = db.Column(db.Boolean, default=True)
     edit_required = db.Column(db.Boolean, default=False)
 
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))

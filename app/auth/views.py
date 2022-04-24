@@ -60,7 +60,7 @@ def register():
         db.session.commit()
         token = user.generate_confirmation_token()
         send_email(user.email, 'Confirm Your UAV-HiRAP Account', 'auth/email/confirm', user=user, token=token)
-        flash('A confirmation email has been sent to your by email. Please check your INBOX or SAMP Box')
+        flash('Registration successful! Please login.')
         app = current_app._get_current_object()
         send_email(app.config['MAIL_ADMIN'], '[' + user.username + '] Joined in', 'auth/email/userinfo', user=user)
         return redirect(url_for('main.index'))
